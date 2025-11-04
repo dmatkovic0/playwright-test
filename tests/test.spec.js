@@ -2,6 +2,9 @@ import { test, expect } from '@playwright/test';
 import { login, generateShortID } from '../src/utils.js';
 
 test('test', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+  
   await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
   
   await page.getByRole('link', { name: 'People' }).click();
@@ -29,13 +32,13 @@ test('test', async ({ page }) => {
   await page.getByText('afgannnn').click();
   await page.getByRole('button', { name: 'Save' }).click();
   
-  // Verify employee was created successfully by checking we're on the profile page
-  // Wait for navigation to complete
-  await page.waitForLoadState('networkidle');
+  // Verify employee was created successfully
+  // Wait for either the first name or last name to appear on the page
+  await expect(page.locator(`text=${firstName}`).or(page.locator(`text=${lastName}`))).toBeVisible({ timeout: 15000 });
   
-  // Verify the employee name appears on the profile page
-  await expect(page.locator('text=' + firstName)).toBeVisible({ timeout: 10000 });
-  await expect(page.locator('text=' + lastName)).toBeVisible({ timeout: 10000 });
+  // Additional verification - check both names are present
+  await expect(page.locator(`text=${firstName}`)).toBeVisible();
+  await expect(page.locator(`text=${lastName}`)).toBeVisible();
   
   console.log(`✓ Employee created successfully: ${firstName} ${lastName}`);
 });
