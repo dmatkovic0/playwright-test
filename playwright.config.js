@@ -2,18 +2,24 @@
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
-  testDir: './test',
+  testDir: './tests',
   timeout: 30000,
   use: {
     baseURL: 'https://corehr.staging.hrcloud.net/Start/#/Authentication/Login?returnUrl=', 
     headless: false, 
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    viewport: null, // Disable fixed viewport
   },
   projects: [
     {
       name: 'chromium',
-      use: { browserName: 'chromium' },
+      use: { 
+        browserName: 'chromium',
+        launchOptions: {
+          args: ['--start-maximized'] // Open Chrome in maximized window
+        }
+      },
     },
   ],
 });
