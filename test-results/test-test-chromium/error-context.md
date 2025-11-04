@@ -1,0 +1,2286 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - text: 
+        - generic [ref=e5] [cursor=pointer]:
+          - link [ref=e6]:
+            - /url: "#/Workmates"
+            - img [ref=e7]
+          - text:  
+        - list [ref=e8]:
+          - listitem [ref=e9]:
+            - link " Tasks 1" [ref=e11] [cursor=pointer]:
+              - /url: "#/Tasks"
+              - generic [ref=e13]: 
+              - generic: Tasks
+              - generic [ref=e14]: "1"
+            - text: 
+          - listitem [ref=e15]:
+            - link " Chat" [ref=e17] [cursor=pointer]:
+              - /url: "#/Messaging"
+              - generic [ref=e19]: 
+              - generic: Chat
+            - text: 
+          - listitem [ref=e20]:
+            - link " Calendar" [ref=e22] [cursor=pointer]:
+              - /url: "#/Calendar"
+              - generic [ref=e24]: 
+              - generic: Calendar
+            - text: 
+          - listitem [ref=e25]:
+            - link " Directory" [ref=e27] [cursor=pointer]:
+              - /url: "#/Directory"
+              - generic [ref=e29]: 
+              - generic: Directory
+            - text: 
+          - listitem [ref=e30]:
+            - link " Files" [ref=e32] [cursor=pointer]:
+              - /url: "#/Files"
+              - generic [ref=e34]: 
+              - generic: Files
+            - text: 
+          - listitem [ref=e35]:
+            - text: 
+            - link " Checklists" [ref=e37] [cursor=pointer]:
+              - /url: "#/Checklists"
+              - generic [ref=e39]: 
+              - generic: Checklists
+          - listitem [ref=e40]:
+            - link " Reports" [ref=e42] [cursor=pointer]:
+              - /url: "#/Reports/Overview"
+              - generic [ref=e44]: 
+              - generic: Reports
+            - text: 
+          - listitem [ref=e45]:
+            - link " Surveys" [ref=e47] [cursor=pointer]:
+              - /url: "#/SurveyApp"
+              - generic [ref=e49]: 
+              - generic: Surveys
+            - text: 
+          - listitem [ref=e50]:
+            - link " Settings" [ref=e52] [cursor=pointer]:
+              - /url: "#/Settings"
+              - generic [ref=e54]: 
+              - generic: Settings
+            - text: 
+        - list [ref=e55]:
+          - listitem [ref=e56]:
+            - link "People" [ref=e57] [cursor=pointer]:
+              - /url: "#/CoreHr/People"
+              - img [ref=e59]
+              - generic: People
+          - listitem [ref=e60]:
+            - link "Recruit" [ref=e61] [cursor=pointer]:
+              - /url: "#/Recruit/Applicants"
+              - img [ref=e63]
+              - generic: Recruit
+          - listitem [ref=e64]:
+            - link "Onboard" [ref=e65] [cursor=pointer]:
+              - /url: "#/Portal/onboard/People"
+              - img [ref=e67]
+              - generic: Onboard
+          - listitem [ref=e68]:
+            - link "Shift Planner" [ref=e69] [cursor=pointer]:
+              - /url: "#/ShiftPlanner/Schedule"
+              - img [ref=e71]
+              - generic: Shift Planner
+          - listitem [ref=e72]:
+            - link "Time Clock" [ref=e73] [cursor=pointer]:
+              - /url: "#/TimeClock/Overview"
+              - img [ref=e75]
+              - generic: Time Clock
+          - listitem [ref=e76]:
+            - link "Time Off" [ref=e77] [cursor=pointer]:
+              - /url: "#/TimeOff/Overview"
+              - img [ref=e79]
+              - generic: Time Off
+          - listitem [ref=e80]:
+            - link "Perform" [ref=e81] [cursor=pointer]:
+              - /url: "#/Perform/People"
+              - img [ref=e83]
+              - generic: Perform
+          - listitem [ref=e84]:
+            - link "Kudos" [ref=e85] [cursor=pointer]:
+              - /url: https://corehr.staging.hrcloud.net/#/Workmates/KudosApp/Overview
+              - img [ref=e87]
+              - generic: Kudos
+          - listitem [ref=e88]:
+            - link "Assets" [ref=e89] [cursor=pointer]:
+              - /url: "#/Assets/List"
+              - img [ref=e91]
+              - generic: Assets
+          - listitem [ref=e92]:
+            - link "Benefits" [ref=e93] [cursor=pointer]:
+              - /url: "#/Portal/benefits/People"
+              - img [ref=e95]
+              - generic: Benefits
+          - listitem [ref=e96]:
+            - link "Offboard" [ref=e97] [cursor=pointer]:
+              - /url: "#/Portal/offboard/People"
+              - img [ref=e99]
+              - generic: Offboard
+          - listitem [ref=e100]:
+            - link "Edukacija COM" [ref=e101] [cursor=pointer]:
+              - /url: "#/Cloud/List/Edukacija_COM/CustomObjectMultiple"
+              - img [ref=e103]
+              - generic: Edukacija COM
+          - listitem [ref=e104]:
+            - link "Edukacija COM" [ref=e105] [cursor=pointer]:
+              - /url: "#/Cloud/List/Edukacija_COM_2/CustomObjectMultiple"
+              - img [ref=e107]
+              - generic: Edukacija COM
+          - listitem [ref=e108]:
+            - link "dynamic regression 620" [ref=e109] [cursor=pointer]:
+              - /url: "#/Cloud/List/dynamic_regression_620/Form"
+              - img [ref=e111]
+              - generic: dynamic regression 620
+          - listitem [ref=e112]:
+            - link "benefits only form" [ref=e113] [cursor=pointer]:
+              - /url: "#/Cloud/List/benefits_only_form/Form"
+              - img [ref=e115]
+              - generic: benefits only form
+          - listitem [ref=e116]:
+            - link "universal form test" [ref=e117] [cursor=pointer]:
+              - /url: "#/Cloud/List/universal_form_test/Form"
+              - img [ref=e119]
+              - generic: universal form test
+          - listitem [ref=e120]:
+            - link "offboard form test" [ref=e121] [cursor=pointer]:
+              - /url: "#/Cloud/List/offboard_form_test/Form"
+              - img [ref=e123]
+              - generic: offboard form test
+          - listitem [ref=e124]:
+            - link "standalone test petra" [ref=e125] [cursor=pointer]:
+              - /url: "#/Cloud/List/standalone_test_petra/None"
+              - img [ref=e127]
+              - generic: standalone test petra
+          - listitem [ref=e128]:
+            - link "dado test" [ref=e129] [cursor=pointer]:
+              - /url: "#/Cloud/List/dado_test/CustomObjectMultiple"
+              - img [ref=e131]
+              - generic: dado test
+          - listitem [ref=e132]:
+            - link "dado test 2" [ref=e133] [cursor=pointer]:
+              - /url: "#/Cloud/List/dado_test_2/Form"
+              - img [ref=e135]
+              - generic: dado test 2
+          - listitem [ref=e136]:
+            - link "test" [ref=e137] [cursor=pointer]:
+              - /url: "#/Cloud/List/test/Form"
+              - img [ref=e139]
+              - generic: test
+          - listitem [ref=e140]:
+            - link "section test 22" [ref=e141] [cursor=pointer]:
+              - /url: "#/Cloud/List/section_test_22/None"
+              - img [ref=e143]
+              - generic: section test 22
+          - listitem [ref=e144]:
+            - link "testttt123rttt" [ref=e145] [cursor=pointer]:
+              - /url: "#/Cloud/List/testttt123rttt/Form"
+              - img [ref=e147]
+              - generic: testttt123rttt
+          - listitem [ref=e148]:
+            - link "Background hotfix toggle" [ref=e149] [cursor=pointer]:
+              - /url: "#/Cloud/List/Background_hotfix_toggle/Form"
+              - img [ref=e151]
+              - generic: Background hotfix toggle
+          - listitem [ref=e152]:
+            - link "onboard form test" [ref=e153] [cursor=pointer]:
+              - /url: "#/Cloud/List/onboard_form_test/Form"
+              - img [ref=e155]
+              - generic: onboard form test
+          - listitem [ref=e156]:
+            - link "Dynamic lea test regression" [ref=e157] [cursor=pointer]:
+              - /url: "#/Cloud/List/Dynamic_lea_test_regression/Form"
+              - img [ref=e159]
+              - generic: Dynamic lea test regression
+          - listitem [ref=e160]:
+            - link "dadadadada" [ref=e161] [cursor=pointer]:
+              - /url: "#/Cloud/List/dadadadada/Form"
+              - img [ref=e163]
+              - generic: dadadadada
+          - listitem [ref=e164]:
+            - link " Explore Apps" [ref=e165] [cursor=pointer]:
+              - /url: "#/exploreapps"
+              - generic [ref=e167]: 
+              - generic: Explore Apps
+      - text:     
+      - generic [ref=e170] [cursor=pointer]: 
+    - generic:
+      - generic:
+        - generic: 
+    - generic:  
+    - generic [ref=e171]:
+      - list [ref=e172]:
+        - listitem [ref=e173]:
+          - generic [ref=e177] [cursor=pointer]: 
+          - text: 
+      - list [ref=e178]:
+        - listitem [ref=e179]:
+          - generic [ref=e181]:
+            - generic [ref=e182]: 
+            - generic [ref=e184]:
+              - generic [ref=e185]: RegTitle - RegMessage
+              - link "More detail" [ref=e186] [cursor=pointer]:
+                - /url: /Announcement/Product?id=d875a2c0a80c62b9
+            - generic [ref=e187] [cursor=pointer]: 
+            - generic [ref=e188] [cursor=pointer]: "+1"
+      - list [ref=e189]:
+        - listitem [ref=e190]:
+          - generic [ref=e192]:
+            - generic [ref=e193]:
+              - generic [ref=e195]: 
+              - textbox "Search" [ref=e196]
+              - generic [ref=e197]: 
+            - text:   
+          - text: 
+        - text: 
+        - listitem [ref=e198]:
+          - generic [ref=e201] [cursor=pointer]: 
+          - text:     
+        - listitem [ref=e202]:
+          - generic [ref=e205] [cursor=pointer]: 
+          - text:       
+        - listitem [ref=e206]:
+          - generic [ref=e209] [cursor=pointer]: 
+        - listitem [ref=e210]:
+          - generic [ref=e213] [cursor=pointer]: 
+          - text: 
+        - listitem [ref=e214]:
+          - link "Signed in user picture " [ref=e217] [cursor=pointer]:
+            - /url: "#/Employee/Detail/e4b7f1f868474f3d805178a1125bc268"
+            - img "Signed in user picture" [ref=e219]
+            - generic [ref=e222]: 
+          - text:     
+    - generic [ref=e223]:
+      - generic:
+        - generic:
+          - generic: 
+      - generic:  
+      - generic [ref=e226]:
+        - generic [ref=e227]:
+          - banner [ref=e228]:
+            - heading "People" [level=2] [ref=e233]:
+              - generic [ref=e234]: People
+          - navigation [ref=e235]:
+            - list [ref=e237]:
+              - listitem [ref=e238]:
+                - link "Dashboard" [ref=e239] [cursor=pointer]:
+                  - /url: ""
+              - listitem [ref=e240]:
+                - link "People" [ref=e241]:
+                  - /url: ""
+              - listitem [ref=e242]:
+                - link "Portals" [ref=e243] [cursor=pointer]:
+                  - /url: ""
+              - listitem [ref=e244]:
+                - link "Positions" [ref=e245] [cursor=pointer]:
+                  - /url: ""
+              - listitem [ref=e246]:
+                - link "Reports" [ref=e247] [cursor=pointer]:
+                  - /url: ""
+              - listitem [ref=e248]:
+                - link "Forms" [ref=e249] [cursor=pointer]:
+                  - /url: ""
+              - listitem [ref=e250]:
+                - link "More" [ref=e251] [cursor=pointer]:
+                  - /url: ""
+                  - text: More
+        - generic [ref=e256]:
+          - generic [ref=e258]:
+            - generic [ref=e260]:
+              - generic [ref=e261]:
+                - list [ref=e262]:
+                  - listitem [ref=e263]:
+                    - generic [ref=e265] [cursor=pointer]: 
+                  - listitem [ref=e266]:
+                    - generic [ref=e267] [cursor=pointer]:
+                      - generic [ref=e268]: 
+                      - text: Standard 
+                  - listitem
+                  - listitem [ref=e269]:
+                    - generic:
+                      - generic: 
+                      - text: Actions 
+                - list [ref=e270]:
+                  - listitem [ref=e271]:
+                    - generic [ref=e273] [cursor=pointer]: 
+                  - listitem [ref=e274]:
+                    - generic [ref=e276] [cursor=pointer]: 
+                  - listitem [ref=e277]:
+                    - generic [ref=e279] [cursor=pointer]: 
+                  - listitem [ref=e280]:
+                    - generic [ref=e282] [cursor=pointer]: 
+                  - listitem [ref=e283]:
+                    - generic [ref=e285] [cursor=pointer]: 
+                - generic [ref=e286]:
+                  - generic [ref=e288]:
+                    - button "" [ref=e289] [cursor=pointer]:
+                      - generic [ref=e290]: 
+                    - button "" [ref=e291] [cursor=pointer]:
+                      - generic [ref=e292]: 
+                  - generic [ref=e295] [cursor=pointer]: 
+                  - text:  
+                  - table [ref=e297]:
+                    - row "first_mhklhxiwgpdkr                      " [ref=e298]:
+                      - cell [ref=e299]
+                      - cell [ref=e300]
+                      - cell "first_mhklhxiwgpdkr " [ref=e301]:
+                        - generic [ref=e302]:
+                          - textbox "First Name" [active] [ref=e303]: first_mhklhxiwgpdkr
+                          - generic [ref=e304]: 
+                          - text: 
+                      - cell "" [ref=e305]:
+                        - generic [ref=e306]:
+                          - textbox "Last Name" [ref=e307]
+                          - generic [ref=e308]: 
+                          - text: 
+                      - cell "" [ref=e309]:
+                        - generic [ref=e310]:
+                          - textbox "Start Date" [ref=e311]
+                          - generic [ref=e312]: 
+                          - text: 
+                      - cell "" [ref=e313]:
+                        - generic [ref=e314]:
+                          - textbox "Position Title" [ref=e315]
+                          - generic [ref=e316]: 
+                          - text: 
+                      - cell "" [ref=e317]:
+                        - generic [ref=e318]:
+                          - textbox "Department Name" [ref=e319]
+                          - generic [ref=e320]: 
+                          - text: 
+                      - cell "" [ref=e321]:
+                        - generic [ref=e322]:
+                          - textbox "Division Name" [ref=e323]
+                          - generic [ref=e324]: 
+                          - text: 
+                      - cell "" [ref=e325]:
+                        - generic [ref=e326]:
+                          - textbox "Location Name" [ref=e327]
+                          - generic [ref=e328]: 
+                          - text: 
+                      - cell "" [ref=e329]:
+                        - generic [ref=e330]:
+                          - textbox "Employment Status" [ref=e331]
+                          - generic [ref=e332]: 
+                          - text: 
+                      - cell "" [ref=e333]:
+                        - generic [ref=e334]:
+                          - textbox "Employment Type" [ref=e335]
+                          - generic [ref=e336]: 
+                          - text: 
+                      - text:  
+                      - cell "" [ref=e337]:
+                        - generic [ref=e338]:
+                          - textbox "Single Text Section hotfix test" [ref=e339]:
+                            - /placeholder: Single Text Section hotfix test
+                          - generic [ref=e340]: 
+                          - text: 
+                      - cell "" [ref=e341]:
+                        - generic [ref=e342]:
+                          - textbox "Number Section hotfix test" [ref=e343]:
+                            - /placeholder: Number Section hotfix test
+                          - generic [ref=e344]: 
+                          - text: 
+                      - cell "" [ref=e345]:
+                        - generic [ref=e346]:
+                          - textbox "Multiple Selection Section hotfix test" [ref=e347]:
+                            - /placeholder: Multiple Selection Section hotfix test
+                          - generic [ref=e348]: 
+                          - text: 
+                      - cell "" [ref=e349]:
+                        - generic [ref=e350]:
+                          - textbox "Toggle Section hotfix test" [ref=e351]:
+                            - /placeholder: Toggle Section hotfix test
+                          - generic [ref=e352]: 
+                          - text: 
+                      - cell "" [ref=e353]:
+                        - generic [ref=e354]:
+                          - textbox "Email Section hotfix test" [ref=e355]:
+                            - /placeholder: Email Section hotfix test
+                          - generic [ref=e356]: 
+                          - text: 
+                      - cell "" [ref=e357]:
+                        - generic [ref=e358]:
+                          - textbox "Currency Section hotfix test" [ref=e359]:
+                            - /placeholder: Currency Section hotfix test
+                          - generic [ref=e360]: 
+                          - text: 
+                      - cell "" [ref=e361]:
+                        - generic [ref=e362]:
+                          - textbox "Address Section hotfix test" [ref=e363]:
+                            - /placeholder: Address Section hotfix test
+                          - generic [ref=e364]: 
+                          - text: 
+                      - cell "" [ref=e365]:
+                        - generic [ref=e366]:
+                          - textbox "Single Selection Section hotfix test" [ref=e367]:
+                            - /placeholder: Single Selection Section hotfix test
+                          - generic [ref=e368]: 
+                          - text: 
+                      - cell "" [ref=e369]:
+                        - generic [ref=e370]:
+                          - textbox "Date Section hotfix test" [ref=e371]:
+                            - /placeholder: Date Section hotfix test
+                          - generic [ref=e372]: 
+                          - text: 
+                      - cell "" [ref=e373]:
+                        - generic [ref=e374]:
+                          - textbox "Phone Section hotfix test" [ref=e375]:
+                            - /placeholder: Phone Section hotfix test
+                          - generic [ref=e376]: 
+                          - text: 
+                      - cell "" [ref=e377]:
+                        - generic [ref=e378]:
+                          - textbox "Period" [ref=e379]
+                          - generic [ref=e380]: 
+                          - text: 
+                      - cell "" [ref=e381]:
+                        - generic [ref=e382]:
+                          - textbox "URL field Section hotfix test" [ref=e383]:
+                            - /placeholder: URL field Section hotfix test
+                          - generic [ref=e384]: 
+                          - text: 
+                      - cell "" [ref=e385]:
+                        - generic [ref=e386]:
+                          - textbox "Security Role" [ref=e387]
+                          - generic [ref=e388]: 
+                          - text: 
+                      - text:                                                                                                                                                  
+              - grid [ref=e391]:
+                - rowgroup [ref=e417]:
+                  - row " First Name Last Name Start Date Position Title Department Name Division Name Location Name Employment Status Employment Type Single Text Section hotfix test Number Section hotfix test Multiple Selection Section hotfix test Toggle Section hotfix test Email Section hotfix test Currency Section hotfix test Address Section hotfix test Single Selection Section hotfix test Date Section hotfix test Phone Section hotfix test Period URL field Section hotfix test Security Role" [ref=e418]:
+                    - columnheader "" [ref=e419]:
+                      - checkbox ""
+                      - generic [ref=e420] [cursor=pointer]: 
+                    - columnheader [ref=e421]
+                    - columnheader "First Name" [ref=e423]:
+                      - link "First Name" [ref=e424] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e425]: First Name
+                    - columnheader "Last Name" [ref=e426]:
+                      - link "Last Name" [ref=e427] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e428]: Last Name
+                    - columnheader "Start Date" [ref=e429]:
+                      - link "Start Date" [ref=e430] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e431]: Start Date
+                    - columnheader "Position Title" [ref=e432]:
+                      - link "Position Title" [ref=e433] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e434]: Position Title
+                    - columnheader "Department Name" [ref=e435]:
+                      - link "Department Name" [ref=e436] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e437]: Department Name
+                    - columnheader "Division Name" [ref=e438]:
+                      - link "Division Name" [ref=e439] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e440]: Division Name
+                    - columnheader "Location Name" [ref=e441]:
+                      - link "Location Name" [ref=e442] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e443]: Location Name
+                    - columnheader "Employment Status" [ref=e444]:
+                      - link "Employment Status" [ref=e445] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e446]: Employment Status
+                    - columnheader "Employment Type" [ref=e447]:
+                      - link "Employment Type" [ref=e448] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e449]: Employment Type
+                    - columnheader "Single Text Section hotfix test" [ref=e450]:
+                      - link "Single Text Section hotfix test" [ref=e451] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e452]: Single Text Section hotfix test
+                    - columnheader "Number Section hotfix test" [ref=e453]:
+                      - link "Number Section hotfix test" [ref=e454] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e455]: Number Section hotfix test
+                    - columnheader "Multiple Selection Section hotfix test" [ref=e456]:
+                      - generic [ref=e457]: Multiple Selection Section hotfix test
+                    - columnheader "Toggle Section hotfix test" [ref=e458]:
+                      - link "Toggle Section hotfix test" [ref=e459] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e460]: Toggle Section hotfix test
+                    - columnheader "Email Section hotfix test" [ref=e461]:
+                      - link "Email Section hotfix test" [ref=e462] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e463]: Email Section hotfix test
+                    - columnheader "Currency Section hotfix test" [ref=e464]:
+                      - link "Currency Section hotfix test" [ref=e465] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e466]: Currency Section hotfix test
+                    - columnheader "Address Section hotfix test" [ref=e467]:
+                      - link "Address Section hotfix test" [ref=e468] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e469]: Address Section hotfix test
+                    - columnheader "Single Selection Section hotfix test" [ref=e470]:
+                      - link "Single Selection Section hotfix test" [ref=e471] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e472]: Single Selection Section hotfix test
+                    - columnheader "Date Section hotfix test" [ref=e473]:
+                      - link "Date Section hotfix test" [ref=e474] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e475]: Date Section hotfix test
+                    - columnheader "Phone Section hotfix test" [ref=e476]:
+                      - link "Phone Section hotfix test" [ref=e477] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e478]: Phone Section hotfix test
+                    - columnheader "Period" [ref=e479]:
+                      - generic [ref=e480]: Period
+                    - columnheader "URL field Section hotfix test" [ref=e481]:
+                      - generic [ref=e482]: URL field Section hotfix test
+                    - columnheader "Security Role" [ref=e483]:
+                      - link "Security Role" [ref=e484] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e485]: Security Role
+              - grid [ref=e487]:
+                - rowgroup [ref=e513]:
+                  - row " HR Admin 10/27/2025 Sample Position Name Human Resources Splitistan Active HR Admin" [ref=e514]:
+                    - gridcell "" [ref=e515]:
+                      - checkbox ""
+                      - generic [ref=e516] [cursor=pointer]: 
+                    - gridcell [ref=e517]:
+                      - link [ref=e518] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd2adcf5297da6e2fc9/Profile"
+                        - img [ref=e521]
+                    - gridcell "HR" [ref=e522]:
+                      - link "HR" [ref=e523] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd2adcf5297da6e2fc9/Profile"
+                    - gridcell "Admin" [ref=e524]:
+                      - link "Admin" [ref=e525] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd2adcf5297da6e2fc9/Profile"
+                    - gridcell "10/27/2025" [ref=e526]
+                    - gridcell "Sample Position Name" [ref=e527]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e528]: Human Resources
+                    - gridcell [ref=e529]
+                    - gridcell "Splitistan" [ref=e530]: Splitistan
+                    - gridcell "Active" [ref=e531]: Active
+                    - gridcell [ref=e532]
+                    - gridcell [ref=e533]
+                    - gridcell [ref=e534]
+                    - gridcell [ref=e535]
+                    - gridcell [ref=e536]
+                    - gridcell [ref=e537]
+                    - gridcell [ref=e538]
+                    - gridcell [ref=e539]
+                    - gridcell [ref=e540]
+                    - gridcell [ref=e541]
+                    - gridcell [ref=e542]
+                    - gridcell [ref=e543]
+                    - gridcell [ref=e544]
+                    - gridcell "HR Admin" [ref=e545]
+                  - row " HR Operation 10/12/2023 Sample Position Name Human Resources yessss Splitistan Active Manager" [ref=e546]:
+                    - gridcell "" [ref=e547]:
+                      - checkbox ""
+                      - generic [ref=e548] [cursor=pointer]: 
+                    - gridcell [ref=e549]:
+                      - link [ref=e550] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd2997408486d4ebd97/Profile"
+                        - img [ref=e553]
+                    - gridcell "HR" [ref=e554]:
+                      - link "HR" [ref=e555] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd2997408486d4ebd97/Profile"
+                    - gridcell "Operation" [ref=e556]:
+                      - link "Operation" [ref=e557] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd2997408486d4ebd97/Profile"
+                    - gridcell "10/12/2023" [ref=e558]
+                    - gridcell "Sample Position Name" [ref=e559]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e560]: Human Resources
+                    - gridcell "yessss" [ref=e561]: yessss
+                    - gridcell "Splitistan" [ref=e562]: Splitistan
+                    - gridcell "Active" [ref=e563]: Active
+                    - gridcell [ref=e564]
+                    - gridcell [ref=e565]
+                    - gridcell [ref=e566]
+                    - gridcell [ref=e567]
+                    - gridcell [ref=e568]
+                    - gridcell [ref=e569]
+                    - gridcell [ref=e570]
+                    - gridcell [ref=e571]
+                    - gridcell [ref=e572]
+                    - gridcell [ref=e573]
+                    - gridcell [ref=e574]
+                    - gridcell [ref=e575]
+                    - gridcell [ref=e576]
+                    - gridcell "Manager" [ref=e577]
+                  - row " HR User 03/25/2025 Sample Position Name Human Resources Sample Location Name Active Employee" [ref=e578]:
+                    - gridcell "" [ref=e579]:
+                      - checkbox ""
+                      - generic [ref=e580] [cursor=pointer]: 
+                    - gridcell [ref=e581]:
+                      - link [ref=e582] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd23cf7d4bc6aaa84db/Profile"
+                        - img [ref=e585]
+                    - gridcell "HR" [ref=e586]:
+                      - link "HR" [ref=e587] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd23cf7d4bc6aaa84db/Profile"
+                    - gridcell "User" [ref=e588]:
+                      - link "User" [ref=e589] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd23cf7d4bc6aaa84db/Profile"
+                    - gridcell "03/25/2025" [ref=e590]
+                    - gridcell "Sample Position Name" [ref=e591]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e592]: Human Resources
+                    - gridcell [ref=e593]
+                    - gridcell "Sample Location Name" [ref=e594]: Sample Location Name
+                    - gridcell "Active" [ref=e595]: Active
+                    - gridcell [ref=e596]
+                    - gridcell [ref=e597]
+                    - gridcell [ref=e598]
+                    - gridcell [ref=e599]
+                    - gridcell [ref=e600]
+                    - gridcell [ref=e601]
+                    - gridcell [ref=e602]
+                    - gridcell [ref=e603]
+                    - gridcell [ref=e604]
+                    - gridcell [ref=e605]
+                    - gridcell [ref=e606]
+                    - gridcell [ref=e607]
+                    - gridcell [ref=e608]
+                    - gridcell "Employee" [ref=e609]
+                  - row " IT Operation 06/26/2024 pozicija Executive Operations East Splitistan Active IT Operation" [ref=e610]:
+                    - gridcell "" [ref=e611]:
+                      - checkbox ""
+                      - generic [ref=e612] [cursor=pointer]: 
+                    - gridcell [ref=e613]:
+                      - link [ref=e614] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd20da3ad6552bfdd42/Profile"
+                        - img [ref=e617]
+                    - gridcell "IT" [ref=e618]:
+                      - link "IT" [ref=e619] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd20da3ad6552bfdd42/Profile"
+                    - gridcell "Operation" [ref=e620]:
+                      - link "Operation" [ref=e621] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd20da3ad6552bfdd42/Profile"
+                    - gridcell "06/26/2024" [ref=e622]
+                    - gridcell "pozicija" [ref=e623]: pozicija
+                    - gridcell "Executive Operations" [ref=e624]: Executive Operations
+                    - gridcell "East" [ref=e625]: East
+                    - gridcell "Splitistan" [ref=e626]: Splitistan
+                    - gridcell "Active" [ref=e627]: Active
+                    - gridcell [ref=e628]
+                    - gridcell [ref=e629]
+                    - gridcell [ref=e630]
+                    - gridcell [ref=e631]
+                    - gridcell [ref=e632]
+                    - gridcell [ref=e633]
+                    - gridcell [ref=e634]
+                    - gridcell [ref=e635]
+                    - gridcell [ref=e636]
+                    - gridcell [ref=e637]
+                    - gridcell [ref=e638]
+                    - gridcell [ref=e639]
+                    - gridcell [ref=e640]
+                    - gridcell "IT Operation" [ref=e641]
+                  - row " IT User 12/17/2024 Sample Position Name Human Resources yessss Splitistan Active Employee" [ref=e642]:
+                    - gridcell "" [ref=e643]:
+                      - checkbox ""
+                      - generic [ref=e644] [cursor=pointer]: 
+                    - gridcell [ref=e645]:
+                      - link [ref=e646] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd21851360e559c002d/Profile"
+                        - img [ref=e649]
+                    - gridcell "IT" [ref=e650]:
+                      - link "IT" [ref=e651] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd21851360e559c002d/Profile"
+                    - gridcell "User" [ref=e652]:
+                      - link "User" [ref=e653] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd21851360e559c002d/Profile"
+                    - gridcell "12/17/2024" [ref=e654]
+                    - gridcell "Sample Position Name" [ref=e655]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e656]: Human Resources
+                    - gridcell "yessss" [ref=e657]: yessss
+                    - gridcell "Splitistan" [ref=e658]: Splitistan
+                    - gridcell "Active" [ref=e659]: Active
+                    - gridcell [ref=e660]
+                    - gridcell [ref=e661]
+                    - gridcell [ref=e662]
+                    - gridcell [ref=e663]
+                    - gridcell [ref=e664]
+                    - gridcell [ref=e665]
+                    - gridcell [ref=e666]
+                    - gridcell [ref=e667]
+                    - gridcell [ref=e668]
+                    - gridcell [ref=e669]
+                    - gridcell [ref=e670]
+                    - gridcell [ref=e671]
+                    - gridcell [ref=e672]
+                    - gridcell "Employee" [ref=e673]
+                  - row " HR Manager 09/10/2024 Sample Position Name Human Resources Splitistan Active Manager" [ref=e674]:
+                    - gridcell "" [ref=e675]:
+                      - checkbox ""
+                      - generic [ref=e676] [cursor=pointer]: 
+                    - gridcell [ref=e677]:
+                      - link [ref=e678] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd25d6d48c9b8d079d2/Profile"
+                        - img [ref=e681]
+                    - gridcell "HR" [ref=e682]:
+                      - link "HR" [ref=e683] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd25d6d48c9b8d079d2/Profile"
+                    - gridcell "Manager" [ref=e684]:
+                      - link "Manager" [ref=e685] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd25d6d48c9b8d079d2/Profile"
+                    - gridcell "09/10/2024" [ref=e686]
+                    - gridcell "Sample Position Name" [ref=e687]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e688]: Human Resources
+                    - gridcell [ref=e689]
+                    - gridcell "Splitistan" [ref=e690]: Splitistan
+                    - gridcell "Active" [ref=e691]: Active
+                    - gridcell [ref=e692]
+                    - gridcell [ref=e693]
+                    - gridcell [ref=e694]
+                    - gridcell [ref=e695]
+                    - gridcell [ref=e696]
+                    - gridcell [ref=e697]
+                    - gridcell [ref=e698]
+                    - gridcell [ref=e699]
+                    - gridcell [ref=e700]
+                    - gridcell [ref=e701]
+                    - gridcell [ref=e702]
+                    - gridcell [ref=e703]
+                    - gridcell [ref=e704]
+                    - gridcell "Manager" [ref=e705]
+                  - row " HR Employee 10/22/2024 Sample Position Name Human Resources lokacija mile gg Active hotfix test 1 1 hotfix A Yes hotfixtest1@mail.com 111111 hotfix test 1 hotfix A 07/09/2024 +1 11111111 07/09/2024 - 07/10/2024 www.hotfixtest1.net Employee" [ref=e706]:
+                    - gridcell "" [ref=e707]:
+                      - checkbox ""
+                      - generic [ref=e708] [cursor=pointer]: 
+                    - gridcell [ref=e709]:
+                      - link [ref=e710] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd278a045f9ee02dc58/Profile"
+                        - img [ref=e713]
+                    - gridcell "HR" [ref=e714]:
+                      - link "HR" [ref=e715] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd278a045f9ee02dc58/Profile"
+                    - gridcell "Employee" [ref=e716]:
+                      - link "Employee" [ref=e717] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/0e6c73c1696adfd278a045f9ee02dc58/Profile"
+                    - gridcell "10/22/2024" [ref=e718]
+                    - gridcell "Sample Position Name" [ref=e719]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e720]: Human Resources
+                    - gridcell [ref=e721]
+                    - gridcell "lokacija mile gg" [ref=e722]: lokacija mile gg
+                    - gridcell "Active" [ref=e723]: Active
+                    - gridcell [ref=e724]
+                    - gridcell "hotfix test 1" [ref=e725]
+                    - gridcell "1" [ref=e726]
+                    - gridcell "hotfix A" [ref=e727]
+                    - gridcell "Yes" [ref=e728]
+                    - gridcell "hotfixtest1@mail.com" [ref=e729]
+                    - gridcell "111111" [ref=e730]
+                    - gridcell "hotfix test 1" [ref=e731]
+                    - gridcell "hotfix A" [ref=e732]
+                    - gridcell "07/09/2024" [ref=e733]
+                    - gridcell "+1 11111111" [ref=e734]
+                    - gridcell "07/09/2024 - 07/10/2024" [ref=e735]
+                    - gridcell "www.hotfixtest1.net" [ref=e736]
+                    - gridcell "Employee" [ref=e737]
+                  - row " HR2 Employee2 10/23/2024 Sample Position Name Human Resources lokacija mile gg Active Employee" [ref=e738]:
+                    - gridcell "" [ref=e739]:
+                      - checkbox ""
+                      - generic [ref=e740] [cursor=pointer]: 
+                    - gridcell [ref=e741]:
+                      - link [ref=e742] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/be60a82ae82aa44f77041a01009e11ff/Profile"
+                        - img [ref=e745]
+                    - gridcell "HR2" [ref=e746]:
+                      - link "HR2" [ref=e747] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/be60a82ae82aa44f77041a01009e11ff/Profile"
+                    - gridcell "Employee2" [ref=e748]:
+                      - link "Employee2" [ref=e749] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/be60a82ae82aa44f77041a01009e11ff/Profile"
+                    - gridcell "10/23/2024" [ref=e750]
+                    - gridcell "Sample Position Name" [ref=e751]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e752]: Human Resources
+                    - gridcell [ref=e753]
+                    - gridcell "lokacija mile gg" [ref=e754]: lokacija mile gg
+                    - gridcell "Active" [ref=e755]: Active
+                    - gridcell [ref=e756]
+                    - gridcell [ref=e757]
+                    - gridcell [ref=e758]
+                    - gridcell [ref=e759]
+                    - gridcell [ref=e760]
+                    - gridcell [ref=e761]
+                    - gridcell [ref=e762]
+                    - gridcell [ref=e763]
+                    - gridcell [ref=e764]
+                    - gridcell [ref=e765]
+                    - gridcell [ref=e766]
+                    - gridcell [ref=e767]
+                    - gridcell [ref=e768]
+                    - gridcell "Employee" [ref=e769]
+                  - row " <script>alert(\"hello\")</script> <script>alert(\"hello\")</script> 07/24/2023 Sample Position Name Human Resources lokacija mile gg Active Employee" [ref=e770]:
+                    - gridcell "" [ref=e771]:
+                      - checkbox ""
+                      - generic [ref=e772] [cursor=pointer]: 
+                    - gridcell [ref=e773]:
+                      - link [ref=e774] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/be60a82ae82aa44f808dc69a2dab835f/Profile"
+                        - img [ref=e777]
+                    - gridcell "<script>alert(\"hello\")</script>" [ref=e778]:
+                      - link "<script>alert(\"hello\")</script>" [ref=e779] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/be60a82ae82aa44f808dc69a2dab835f/Profile"
+                    - gridcell "<script>alert(\"hello\")</script>" [ref=e780]:
+                      - link "<script>alert(\"hello\")</script>" [ref=e781] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/be60a82ae82aa44f808dc69a2dab835f/Profile"
+                    - gridcell "07/24/2023" [ref=e782]
+                    - gridcell "Sample Position Name" [ref=e783]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e784]: Human Resources
+                    - gridcell [ref=e785]
+                    - gridcell "lokacija mile gg" [ref=e786]: lokacija mile gg
+                    - gridcell "Active" [ref=e787]: Active
+                    - gridcell [ref=e788]
+                    - gridcell [ref=e789]
+                    - gridcell [ref=e790]
+                    - gridcell [ref=e791]
+                    - gridcell [ref=e792]
+                    - gridcell [ref=e793]
+                    - gridcell [ref=e794]
+                    - gridcell [ref=e795]
+                    - gridcell [ref=e796]
+                    - gridcell [ref=e797]
+                    - gridcell [ref=e798]
+                    - gridcell [ref=e799]
+                    - gridcell [ref=e800]
+                    - gridcell "Employee" [ref=e801]
+                  - row " announcehire auto 10/29/2025 Sample Position Name Human Resources lokacija mile gg Active hotfix A Employee" [ref=e802]:
+                    - gridcell "" [ref=e803]:
+                      - checkbox ""
+                      - generic [ref=e804] [cursor=pointer]: 
+                    - gridcell [ref=e805]:
+                      - link [ref=e806] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c418ca6c68f02b92b3/Profile"
+                        - img [ref=e809]
+                    - gridcell "announcehire" [ref=e810]:
+                      - link "announcehire" [ref=e811] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c418ca6c68f02b92b3/Profile"
+                    - gridcell "auto" [ref=e812]:
+                      - link "auto" [ref=e813] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c418ca6c68f02b92b3/Profile"
+                    - gridcell "10/29/2025" [ref=e814]
+                    - gridcell "Sample Position Name" [ref=e815]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e816]: Human Resources
+                    - gridcell [ref=e817]
+                    - gridcell "lokacija mile gg" [ref=e818]: lokacija mile gg
+                    - gridcell "Active" [ref=e819]: Active
+                    - gridcell [ref=e820]
+                    - gridcell [ref=e821]
+                    - gridcell [ref=e822]
+                    - gridcell "hotfix A" [ref=e823]
+                    - gridcell [ref=e824]
+                    - gridcell [ref=e825]
+                    - gridcell [ref=e826]
+                    - gridcell [ref=e827]
+                    - gridcell [ref=e828]
+                    - gridcell [ref=e829]
+                    - gridcell [ref=e830]
+                    - gridcell [ref=e831]
+                    - gridcell [ref=e832]
+                    - gridcell "Employee" [ref=e833]
+                  - row " announcehire22 auto22 10/02/2024 cleaner Client Services West Los Angeles Active Employee" [ref=e834]:
+                    - gridcell "" [ref=e835]:
+                      - checkbox ""
+                      - generic [ref=e836] [cursor=pointer]: 
+                    - gridcell [ref=e837]:
+                      - link [ref=e838] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c4cabb7408d98a0ac6/Profile"
+                        - img [ref=e841]
+                    - gridcell "announcehire22" [ref=e842]:
+                      - link "announcehire22" [ref=e843] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c4cabb7408d98a0ac6/Profile"
+                    - gridcell "auto22" [ref=e844]:
+                      - link "auto22" [ref=e845] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c4cabb7408d98a0ac6/Profile"
+                    - gridcell "10/02/2024" [ref=e846]
+                    - gridcell "cleaner" [ref=e847]: cleaner
+                    - gridcell "Client Services" [ref=e848]: Client Services
+                    - gridcell "West" [ref=e849]: West
+                    - gridcell "Los Angeles" [ref=e850]: Los Angeles
+                    - gridcell "Active" [ref=e851]: Active
+                    - gridcell [ref=e852]
+                    - gridcell [ref=e853]
+                    - gridcell [ref=e854]
+                    - gridcell [ref=e855]
+                    - gridcell [ref=e856]
+                    - gridcell [ref=e857]
+                    - gridcell [ref=e858]
+                    - gridcell [ref=e859]
+                    - gridcell [ref=e860]
+                    - gridcell [ref=e861]
+                    - gridcell [ref=e862]
+                    - gridcell [ref=e863]
+                    - gridcell [ref=e864]
+                    - gridcell "Employee" [ref=e865]
+                  - row " announce3 hire3 10/04/2024 Sample Position Name Human Resources Sample Location Name Active Employee" [ref=e866]:
+                    - gridcell "" [ref=e867]:
+                      - checkbox ""
+                      - generic [ref=e868] [cursor=pointer]: 
+                    - gridcell [ref=e869]:
+                      - link [ref=e870] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c424135c341fa4075f/Profile"
+                        - img [ref=e873]
+                    - gridcell "announce3" [ref=e874]:
+                      - link "announce3" [ref=e875] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c424135c341fa4075f/Profile"
+                    - gridcell "hire3" [ref=e876]:
+                      - link "hire3" [ref=e877] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c424135c341fa4075f/Profile"
+                    - gridcell "10/04/2024" [ref=e878]
+                    - gridcell "Sample Position Name" [ref=e879]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e880]: Human Resources
+                    - gridcell [ref=e881]
+                    - gridcell "Sample Location Name" [ref=e882]: Sample Location Name
+                    - gridcell "Active" [ref=e883]: Active
+                    - gridcell [ref=e884]
+                    - gridcell [ref=e885]
+                    - gridcell [ref=e886]
+                    - gridcell [ref=e887]
+                    - gridcell [ref=e888]
+                    - gridcell [ref=e889]
+                    - gridcell [ref=e890]
+                    - gridcell [ref=e891]
+                    - gridcell [ref=e892]
+                    - gridcell [ref=e893]
+                    - gridcell [ref=e894]
+                    - gridcell [ref=e895]
+                    - gridcell [ref=e896]
+                    - gridcell "Employee" [ref=e897]
+                  - row " what what 10/06/2024 Sample Position Name Human Resources Sample Location Name Active testna rola 123" [ref=e898]:
+                    - gridcell "" [ref=e899]:
+                      - checkbox ""
+                      - generic [ref=e900] [cursor=pointer]: 
+                    - gridcell [ref=e901]:
+                      - link [ref=e902] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c4b3bb2295d12d049f/Profile"
+                        - img [ref=e905]
+                    - gridcell "what" [ref=e906]:
+                      - link "what" [ref=e907] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c4b3bb2295d12d049f/Profile"
+                    - gridcell "what" [ref=e908]:
+                      - link "what" [ref=e909] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c4b3bb2295d12d049f/Profile"
+                    - gridcell "10/06/2024" [ref=e910]
+                    - gridcell "Sample Position Name" [ref=e911]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e912]: Human Resources
+                    - gridcell [ref=e913]
+                    - gridcell "Sample Location Name" [ref=e914]: Sample Location Name
+                    - gridcell "Active" [ref=e915]: Active
+                    - gridcell [ref=e916]
+                    - gridcell [ref=e917]
+                    - gridcell [ref=e918]
+                    - gridcell [ref=e919]
+                    - gridcell [ref=e920]
+                    - gridcell [ref=e921]
+                    - gridcell [ref=e922]
+                    - gridcell [ref=e923]
+                    - gridcell [ref=e924]
+                    - gridcell [ref=e925]
+                    - gridcell [ref=e926]
+                    - gridcell [ref=e927]
+                    - gridcell [ref=e928]
+                    - gridcell "testna rola 123" [ref=e929]
+                  - row " finaltest finaltest 07/30/2024 Sample Position Name Human Resources yapyap Terminated Employee" [ref=e930]:
+                    - gridcell "" [ref=e931]:
+                      - checkbox ""
+                      - generic [ref=e932] [cursor=pointer]: 
+                    - gridcell [ref=e933]:
+                      - link [ref=e934] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c47ad3d17e93a7f698/Profile"
+                        - img [ref=e937]
+                    - gridcell "finaltest" [ref=e938]:
+                      - link "finaltest" [ref=e939] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c47ad3d17e93a7f698/Profile"
+                    - gridcell "finaltest" [ref=e940]:
+                      - link "finaltest" [ref=e941] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c47ad3d17e93a7f698/Profile"
+                    - gridcell "07/30/2024" [ref=e942]
+                    - gridcell "Sample Position Name" [ref=e943]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e944]: Human Resources
+                    - gridcell [ref=e945]
+                    - gridcell "yapyap" [ref=e946]: yapyap
+                    - gridcell "Terminated" [ref=e947]: Terminated
+                    - gridcell [ref=e948]
+                    - gridcell [ref=e949]
+                    - gridcell [ref=e950]
+                    - gridcell [ref=e951]
+                    - gridcell [ref=e952]
+                    - gridcell [ref=e953]
+                    - gridcell [ref=e954]
+                    - gridcell [ref=e955]
+                    - gridcell [ref=e956]
+                    - gridcell [ref=e957]
+                    - gridcell [ref=e958]
+                    - gridcell [ref=e959]
+                    - gridcell [ref=e960]
+                    - gridcell "Employee" [ref=e961]
+                  - row " finaltest2 finaltest2 07/30/2024 Sample Position Name Human Resources Sample Location Name Terminated Employee" [ref=e962]:
+                    - gridcell "" [ref=e963]:
+                      - checkbox ""
+                      - generic [ref=e964] [cursor=pointer]: 
+                    - gridcell [ref=e965]:
+                      - link [ref=e966] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c491051901746fb096/Profile"
+                        - img [ref=e969]
+                    - gridcell "finaltest2" [ref=e970]:
+                      - link "finaltest2" [ref=e971] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c491051901746fb096/Profile"
+                    - gridcell "finaltest2" [ref=e972]:
+                      - link "finaltest2" [ref=e973] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c491051901746fb096/Profile"
+                    - gridcell "07/30/2024" [ref=e974]
+                    - gridcell "Sample Position Name" [ref=e975]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e976]: Human Resources
+                    - gridcell [ref=e977]
+                    - gridcell "Sample Location Name" [ref=e978]: Sample Location Name
+                    - gridcell "Terminated" [ref=e979]: Terminated
+                    - gridcell [ref=e980]
+                    - gridcell [ref=e981]
+                    - gridcell [ref=e982]
+                    - gridcell [ref=e983]
+                    - gridcell [ref=e984]
+                    - gridcell [ref=e985]
+                    - gridcell [ref=e986]
+                    - gridcell [ref=e987]
+                    - gridcell [ref=e988]
+                    - gridcell [ref=e989]
+                    - gridcell [ref=e990]
+                    - gridcell [ref=e991]
+                    - gridcell [ref=e992]
+                    - gridcell "Employee" [ref=e993]
+                  - row " finaltest3 finaltest3 07/30/2024 Sample Position Name Human Resources yapyap Terminated Employee" [ref=e994]:
+                    - gridcell "" [ref=e995]:
+                      - checkbox ""
+                      - generic [ref=e996] [cursor=pointer]: 
+                    - gridcell [ref=e997]:
+                      - link [ref=e998] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c43e81cd1793215e41/Profile"
+                        - img [ref=e1001]
+                    - gridcell "finaltest3" [ref=e1002]:
+                      - link "finaltest3" [ref=e1003] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c43e81cd1793215e41/Profile"
+                    - gridcell "finaltest3" [ref=e1004]:
+                      - link "finaltest3" [ref=e1005] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/5bc175b4b9e524c43e81cd1793215e41/Profile"
+                    - gridcell "07/30/2024" [ref=e1006]
+                    - gridcell "Sample Position Name" [ref=e1007]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e1008]: Human Resources
+                    - gridcell [ref=e1009]
+                    - gridcell "yapyap" [ref=e1010]: yapyap
+                    - gridcell "Terminated" [ref=e1011]: Terminated
+                    - gridcell [ref=e1012]
+                    - gridcell [ref=e1013]
+                    - gridcell [ref=e1014]
+                    - gridcell [ref=e1015]
+                    - gridcell [ref=e1016]
+                    - gridcell [ref=e1017]
+                    - gridcell [ref=e1018]
+                    - gridcell [ref=e1019]
+                    - gridcell [ref=e1020]
+                    - gridcell [ref=e1021]
+                    - gridcell [ref=e1022]
+                    - gridcell [ref=e1023]
+                    - gridcell [ref=e1024]
+                    - gridcell "Employee" [ref=e1025]
+                  - row " first name last name 10/26/2024 Sample Position Name Human Resources lokacija mile gg Active Employee" [ref=e1026]:
+                    - gridcell "" [ref=e1027]:
+                      - checkbox ""
+                      - generic [ref=e1028] [cursor=pointer]: 
+                    - gridcell [ref=e1029]:
+                      - link [ref=e1030] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/a4b62dffca63d2ebf02229e11799dec7/Profile"
+                        - img [ref=e1033]
+                    - gridcell "first name" [ref=e1034]:
+                      - link "first name" [ref=e1035] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/a4b62dffca63d2ebf02229e11799dec7/Profile"
+                    - gridcell "last name" [ref=e1036]:
+                      - link "last name" [ref=e1037] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/a4b62dffca63d2ebf02229e11799dec7/Profile"
+                    - gridcell "10/26/2024" [ref=e1038]
+                    - gridcell "Sample Position Name" [ref=e1039]: Sample Position Name
+                    - gridcell "Human Resources" [ref=e1040]: Human Resources
+                    - gridcell [ref=e1041]
+                    - gridcell "lokacija mile gg" [ref=e1042]: lokacija mile gg
+                    - gridcell "Active" [ref=e1043]: Active
+                    - gridcell [ref=e1044]
+                    - gridcell [ref=e1045]
+                    - gridcell [ref=e1046]
+                    - gridcell [ref=e1047]
+                    - gridcell [ref=e1048]
+                    - gridcell [ref=e1049]
+                    - gridcell [ref=e1050]
+                    - gridcell [ref=e1051]
+                    - gridcell [ref=e1052]
+                    - gridcell [ref=e1053]
+                    - gridcell [ref=e1054]
+                    - gridcell [ref=e1055]
+                    - gridcell [ref=e1056]
+                    - gridcell "Employee" [ref=e1057]
+                  - row " Noe Lupton 02/02/2012 Chief Executive Officer Executive Operations Los Angeles Active Full Time Manager" [ref=e1058]:
+                    - gridcell "" [ref=e1059]:
+                      - checkbox ""
+                      - generic [ref=e1060] [cursor=pointer]: 
+                    - gridcell [ref=e1061]:
+                      - link [ref=e1062] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd29bb3013ed04457af/Profile"
+                        - img [ref=e1065]
+                    - gridcell "Noe" [ref=e1066]:
+                      - link "Noe" [ref=e1067] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd29bb3013ed04457af/Profile"
+                    - gridcell "Lupton" [ref=e1068]:
+                      - link "Lupton" [ref=e1069] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd29bb3013ed04457af/Profile"
+                    - gridcell "02/02/2012" [ref=e1070]
+                    - gridcell "Chief Executive Officer" [ref=e1071]: Chief Executive Officer
+                    - gridcell "Executive Operations" [ref=e1072]: Executive Operations
+                    - gridcell [ref=e1073]
+                    - gridcell "Los Angeles" [ref=e1074]: Los Angeles
+                    - gridcell "Active" [ref=e1075]: Active
+                    - gridcell "Full Time" [ref=e1076]: Full Time
+                    - gridcell [ref=e1077]
+                    - gridcell [ref=e1078]
+                    - gridcell [ref=e1079]
+                    - gridcell [ref=e1080]
+                    - gridcell [ref=e1081]
+                    - gridcell [ref=e1082]
+                    - gridcell [ref=e1083]
+                    - gridcell [ref=e1084]
+                    - gridcell [ref=e1085]
+                    - gridcell [ref=e1086]
+                    - gridcell [ref=e1087]
+                    - gridcell [ref=e1088]
+                    - gridcell "Manager" [ref=e1089]
+                  - row " Rachel Lee 04/01/2014 Sample Position Name Client Services West Los Angeles Active Full Time Employee" [ref=e1090]:
+                    - gridcell "" [ref=e1091]:
+                      - checkbox ""
+                      - generic [ref=e1092] [cursor=pointer]: 
+                    - gridcell [ref=e1093]:
+                      - link [ref=e1094] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd2cd6008eaef5fef25/Profile"
+                        - img [ref=e1097]
+                    - gridcell "Rachel" [ref=e1098]:
+                      - link "Rachel" [ref=e1099] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd2cd6008eaef5fef25/Profile"
+                    - gridcell "Lee" [ref=e1100]:
+                      - link "Lee" [ref=e1101] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd2cd6008eaef5fef25/Profile"
+                    - gridcell "04/01/2014" [ref=e1102]
+                    - gridcell "Sample Position Name" [ref=e1103]: Sample Position Name
+                    - gridcell "Client Services" [ref=e1104]: Client Services
+                    - gridcell "West" [ref=e1105]: West
+                    - gridcell "Los Angeles" [ref=e1106]: Los Angeles
+                    - gridcell "Active" [ref=e1107]: Active
+                    - gridcell "Full Time" [ref=e1108]: Full Time
+                    - gridcell [ref=e1109]
+                    - gridcell [ref=e1110]
+                    - gridcell [ref=e1111]
+                    - gridcell [ref=e1112]
+                    - gridcell [ref=e1113]
+                    - gridcell [ref=e1114]
+                    - gridcell [ref=e1115]
+                    - gridcell [ref=e1116]
+                    - gridcell [ref=e1117]
+                    - gridcell [ref=e1118]
+                    - gridcell [ref=e1119]
+                    - gridcell [ref=e1120]
+                    - gridcell "Employee" [ref=e1121]
+                  - row " Samuel Nichols 12/09/2012 Sample Position Name dprtmnt West New York Active Full Time Manager" [ref=e1122]:
+                    - gridcell "" [ref=e1123]:
+                      - checkbox ""
+                      - generic [ref=e1124] [cursor=pointer]: 
+                    - gridcell [ref=e1125]:
+                      - link [ref=e1126] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd2abf7393845e28237/Profile"
+                        - img [ref=e1129]
+                    - gridcell "Samuel" [ref=e1130]:
+                      - link "Samuel" [ref=e1131] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd2abf7393845e28237/Profile"
+                    - gridcell "Nichols" [ref=e1132]:
+                      - link "Nichols" [ref=e1133] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd2abf7393845e28237/Profile"
+                    - gridcell "12/09/2012" [ref=e1134]
+                    - gridcell "Sample Position Name" [ref=e1135]: Sample Position Name
+                    - gridcell "dprtmnt" [ref=e1136]: dprtmnt
+                    - gridcell "West" [ref=e1137]: West
+                    - gridcell "New York" [ref=e1138]: New York
+                    - gridcell "Active" [ref=e1139]: Active
+                    - gridcell "Full Time" [ref=e1140]: Full Time
+                    - gridcell [ref=e1141]
+                    - gridcell [ref=e1142]
+                    - gridcell [ref=e1143]
+                    - gridcell [ref=e1144]
+                    - gridcell [ref=e1145]
+                    - gridcell [ref=e1146]
+                    - gridcell [ref=e1147]
+                    - gridcell [ref=e1148]
+                    - gridcell [ref=e1149]
+                    - gridcell [ref=e1150]
+                    - gridcell [ref=e1151]
+                    - gridcell [ref=e1152]
+                    - gridcell "Manager" [ref=e1153]
+                  - row " Melissa Andrews 11/04/2014 Sample Position Name dprtmnt East yapyap Active Intern Employee" [ref=e1154]:
+                    - gridcell "" [ref=e1155]:
+                      - checkbox ""
+                      - generic [ref=e1156] [cursor=pointer]: 
+                    - gridcell [ref=e1157]:
+                      - link [ref=e1158] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd20e013d523ca5345d/Profile"
+                        - img [ref=e1161]
+                    - gridcell "Melissa" [ref=e1162]:
+                      - link "Melissa" [ref=e1163] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd20e013d523ca5345d/Profile"
+                    - gridcell "Andrews" [ref=e1164]:
+                      - link "Andrews" [ref=e1165] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd20e013d523ca5345d/Profile"
+                    - gridcell "11/04/2014" [ref=e1166]
+                    - gridcell "Sample Position Name" [ref=e1167]: Sample Position Name
+                    - gridcell "dprtmnt" [ref=e1168]: dprtmnt
+                    - gridcell "East" [ref=e1169]: East
+                    - gridcell "yapyap" [ref=e1170]: yapyap
+                    - gridcell "Active" [ref=e1171]: Active
+                    - gridcell "Intern" [ref=e1172]: Intern
+                    - gridcell [ref=e1173]
+                    - gridcell [ref=e1174]
+                    - gridcell [ref=e1175]
+                    - gridcell [ref=e1176]
+                    - gridcell [ref=e1177]
+                    - gridcell [ref=e1178]
+                    - gridcell [ref=e1179]
+                    - gridcell [ref=e1180]
+                    - gridcell [ref=e1181]
+                    - gridcell [ref=e1182]
+                    - gridcell [ref=e1183]
+                    - gridcell [ref=e1184]
+                    - gridcell "Employee" [ref=e1185]
+                  - row " Alexander Perez 01/05/2015 Sample Position Name Marketing yapyap Active Intern Employee" [ref=e1186]:
+                    - gridcell "" [ref=e1187]:
+                      - checkbox ""
+                      - generic [ref=e1188] [cursor=pointer]: 
+                    - gridcell [ref=e1189]:
+                      - link [ref=e1190] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd2a3bbb106ca8e9ddc/Profile"
+                        - img [ref=e1193]
+                    - gridcell "Alexander" [ref=e1194]:
+                      - link "Alexander" [ref=e1195] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd2a3bbb106ca8e9ddc/Profile"
+                    - gridcell "Perez" [ref=e1196]:
+                      - link "Perez" [ref=e1197] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd2a3bbb106ca8e9ddc/Profile"
+                    - gridcell "01/05/2015" [ref=e1198]
+                    - gridcell "Sample Position Name" [ref=e1199]: Sample Position Name
+                    - gridcell "Marketing" [ref=e1200]: Marketing
+                    - gridcell [ref=e1201]
+                    - gridcell "yapyap" [ref=e1202]: yapyap
+                    - gridcell "Active" [ref=e1203]: Active
+                    - gridcell "Intern" [ref=e1204]: Intern
+                    - gridcell [ref=e1205]
+                    - gridcell [ref=e1206]
+                    - gridcell [ref=e1207]
+                    - gridcell [ref=e1208]
+                    - gridcell [ref=e1209]
+                    - gridcell [ref=e1210]
+                    - gridcell [ref=e1211]
+                    - gridcell [ref=e1212]
+                    - gridcell [ref=e1213]
+                    - gridcell [ref=e1214]
+                    - gridcell [ref=e1215]
+                    - gridcell [ref=e1216]
+                    - gridcell "Employee" [ref=e1217]
+                  - row " Ilia1 Topuria1 09/02/2024 Sample Position Name dprtmnt yapyap Active yea custom rola 1" [ref=e1218]:
+                    - gridcell "" [ref=e1219]:
+                      - checkbox ""
+                      - generic [ref=e1220] [cursor=pointer]: 
+                    - gridcell [ref=e1221]:
+                      - link [ref=e1222] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd29343a89d3db80cf5/Profile"
+                        - img [ref=e1225]
+                    - gridcell "Ilia1" [ref=e1226]:
+                      - link "Ilia1" [ref=e1227] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd29343a89d3db80cf5/Profile"
+                    - gridcell "Topuria1" [ref=e1228]:
+                      - link "Topuria1" [ref=e1229] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd29343a89d3db80cf5/Profile"
+                    - gridcell "09/02/2024" [ref=e1230]
+                    - gridcell "Sample Position Name" [ref=e1231]: Sample Position Name
+                    - gridcell "dprtmnt" [ref=e1232]: dprtmnt
+                    - gridcell [ref=e1233]
+                    - gridcell "yapyap" [ref=e1234]: yapyap
+                    - gridcell "Active" [ref=e1235]: Active
+                    - gridcell "yea" [ref=e1236]: yea
+                    - gridcell [ref=e1237]
+                    - gridcell [ref=e1238]
+                    - gridcell [ref=e1239]
+                    - gridcell [ref=e1240]
+                    - gridcell [ref=e1241]
+                    - gridcell [ref=e1242]
+                    - gridcell [ref=e1243]
+                    - gridcell [ref=e1244]
+                    - gridcell [ref=e1245]
+                    - gridcell [ref=e1246]
+                    - gridcell [ref=e1247]
+                    - gridcell [ref=e1248]
+                    - gridcell "custom rola 1" [ref=e1249]
+                  - row " HR2 Admin2 09/11/2024 Sample Position Name Client Services yapyap Active HR Admin" [ref=e1250]:
+                    - gridcell "" [ref=e1251]:
+                      - checkbox ""
+                      - generic [ref=e1252] [cursor=pointer]: 
+                    - gridcell [ref=e1253]:
+                      - link [ref=e1254] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd20ff5f93b059dfeb2/Profile"
+                        - img [ref=e1257]
+                    - gridcell "HR2" [ref=e1258]:
+                      - link "HR2" [ref=e1259] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd20ff5f93b059dfeb2/Profile"
+                    - gridcell "Admin2" [ref=e1260]:
+                      - link "Admin2" [ref=e1261] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/788db18c10e6cfd20ff5f93b059dfeb2/Profile"
+                    - gridcell "09/11/2024" [ref=e1262]
+                    - gridcell "Sample Position Name" [ref=e1263]: Sample Position Name
+                    - gridcell "Client Services" [ref=e1264]: Client Services
+                    - gridcell [ref=e1265]
+                    - gridcell "yapyap" [ref=e1266]: yapyap
+                    - gridcell "Active" [ref=e1267]: Active
+                    - gridcell [ref=e1268]
+                    - gridcell [ref=e1269]
+                    - gridcell [ref=e1270]
+                    - gridcell [ref=e1271]
+                    - gridcell [ref=e1272]
+                    - gridcell [ref=e1273]
+                    - gridcell [ref=e1274]
+                    - gridcell [ref=e1275]
+                    - gridcell [ref=e1276]
+                    - gridcell [ref=e1277]
+                    - gridcell [ref=e1278]
+                    - gridcell [ref=e1279]
+                    - gridcell [ref=e1280]
+                    - gridcell "HR Admin" [ref=e1281]
+                  - row " checklisttest1 checklisttest1 09/23/2024 Sample Position Name dprtmnt Los Angeles Active Employee" [ref=e1282]:
+                    - gridcell "" [ref=e1283]:
+                      - checkbox ""
+                      - generic [ref=e1284] [cursor=pointer]: 
+                    - gridcell [ref=e1285]:
+                      - link [ref=e1286] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/a6d00010071b652adc5e4819610a9fa5/Profile"
+                        - img [ref=e1289]
+                    - gridcell "checklisttest1" [ref=e1290]:
+                      - link "checklisttest1" [ref=e1291] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/a6d00010071b652adc5e4819610a9fa5/Profile"
+                    - gridcell "checklisttest1" [ref=e1292]:
+                      - link "checklisttest1" [ref=e1293] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/a6d00010071b652adc5e4819610a9fa5/Profile"
+                    - gridcell "09/23/2024" [ref=e1294]
+                    - gridcell "Sample Position Name" [ref=e1295]: Sample Position Name
+                    - gridcell "dprtmnt" [ref=e1296]: dprtmnt
+                    - gridcell [ref=e1297]
+                    - gridcell "Los Angeles" [ref=e1298]: Los Angeles
+                    - gridcell "Active" [ref=e1299]: Active
+                    - gridcell [ref=e1300]
+                    - gridcell [ref=e1301]
+                    - gridcell [ref=e1302]
+                    - gridcell [ref=e1303]
+                    - gridcell [ref=e1304]
+                    - gridcell [ref=e1305]
+                    - gridcell [ref=e1306]
+                    - gridcell [ref=e1307]
+                    - gridcell [ref=e1308]
+                    - gridcell [ref=e1309]
+                    - gridcell [ref=e1310]
+                    - gridcell [ref=e1311]
+                    - gridcell [ref=e1312]
+                    - gridcell "Employee" [ref=e1313]
+                  - row " nodate291 nodate291 10/29/2024 Chief Executive Officer Client Services East Los Angeles Active Full Time testna rola 123" [ref=e1314]:
+                    - gridcell "" [ref=e1315]:
+                      - checkbox ""
+                      - generic [ref=e1316] [cursor=pointer]: 
+                    - gridcell [ref=e1317]:
+                      - link [ref=e1318] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/f9ccc5963616d875acdfbd0f277ff300/Profile"
+                        - img [ref=e1321]
+                    - gridcell "nodate291" [ref=e1322]:
+                      - link "nodate291" [ref=e1323] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/f9ccc5963616d875acdfbd0f277ff300/Profile"
+                    - gridcell "nodate291" [ref=e1324]:
+                      - link "nodate291" [ref=e1325] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/f9ccc5963616d875acdfbd0f277ff300/Profile"
+                    - gridcell "10/29/2024" [ref=e1326]
+                    - gridcell "Chief Executive Officer" [ref=e1327]: Chief Executive Officer
+                    - gridcell "Client Services" [ref=e1328]: Client Services
+                    - gridcell "East" [ref=e1329]: East
+                    - gridcell "Los Angeles" [ref=e1330]: Los Angeles
+                    - gridcell "Active" [ref=e1331]: Active
+                    - gridcell "Full Time" [ref=e1332]: Full Time
+                    - gridcell [ref=e1333]
+                    - gridcell [ref=e1334]
+                    - gridcell [ref=e1335]
+                    - gridcell [ref=e1336]
+                    - gridcell [ref=e1337]
+                    - gridcell [ref=e1338]
+                    - gridcell [ref=e1339]
+                    - gridcell [ref=e1340]
+                    - gridcell [ref=e1341]
+                    - gridcell [ref=e1342]
+                    - gridcell [ref=e1343]
+                    - gridcell [ref=e1344]
+                    - gridcell "testna rola 123" [ref=e1345]
+                  - row " benefits1 benefits1 11/15/2024 Chief Executive Officer Client Services East Los Angeles Active Full Time testna rola" [ref=e1346]:
+                    - gridcell "" [ref=e1347]:
+                      - checkbox ""
+                      - generic [ref=e1348] [cursor=pointer]: 
+                    - gridcell [ref=e1349]:
+                      - link [ref=e1350] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/f9ccc5963616d8755aed97269c2a9bf1/Profile"
+                        - img [ref=e1353]
+                    - gridcell "benefits1" [ref=e1354]:
+                      - link "benefits1" [ref=e1355] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/f9ccc5963616d8755aed97269c2a9bf1/Profile"
+                    - gridcell "benefits1" [ref=e1356]:
+                      - link "benefits1" [ref=e1357] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/f9ccc5963616d8755aed97269c2a9bf1/Profile"
+                    - gridcell "11/15/2024" [ref=e1358]
+                    - gridcell "Chief Executive Officer" [ref=e1359]: Chief Executive Officer
+                    - gridcell "Client Services" [ref=e1360]: Client Services
+                    - gridcell "East" [ref=e1361]: East
+                    - gridcell "Los Angeles" [ref=e1362]: Los Angeles
+                    - gridcell "Active" [ref=e1363]: Active
+                    - gridcell "Full Time" [ref=e1364]: Full Time
+                    - gridcell [ref=e1365]
+                    - gridcell [ref=e1366]
+                    - gridcell [ref=e1367]
+                    - gridcell [ref=e1368]
+                    - gridcell [ref=e1369]
+                    - gridcell [ref=e1370]
+                    - gridcell [ref=e1371]
+                    - gridcell [ref=e1372]
+                    - gridcell [ref=e1373]
+                    - gridcell [ref=e1374]
+                    - gridcell [ref=e1375]
+                    - gridcell [ref=e1376]
+                    - gridcell "testna rola" [ref=e1377]
+                  - row " dadada dqdada 12/18/2024 Chief Executive Officer dprtmnt East Los Angeles Active testna rola" [ref=e1378]:
+                    - gridcell "" [ref=e1379]:
+                      - checkbox ""
+                      - generic [ref=e1380] [cursor=pointer]: 
+                    - gridcell [ref=e1381]:
+                      - link [ref=e1382] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/81d6017e2cac55cc905a9be6d33582f3/Profile"
+                        - img [ref=e1385]
+                    - gridcell "dadada" [ref=e1386]:
+                      - link "dadada" [ref=e1387] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/81d6017e2cac55cc905a9be6d33582f3/Profile"
+                    - gridcell "dqdada" [ref=e1388]:
+                      - link "dqdada" [ref=e1389] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/81d6017e2cac55cc905a9be6d33582f3/Profile"
+                    - gridcell "12/18/2024" [ref=e1390]
+                    - gridcell "Chief Executive Officer" [ref=e1391]: Chief Executive Officer
+                    - gridcell "dprtmnt" [ref=e1392]: dprtmnt
+                    - gridcell "East" [ref=e1393]: East
+                    - gridcell "Los Angeles" [ref=e1394]: Los Angeles
+                    - gridcell "Active" [ref=e1395]: Active
+                    - gridcell [ref=e1396]
+                    - gridcell [ref=e1397]
+                    - gridcell [ref=e1398]
+                    - gridcell [ref=e1399]
+                    - gridcell [ref=e1400]
+                    - gridcell [ref=e1401]
+                    - gridcell [ref=e1402]
+                    - gridcell [ref=e1403]
+                    - gridcell [ref=e1404]
+                    - gridcell [ref=e1405]
+                    - gridcell [ref=e1406]
+                    - gridcell [ref=e1407]
+                    - gridcell [ref=e1408]
+                    - gridcell "testna rola" [ref=e1409]
+                  - row " switch test 12/17/2024 Chief Executive Officer dprtmnt East Los Angeles Active testna rola" [ref=e1410]:
+                    - gridcell "" [ref=e1411]:
+                      - checkbox ""
+                      - generic [ref=e1412] [cursor=pointer]: 
+                    - gridcell [ref=e1413]:
+                      - link [ref=e1414] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb1641f8c175df8a52fa5/Profile"
+                        - img [ref=e1417]
+                    - gridcell "switch" [ref=e1418]:
+                      - link "switch" [ref=e1419] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb1641f8c175df8a52fa5/Profile"
+                    - gridcell "test" [ref=e1420]:
+                      - link "test" [ref=e1421] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb1641f8c175df8a52fa5/Profile"
+                    - gridcell "12/17/2024" [ref=e1422]
+                    - gridcell "Chief Executive Officer" [ref=e1423]: Chief Executive Officer
+                    - gridcell "dprtmnt" [ref=e1424]: dprtmnt
+                    - gridcell "East" [ref=e1425]: East
+                    - gridcell "Los Angeles" [ref=e1426]: Los Angeles
+                    - gridcell "Active" [ref=e1427]: Active
+                    - gridcell [ref=e1428]
+                    - gridcell [ref=e1429]
+                    - gridcell [ref=e1430]
+                    - gridcell [ref=e1431]
+                    - gridcell [ref=e1432]
+                    - gridcell [ref=e1433]
+                    - gridcell [ref=e1434]
+                    - gridcell [ref=e1435]
+                    - gridcell [ref=e1436]
+                    - gridcell [ref=e1437]
+                    - gridcell [ref=e1438]
+                    - gridcell [ref=e1439]
+                    - gridcell [ref=e1440]
+                    - gridcell "testna rola" [ref=e1441]
+                  - row " helloreg hireg 10/01/2024 Chief Executive Officer dprtmnt lokacija mile gg Active Employee" [ref=e1442]:
+                    - gridcell "" [ref=e1443]:
+                      - checkbox ""
+                      - generic [ref=e1444] [cursor=pointer]: 
+                    - gridcell [ref=e1445]:
+                      - link [ref=e1446] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb16454adc869fec6f436/Profile"
+                        - img [ref=e1449]
+                    - gridcell "helloreg" [ref=e1450]:
+                      - link "helloreg" [ref=e1451] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb16454adc869fec6f436/Profile"
+                    - gridcell "hireg" [ref=e1452]:
+                      - link "hireg" [ref=e1453] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb16454adc869fec6f436/Profile"
+                    - gridcell "10/01/2024" [ref=e1454]
+                    - gridcell "Chief Executive Officer" [ref=e1455]: Chief Executive Officer
+                    - gridcell "dprtmnt" [ref=e1456]: dprtmnt
+                    - gridcell [ref=e1457]
+                    - gridcell "lokacija mile gg" [ref=e1458]: lokacija mile gg
+                    - gridcell "Active" [ref=e1459]: Active
+                    - gridcell [ref=e1460]
+                    - gridcell [ref=e1461]
+                    - gridcell [ref=e1462]
+                    - gridcell [ref=e1463]
+                    - gridcell [ref=e1464]
+                    - gridcell [ref=e1465]
+                    - gridcell [ref=e1466]
+                    - gridcell [ref=e1467]
+                    - gridcell [ref=e1468]
+                    - gridcell [ref=e1469]
+                    - gridcell [ref=e1470]
+                    - gridcell [ref=e1471]
+                    - gridcell [ref=e1472]
+                    - gridcell "Employee" [ref=e1473]
+                  - row " prehire prehire 12/18/2024 Customer Service Specialist Manager Client Services East Los Angeles Prehire Employee" [ref=e1474]:
+                    - gridcell "" [ref=e1475]:
+                      - checkbox ""
+                      - generic [ref=e1476] [cursor=pointer]: 
+                    - gridcell [ref=e1477]:
+                      - link [ref=e1478] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb164085c3ca71bdf018e/Profile"
+                        - img [ref=e1481]
+                    - gridcell "prehire" [ref=e1482]:
+                      - link "prehire" [ref=e1483] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb164085c3ca71bdf018e/Profile"
+                    - gridcell "prehire" [ref=e1484]:
+                      - link "prehire" [ref=e1485] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb164085c3ca71bdf018e/Profile"
+                    - gridcell "12/18/2024" [ref=e1486]
+                    - gridcell "Customer Service Specialist Manager" [ref=e1487]: Customer Service Specialist Manager
+                    - gridcell "Client Services" [ref=e1488]: Client Services
+                    - gridcell "East" [ref=e1489]: East
+                    - gridcell "Los Angeles" [ref=e1490]: Los Angeles
+                    - gridcell "Prehire" [ref=e1491]: Prehire
+                    - gridcell [ref=e1492]
+                    - gridcell [ref=e1493]
+                    - gridcell [ref=e1494]
+                    - gridcell [ref=e1495]
+                    - gridcell [ref=e1496]
+                    - gridcell [ref=e1497]
+                    - gridcell [ref=e1498]
+                    - gridcell [ref=e1499]
+                    - gridcell [ref=e1500]
+                    - gridcell [ref=e1501]
+                    - gridcell [ref=e1502]
+                    - gridcell [ref=e1503]
+                    - gridcell [ref=e1504]
+                    - gridcell "Employee" [ref=e1505]
+                  - row " onboard onboard 12/17/2024 Customer Service Specialist Manager dprtmnt Los Angeles Active Employee" [ref=e1506]:
+                    - gridcell "" [ref=e1507]:
+                      - checkbox ""
+                      - generic [ref=e1508] [cursor=pointer]: 
+                    - gridcell [ref=e1509]:
+                      - link [ref=e1510] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb1646200d9cdbcf05966/Profile"
+                        - img [ref=e1513]
+                    - gridcell "onboard" [ref=e1514]:
+                      - link "onboard" [ref=e1515] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb1646200d9cdbcf05966/Profile"
+                    - gridcell "onboard" [ref=e1516]:
+                      - link "onboard" [ref=e1517] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb1646200d9cdbcf05966/Profile"
+                    - gridcell "12/17/2024" [ref=e1518]
+                    - gridcell "Customer Service Specialist Manager" [ref=e1519]: Customer Service Specialist Manager
+                    - gridcell "dprtmnt" [ref=e1520]: dprtmnt
+                    - gridcell [ref=e1521]
+                    - gridcell "Los Angeles" [ref=e1522]: Los Angeles
+                    - gridcell "Active" [ref=e1523]: Active
+                    - gridcell [ref=e1524]
+                    - gridcell [ref=e1525]
+                    - gridcell [ref=e1526]
+                    - gridcell [ref=e1527]
+                    - gridcell [ref=e1528]
+                    - gridcell [ref=e1529]
+                    - gridcell [ref=e1530]
+                    - gridcell [ref=e1531]
+                    - gridcell [ref=e1532]
+                    - gridcell [ref=e1533]
+                    - gridcell [ref=e1534]
+                    - gridcell [ref=e1535]
+                    - gridcell [ref=e1536]
+                    - gridcell "Employee" [ref=e1537]
+                  - row " regression1812 regression1812 12/18/2024 Customer Service Specialist Manager dprtmnt Los Angeles Active Employee" [ref=e1538]:
+                    - gridcell "" [ref=e1539]:
+                      - checkbox ""
+                      - generic [ref=e1540] [cursor=pointer]: 
+                    - gridcell [ref=e1541]:
+                      - link [ref=e1542] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb164098f82aee5f706f0/Profile"
+                        - img [ref=e1545]
+                    - gridcell "regression1812" [ref=e1546]:
+                      - link "regression1812" [ref=e1547] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb164098f82aee5f706f0/Profile"
+                    - gridcell "regression1812" [ref=e1548]:
+                      - link "regression1812" [ref=e1549] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/26de9f92948fb164098f82aee5f706f0/Profile"
+                    - gridcell "12/18/2024" [ref=e1550]
+                    - gridcell "Customer Service Specialist Manager" [ref=e1551]: Customer Service Specialist Manager
+                    - gridcell "dprtmnt" [ref=e1552]: dprtmnt
+                    - gridcell [ref=e1553]
+                    - gridcell "Los Angeles" [ref=e1554]: Los Angeles
+                    - gridcell "Active" [ref=e1555]: Active
+                    - gridcell [ref=e1556]
+                    - gridcell [ref=e1557]
+                    - gridcell [ref=e1558]
+                    - gridcell [ref=e1559]
+                    - gridcell [ref=e1560]
+                    - gridcell [ref=e1561]
+                    - gridcell [ref=e1562]
+                    - gridcell [ref=e1563]
+                    - gridcell [ref=e1564]
+                    - gridcell [ref=e1565]
+                    - gridcell [ref=e1566]
+                    - gridcell [ref=e1567]
+                    - gridcell [ref=e1568]
+                    - gridcell "Employee" [ref=e1569]
+                  - row " hired141 hired141 01/14/2025 Marketing Coordinator Client Services lokacija mile gg Active Employee" [ref=e1570]:
+                    - gridcell "" [ref=e1571]:
+                      - checkbox ""
+                      - generic [ref=e1572] [cursor=pointer]: 
+                    - gridcell [ref=e1573]:
+                      - link [ref=e1574] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/925fbfb1db83625d6c12af2078af3a55/Profile"
+                        - img [ref=e1577]
+                    - gridcell "hired141" [ref=e1578]:
+                      - link "hired141" [ref=e1579] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/925fbfb1db83625d6c12af2078af3a55/Profile"
+                    - gridcell "hired141" [ref=e1580]:
+                      - link "hired141" [ref=e1581] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/925fbfb1db83625d6c12af2078af3a55/Profile"
+                    - gridcell "01/14/2025" [ref=e1582]
+                    - gridcell "Marketing Coordinator" [ref=e1583]: Marketing Coordinator
+                    - gridcell "Client Services" [ref=e1584]: Client Services
+                    - gridcell [ref=e1585]
+                    - gridcell "lokacija mile gg" [ref=e1586]: lokacija mile gg
+                    - gridcell "Active" [ref=e1587]: Active
+                    - gridcell [ref=e1588]
+                    - gridcell [ref=e1589]
+                    - gridcell [ref=e1590]
+                    - gridcell [ref=e1591]
+                    - gridcell [ref=e1592]
+                    - gridcell [ref=e1593]
+                    - gridcell [ref=e1594]
+                    - gridcell [ref=e1595]
+                    - gridcell [ref=e1596]
+                    - gridcell [ref=e1597]
+                    - gridcell [ref=e1598]
+                    - gridcell [ref=e1599]
+                    - gridcell [ref=e1600]
+                    - gridcell "Employee" [ref=e1601]
+                  - row " temmmz teeeeemz 02/23/2025 Customer Service Specialist Manager Client Services Los Angeles Active Employee" [ref=e1602]:
+                    - gridcell "" [ref=e1603]:
+                      - checkbox ""
+                      - generic [ref=e1604] [cursor=pointer]: 
+                    - gridcell [ref=e1605]:
+                      - link [ref=e1606] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/28cfc62f637f0faca856e855995cbe6a/Profile"
+                        - img [ref=e1609]
+                    - gridcell "temmmz" [ref=e1610]:
+                      - link "temmmz" [ref=e1611] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/28cfc62f637f0faca856e855995cbe6a/Profile"
+                    - gridcell "teeeeemz" [ref=e1612]:
+                      - link "teeeeemz" [ref=e1613] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/28cfc62f637f0faca856e855995cbe6a/Profile"
+                    - gridcell "02/23/2025" [ref=e1614]
+                    - gridcell "Customer Service Specialist Manager" [ref=e1615]: Customer Service Specialist Manager
+                    - gridcell "Client Services" [ref=e1616]: Client Services
+                    - gridcell [ref=e1617]
+                    - gridcell "Los Angeles" [ref=e1618]: Los Angeles
+                    - gridcell "Active" [ref=e1619]: Active
+                    - gridcell [ref=e1620]
+                    - gridcell [ref=e1621]
+                    - gridcell [ref=e1622]
+                    - gridcell [ref=e1623]
+                    - gridcell [ref=e1624]
+                    - gridcell [ref=e1625]
+                    - gridcell [ref=e1626]
+                    - gridcell [ref=e1627]
+                    - gridcell [ref=e1628]
+                    - gridcell [ref=e1629]
+                    - gridcell [ref=e1630]
+                    - gridcell [ref=e1631]
+                    - gridcell [ref=e1632]
+                    - gridcell "Employee" [ref=e1633]
+                  - row " Teeest31 Teeeeeeest45 03/25/2025 Customer Service Specialist Manager dprtmnt New York Active Employee" [ref=e1634]:
+                    - gridcell "" [ref=e1635]:
+                      - checkbox ""
+                      - generic [ref=e1636] [cursor=pointer]: 
+                    - gridcell [ref=e1637]:
+                      - link [ref=e1638] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/ead907e03276e3135e7d0c3bf50d15d4/Profile"
+                        - img [ref=e1641]
+                    - gridcell "Teeest31" [ref=e1642]:
+                      - link "Teeest31" [ref=e1643] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/ead907e03276e3135e7d0c3bf50d15d4/Profile"
+                    - gridcell "Teeeeeeest45" [ref=e1644]:
+                      - link "Teeeeeeest45" [ref=e1645] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/ead907e03276e3135e7d0c3bf50d15d4/Profile"
+                    - gridcell "03/25/2025" [ref=e1646]
+                    - gridcell "Customer Service Specialist Manager" [ref=e1647]: Customer Service Specialist Manager
+                    - gridcell "dprtmnt" [ref=e1648]: dprtmnt
+                    - gridcell [ref=e1649]
+                    - gridcell "New York" [ref=e1650]: New York
+                    - gridcell "Active" [ref=e1651]: Active
+                    - gridcell [ref=e1652]
+                    - gridcell [ref=e1653]
+                    - gridcell [ref=e1654]
+                    - gridcell [ref=e1655]
+                    - gridcell [ref=e1656]
+                    - gridcell [ref=e1657]
+                    - gridcell [ref=e1658]
+                    - gridcell [ref=e1659]
+                    - gridcell [ref=e1660]
+                    - gridcell [ref=e1661]
+                    - gridcell [ref=e1662]
+                    - gridcell [ref=e1663]
+                    - gridcell [ref=e1664]
+                    - gridcell "Employee" [ref=e1665]
+                  - row " dadasdasd asdasdasdas 08/25/2025 Customer Service Specialist Manager dprtmnt lokacija mile gg Active Employee" [ref=e1666]:
+                    - gridcell "" [ref=e1667]:
+                      - checkbox ""
+                      - generic [ref=e1668] [cursor=pointer]: 
+                    - gridcell [ref=e1669]:
+                      - link [ref=e1670] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/fbbf6f89bf81fdddc1719faf279dd0eb/Profile"
+                        - img [ref=e1673]
+                    - gridcell "dadasdasd" [ref=e1674]:
+                      - link "dadasdasd" [ref=e1675] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/fbbf6f89bf81fdddc1719faf279dd0eb/Profile"
+                    - gridcell "asdasdasdas" [ref=e1676]:
+                      - link "asdasdasdas" [ref=e1677] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/fbbf6f89bf81fdddc1719faf279dd0eb/Profile"
+                    - gridcell "08/25/2025" [ref=e1678]
+                    - gridcell "Customer Service Specialist Manager" [ref=e1679]: Customer Service Specialist Manager
+                    - gridcell "dprtmnt" [ref=e1680]: dprtmnt
+                    - gridcell [ref=e1681]
+                    - gridcell "lokacija mile gg" [ref=e1682]: lokacija mile gg
+                    - gridcell "Active" [ref=e1683]: Active
+                    - gridcell [ref=e1684]
+                    - gridcell [ref=e1685]
+                    - gridcell [ref=e1686]
+                    - gridcell [ref=e1687]
+                    - gridcell [ref=e1688]
+                    - gridcell [ref=e1689]
+                    - gridcell [ref=e1690]
+                    - gridcell [ref=e1691]
+                    - gridcell [ref=e1692]
+                    - gridcell [ref=e1693]
+                    - gridcell [ref=e1694]
+                    - gridcell [ref=e1695]
+                    - gridcell [ref=e1696]
+                    - gridcell "Employee" [ref=e1697]
+                  - row " Naranca Narancic 08/28/2025 Director of Marketing Executive Operations Los Angeles Active Employee" [ref=e1698]:
+                    - gridcell "" [ref=e1699]:
+                      - checkbox ""
+                      - generic [ref=e1700] [cursor=pointer]: 
+                    - gridcell [ref=e1701]:
+                      - link [ref=e1702] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/05d01afb4a24bc26efc48c913fa05557/Profile"
+                        - img [ref=e1705]
+                    - gridcell "Naranca" [ref=e1706]:
+                      - link "Naranca" [ref=e1707] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/05d01afb4a24bc26efc48c913fa05557/Profile"
+                    - gridcell "Narancic" [ref=e1708]:
+                      - link "Narancic" [ref=e1709] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/05d01afb4a24bc26efc48c913fa05557/Profile"
+                    - gridcell "08/28/2025" [ref=e1710]
+                    - gridcell "Director of Marketing" [ref=e1711]: Director of Marketing
+                    - gridcell "Executive Operations" [ref=e1712]: Executive Operations
+                    - gridcell [ref=e1713]
+                    - gridcell "Los Angeles" [ref=e1714]: Los Angeles
+                    - gridcell "Active" [ref=e1715]: Active
+                    - gridcell [ref=e1716]
+                    - gridcell [ref=e1717]
+                    - gridcell [ref=e1718]
+                    - gridcell [ref=e1719]
+                    - gridcell [ref=e1720]
+                    - gridcell [ref=e1721]
+                    - gridcell [ref=e1722]
+                    - gridcell [ref=e1723]
+                    - gridcell [ref=e1724]
+                    - gridcell [ref=e1725]
+                    - gridcell [ref=e1726]
+                    - gridcell [ref=e1727]
+                    - gridcell [ref=e1728]
+                    - gridcell "Employee" [ref=e1729]
+                  - row " narancic2 manarancic2 08/28/2025 Director of Marketing Human Resources Los Angeles Active Employee" [ref=e1730]:
+                    - gridcell "" [ref=e1731]:
+                      - checkbox ""
+                      - generic [ref=e1732] [cursor=pointer]: 
+                    - gridcell [ref=e1733]:
+                      - link [ref=e1734] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/05d01afb4a24bc269257a3d449c3096c/Profile"
+                        - img [ref=e1737]
+                    - gridcell "narancic2" [ref=e1738]:
+                      - link "narancic2" [ref=e1739] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/05d01afb4a24bc269257a3d449c3096c/Profile"
+                    - gridcell "manarancic2" [ref=e1740]:
+                      - link "manarancic2" [ref=e1741] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/05d01afb4a24bc269257a3d449c3096c/Profile"
+                    - gridcell "08/28/2025" [ref=e1742]
+                    - gridcell "Director of Marketing" [ref=e1743]: Director of Marketing
+                    - gridcell "Human Resources" [ref=e1744]: Human Resources
+                    - gridcell [ref=e1745]
+                    - gridcell "Los Angeles" [ref=e1746]: Los Angeles
+                    - gridcell "Active" [ref=e1747]: Active
+                    - gridcell [ref=e1748]
+                    - gridcell [ref=e1749]
+                    - gridcell [ref=e1750]
+                    - gridcell [ref=e1751]
+                    - gridcell [ref=e1752]
+                    - gridcell [ref=e1753]
+                    - gridcell [ref=e1754]
+                    - gridcell [ref=e1755]
+                    - gridcell [ref=e1756]
+                    - gridcell [ref=e1757]
+                    - gridcell [ref=e1758]
+                    - gridcell [ref=e1759]
+                    - gridcell [ref=e1760]
+                    - gridcell "Employee" [ref=e1761]
+                  - row " naranca jabuka 08/28/2025 Marketing Coordinator Human Resources lokacija mile gg Active Employee" [ref=e1762]:
+                    - gridcell "" [ref=e1763]:
+                      - checkbox ""
+                      - generic [ref=e1764] [cursor=pointer]: 
+                    - gridcell [ref=e1765]:
+                      - link [ref=e1766] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/05d01afb4a24bc2647147bf1c8cf0b05/Profile"
+                        - img [ref=e1769]
+                    - gridcell "naranca" [ref=e1770]:
+                      - link "naranca" [ref=e1771] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/05d01afb4a24bc2647147bf1c8cf0b05/Profile"
+                    - gridcell "jabuka" [ref=e1772]:
+                      - link "jabuka" [ref=e1773] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/05d01afb4a24bc2647147bf1c8cf0b05/Profile"
+                    - gridcell "08/28/2025" [ref=e1774]
+                    - gridcell "Marketing Coordinator" [ref=e1775]: Marketing Coordinator
+                    - gridcell "Human Resources" [ref=e1776]: Human Resources
+                    - gridcell [ref=e1777]
+                    - gridcell "lokacija mile gg" [ref=e1778]: lokacija mile gg
+                    - gridcell "Active" [ref=e1779]: Active
+                    - gridcell [ref=e1780]
+                    - gridcell [ref=e1781]
+                    - gridcell [ref=e1782]
+                    - gridcell [ref=e1783]
+                    - gridcell [ref=e1784]
+                    - gridcell [ref=e1785]
+                    - gridcell [ref=e1786]
+                    - gridcell [ref=e1787]
+                    - gridcell [ref=e1788]
+                    - gridcell [ref=e1789]
+                    - gridcell [ref=e1790]
+                    - gridcell [ref=e1791]
+                    - gridcell [ref=e1792]
+                    - gridcell "Employee" [ref=e1793]
+                  - row " calendarrr testttt 10/01/2024 Director of Marketing Client Services Los Angeles Active Employee" [ref=e1794]:
+                    - gridcell "" [ref=e1795]:
+                      - checkbox ""
+                      - generic [ref=e1796] [cursor=pointer]: 
+                    - gridcell [ref=e1797]:
+                      - link [ref=e1798] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/753af6a828157809b2a510eae1d4670c/Profile"
+                        - img [ref=e1801]
+                    - gridcell "calendarrr" [ref=e1802]:
+                      - link "calendarrr" [ref=e1803] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/753af6a828157809b2a510eae1d4670c/Profile"
+                    - gridcell "testttt" [ref=e1804]:
+                      - link "testttt" [ref=e1805] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/753af6a828157809b2a510eae1d4670c/Profile"
+                    - gridcell "10/01/2024" [ref=e1806]
+                    - gridcell "Director of Marketing" [ref=e1807]: Director of Marketing
+                    - gridcell "Client Services" [ref=e1808]: Client Services
+                    - gridcell [ref=e1809]
+                    - gridcell "Los Angeles" [ref=e1810]: Los Angeles
+                    - gridcell "Active" [ref=e1811]: Active
+                    - gridcell [ref=e1812]
+                    - gridcell [ref=e1813]
+                    - gridcell [ref=e1814]
+                    - gridcell [ref=e1815]
+                    - gridcell [ref=e1816]
+                    - gridcell [ref=e1817]
+                    - gridcell [ref=e1818]
+                    - gridcell [ref=e1819]
+                    - gridcell [ref=e1820]
+                    - gridcell [ref=e1821]
+                    - gridcell [ref=e1822]
+                    - gridcell [ref=e1823]
+                    - gridcell [ref=e1824]
+                    - gridcell "Employee" [ref=e1825]
+                  - row " abcd abdc 10/06/2024 Director of Marketing Human Resources lokacija mile gg Terminated Employee" [ref=e1826]:
+                    - gridcell "" [ref=e1827]:
+                      - checkbox ""
+                      - generic [ref=e1828] [cursor=pointer]: 
+                    - gridcell [ref=e1829]:
+                      - link [ref=e1830] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/753af6a8281578098fd765ce6865a9c4/Profile"
+                        - img [ref=e1833]
+                    - gridcell "abcd" [ref=e1834]:
+                      - link "abcd" [ref=e1835] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/753af6a8281578098fd765ce6865a9c4/Profile"
+                    - gridcell "abdc" [ref=e1836]:
+                      - link "abdc" [ref=e1837] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/753af6a8281578098fd765ce6865a9c4/Profile"
+                    - gridcell "10/06/2024" [ref=e1838]
+                    - gridcell "Director of Marketing" [ref=e1839]: Director of Marketing
+                    - gridcell "Human Resources" [ref=e1840]: Human Resources
+                    - gridcell [ref=e1841]
+                    - gridcell "lokacija mile gg" [ref=e1842]: lokacija mile gg
+                    - gridcell "Terminated" [ref=e1843]: Terminated
+                    - gridcell [ref=e1844]
+                    - gridcell [ref=e1845]
+                    - gridcell [ref=e1846]
+                    - gridcell [ref=e1847]
+                    - gridcell [ref=e1848]
+                    - gridcell [ref=e1849]
+                    - gridcell [ref=e1850]
+                    - gridcell [ref=e1851]
+                    - gridcell [ref=e1852]
+                    - gridcell [ref=e1853]
+                    - gridcell [ref=e1854]
+                    - gridcell [ref=e1855]
+                    - gridcell [ref=e1856]
+                    - gridcell "Employee" [ref=e1857]
+                  - row " Onboard648 Onboard648 10/29/2025 Director of Marketing Client Services lokacija mile gg Terminated Employee" [ref=e1858]:
+                    - gridcell "" [ref=e1859]:
+                      - checkbox ""
+                      - generic [ref=e1860] [cursor=pointer]: 
+                    - gridcell [ref=e1861]:
+                      - link [ref=e1862] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d8af27dc6b21130a5/Profile"
+                        - img [ref=e1865]
+                    - gridcell "Onboard648" [ref=e1866]:
+                      - link "Onboard648" [ref=e1867] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d8af27dc6b21130a5/Profile"
+                    - gridcell "Onboard648" [ref=e1868]:
+                      - link "Onboard648" [ref=e1869] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d8af27dc6b21130a5/Profile"
+                    - gridcell "10/29/2025" [ref=e1870]
+                    - gridcell "Director of Marketing" [ref=e1871]: Director of Marketing
+                    - gridcell "Client Services" [ref=e1872]: Client Services
+                    - gridcell [ref=e1873]
+                    - gridcell "lokacija mile gg" [ref=e1874]: lokacija mile gg
+                    - gridcell "Terminated" [ref=e1875]: Terminated
+                    - gridcell [ref=e1876]
+                    - gridcell [ref=e1877]
+                    - gridcell [ref=e1878]
+                    - gridcell [ref=e1879]
+                    - gridcell [ref=e1880]
+                    - gridcell [ref=e1881]
+                    - gridcell [ref=e1882]
+                    - gridcell [ref=e1883]
+                    - gridcell [ref=e1884]
+                    - gridcell [ref=e1885]
+                    - gridcell [ref=e1886]
+                    - gridcell [ref=e1887]
+                    - gridcell [ref=e1888]
+                    - gridcell "Employee" [ref=e1889]
+                  - row " HR2 Admin2 10/30/2025 cleaner Client Services lokacija mile gg Active HR Admin" [ref=e1890]:
+                    - gridcell "" [ref=e1891]:
+                      - checkbox ""
+                      - generic [ref=e1892] [cursor=pointer]: 
+                    - gridcell [ref=e1893]:
+                      - link [ref=e1894] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d805178a1125bc268/Profile"
+                        - img [ref=e1897]
+                    - gridcell "HR2" [ref=e1898]:
+                      - link "HR2" [ref=e1899] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d805178a1125bc268/Profile"
+                    - gridcell "Admin2" [ref=e1900]:
+                      - link "Admin2" [ref=e1901] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d805178a1125bc268/Profile"
+                    - gridcell "10/30/2025" [ref=e1902]
+                    - gridcell "cleaner" [ref=e1903]: cleaner
+                    - gridcell "Client Services" [ref=e1904]: Client Services
+                    - gridcell [ref=e1905]
+                    - gridcell "lokacija mile gg" [ref=e1906]: lokacija mile gg
+                    - gridcell "Active" [ref=e1907]: Active
+                    - gridcell [ref=e1908]
+                    - gridcell [ref=e1909]
+                    - gridcell [ref=e1910]
+                    - gridcell [ref=e1911]
+                    - gridcell [ref=e1912]
+                    - gridcell [ref=e1913]
+                    - gridcell [ref=e1914]
+                    - gridcell [ref=e1915]
+                    - gridcell [ref=e1916]
+                    - gridcell [ref=e1917]
+                    - gridcell [ref=e1918]
+                    - gridcell [ref=e1919]
+                    - gridcell [ref=e1920]
+                    - gridcell "HR Admin" [ref=e1921]
+                  - row " FirstName+7bd6c924-1232-453d-875e-60f08679e47d LastName+7bd6c924-1232-453d-875e-60f08679e47d 10/30/2025 cleaner dprtmnt lokacija mile gg Active Employee" [ref=e1922]:
+                    - gridcell "" [ref=e1923]:
+                      - checkbox ""
+                      - generic [ref=e1924] [cursor=pointer]: 
+                    - gridcell [ref=e1925]:
+                      - link [ref=e1926] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d25c173c52fd0f6b1/Profile"
+                        - img [ref=e1929]
+                    - gridcell "FirstName+7bd6c924-1232-453d-875e-60f08679e47d" [ref=e1930]:
+                      - link "FirstName+7bd6c924-1232-453d-875e-60f08679e47d" [ref=e1931] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d25c173c52fd0f6b1/Profile"
+                    - gridcell "LastName+7bd6c924-1232-453d-875e-60f08679e47d" [ref=e1932]:
+                      - link "LastName+7bd6c924-1232-453d-875e-60f08679e47d" [ref=e1933] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d25c173c52fd0f6b1/Profile"
+                    - gridcell "10/30/2025" [ref=e1934]
+                    - gridcell "cleaner" [ref=e1935]: cleaner
+                    - gridcell "dprtmnt" [ref=e1936]: dprtmnt
+                    - gridcell [ref=e1937]
+                    - gridcell "lokacija mile gg" [ref=e1938]: lokacija mile gg
+                    - gridcell "Active" [ref=e1939]: Active
+                    - gridcell [ref=e1940]
+                    - gridcell [ref=e1941]
+                    - gridcell [ref=e1942]
+                    - gridcell [ref=e1943]
+                    - gridcell [ref=e1944]
+                    - gridcell [ref=e1945]
+                    - gridcell [ref=e1946]
+                    - gridcell [ref=e1947]
+                    - gridcell [ref=e1948]
+                    - gridcell [ref=e1949]
+                    - gridcell [ref=e1950]
+                    - gridcell [ref=e1951]
+                    - gridcell [ref=e1952]
+                    - gridcell "Employee" [ref=e1953]
+                  - row " FirstName+0e34f986-9acf-45a7-8956-59413bbbe1fd LastName+0e34f986-9acf-45a7-8956-59413bbbe1fd 10/30/2025 cleaner dprtmnt lokacija mile gg Active Employee" [ref=e1954]:
+                    - gridcell "" [ref=e1955]:
+                      - checkbox ""
+                      - generic [ref=e1956] [cursor=pointer]: 
+                    - gridcell [ref=e1957]:
+                      - link [ref=e1958] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d9b9dc2bc6c506115/Profile"
+                        - img [ref=e1961]
+                    - gridcell "FirstName+0e34f986-9acf-45a7-8956-59413bbbe1fd" [ref=e1962]:
+                      - link "FirstName+0e34f986-9acf-45a7-8956-59413bbbe1fd" [ref=e1963] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d9b9dc2bc6c506115/Profile"
+                    - gridcell "LastName+0e34f986-9acf-45a7-8956-59413bbbe1fd" [ref=e1964]:
+                      - link "LastName+0e34f986-9acf-45a7-8956-59413bbbe1fd" [ref=e1965] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d9b9dc2bc6c506115/Profile"
+                    - gridcell "10/30/2025" [ref=e1966]
+                    - gridcell "cleaner" [ref=e1967]: cleaner
+                    - gridcell "dprtmnt" [ref=e1968]: dprtmnt
+                    - gridcell [ref=e1969]
+                    - gridcell "lokacija mile gg" [ref=e1970]: lokacija mile gg
+                    - gridcell "Active" [ref=e1971]: Active
+                    - gridcell [ref=e1972]
+                    - gridcell [ref=e1973]
+                    - gridcell [ref=e1974]
+                    - gridcell [ref=e1975]
+                    - gridcell [ref=e1976]
+                    - gridcell [ref=e1977]
+                    - gridcell [ref=e1978]
+                    - gridcell [ref=e1979]
+                    - gridcell [ref=e1980]
+                    - gridcell [ref=e1981]
+                    - gridcell [ref=e1982]
+                    - gridcell [ref=e1983]
+                    - gridcell [ref=e1984]
+                    - gridcell "Employee" [ref=e1985]
+                  - row " FirstName+f583a547-2651-491e-bf82-4132d521ff31 LastName+f583a547-2651-491e-bf82-4132d521ff31 10/30/2025 cleaner dprtmnt lokacija mile gg Active Employee" [ref=e1986]:
+                    - gridcell "" [ref=e1987]:
+                      - checkbox ""
+                      - generic [ref=e1988] [cursor=pointer]: 
+                    - gridcell [ref=e1989]:
+                      - link [ref=e1990] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3dae1786bc2483c656/Profile"
+                        - img [ref=e1993]
+                    - gridcell "FirstName+f583a547-2651-491e-bf82-4132d521ff31" [ref=e1994]:
+                      - link "FirstName+f583a547-2651-491e-bf82-4132d521ff31" [ref=e1995] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3dae1786bc2483c656/Profile"
+                    - gridcell "LastName+f583a547-2651-491e-bf82-4132d521ff31" [ref=e1996]:
+                      - link "LastName+f583a547-2651-491e-bf82-4132d521ff31" [ref=e1997] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3dae1786bc2483c656/Profile"
+                    - gridcell "10/30/2025" [ref=e1998]
+                    - gridcell "cleaner" [ref=e1999]: cleaner
+                    - gridcell "dprtmnt" [ref=e2000]: dprtmnt
+                    - gridcell [ref=e2001]
+                    - gridcell "lokacija mile gg" [ref=e2002]: lokacija mile gg
+                    - gridcell "Active" [ref=e2003]: Active
+                    - gridcell [ref=e2004]
+                    - gridcell [ref=e2005]
+                    - gridcell [ref=e2006]
+                    - gridcell [ref=e2007]
+                    - gridcell [ref=e2008]
+                    - gridcell [ref=e2009]
+                    - gridcell [ref=e2010]
+                    - gridcell [ref=e2011]
+                    - gridcell [ref=e2012]
+                    - gridcell [ref=e2013]
+                    - gridcell [ref=e2014]
+                    - gridcell [ref=e2015]
+                    - gridcell [ref=e2016]
+                    - gridcell "Employee" [ref=e2017]
+                  - row " FirstName+6dc7784b-6325-4660-ab98-9f8decc601a5 LastName+6dc7784b-6325-4660-ab98-9f8decc601a5 10/30/2025 cleaner dprtmnt lokacija mile gg Active Employee" [ref=e2018]:
+                    - gridcell "" [ref=e2019]:
+                      - checkbox ""
+                      - generic [ref=e2020] [cursor=pointer]: 
+                    - gridcell [ref=e2021]:
+                      - link [ref=e2022] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d61cb30cf5ed3dd56/Profile"
+                        - img [ref=e2025]
+                    - gridcell "FirstName+6dc7784b-6325-4660-ab98-9f8decc601a5" [ref=e2026]:
+                      - link "FirstName+6dc7784b-6325-4660-ab98-9f8decc601a5" [ref=e2027] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d61cb30cf5ed3dd56/Profile"
+                    - gridcell "LastName+6dc7784b-6325-4660-ab98-9f8decc601a5" [ref=e2028]:
+                      - link "LastName+6dc7784b-6325-4660-ab98-9f8decc601a5" [ref=e2029] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d61cb30cf5ed3dd56/Profile"
+                    - gridcell "10/30/2025" [ref=e2030]
+                    - gridcell "cleaner" [ref=e2031]: cleaner
+                    - gridcell "dprtmnt" [ref=e2032]: dprtmnt
+                    - gridcell [ref=e2033]
+                    - gridcell "lokacija mile gg" [ref=e2034]: lokacija mile gg
+                    - gridcell "Active" [ref=e2035]: Active
+                    - gridcell [ref=e2036]
+                    - gridcell [ref=e2037]
+                    - gridcell [ref=e2038]
+                    - gridcell [ref=e2039]
+                    - gridcell [ref=e2040]
+                    - gridcell [ref=e2041]
+                    - gridcell [ref=e2042]
+                    - gridcell [ref=e2043]
+                    - gridcell [ref=e2044]
+                    - gridcell [ref=e2045]
+                    - gridcell [ref=e2046]
+                    - gridcell [ref=e2047]
+                    - gridcell [ref=e2048]
+                    - gridcell "Employee" [ref=e2049]
+                  - row " FirstName+ccf1b836-6fad-45ea-b342-5bc48dc65eb5 LastName+ccf1b836-6fad-45ea-b342-5bc48dc65eb5 10/30/2025 cleaner dprtmnt lokacija mile gg Active Employee" [ref=e2050]:
+                    - gridcell "" [ref=e2051]:
+                      - checkbox ""
+                      - generic [ref=e2052] [cursor=pointer]: 
+                    - gridcell [ref=e2053]:
+                      - link [ref=e2054] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d11b68c1f33507f65/Profile"
+                        - img [ref=e2057]
+                    - gridcell "FirstName+ccf1b836-6fad-45ea-b342-5bc48dc65eb5" [ref=e2058]:
+                      - link "FirstName+ccf1b836-6fad-45ea-b342-5bc48dc65eb5" [ref=e2059] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d11b68c1f33507f65/Profile"
+                    - gridcell "LastName+ccf1b836-6fad-45ea-b342-5bc48dc65eb5" [ref=e2060]:
+                      - link "LastName+ccf1b836-6fad-45ea-b342-5bc48dc65eb5" [ref=e2061] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3d11b68c1f33507f65/Profile"
+                    - gridcell "10/30/2025" [ref=e2062]
+                    - gridcell "cleaner" [ref=e2063]: cleaner
+                    - gridcell "dprtmnt" [ref=e2064]: dprtmnt
+                    - gridcell [ref=e2065]
+                    - gridcell "lokacija mile gg" [ref=e2066]: lokacija mile gg
+                    - gridcell "Active" [ref=e2067]: Active
+                    - gridcell [ref=e2068]
+                    - gridcell [ref=e2069]
+                    - gridcell [ref=e2070]
+                    - gridcell [ref=e2071]
+                    - gridcell [ref=e2072]
+                    - gridcell [ref=e2073]
+                    - gridcell [ref=e2074]
+                    - gridcell [ref=e2075]
+                    - gridcell [ref=e2076]
+                    - gridcell [ref=e2077]
+                    - gridcell [ref=e2078]
+                    - gridcell [ref=e2079]
+                    - gridcell [ref=e2080]
+                    - gridcell "Employee" [ref=e2081]
+                  - row " FirstName+c15e6a33-4abd-4528-9f2a-7f2796bca078 LastName+c15e6a33-4abd-4528-9f2a-7f2796bca078 10/30/2025 cleaner dprtmnt lokacija mile gg Active Employee" [ref=e2082]:
+                    - gridcell "" [ref=e2083]:
+                      - checkbox ""
+                      - generic [ref=e2084] [cursor=pointer]: 
+                    - gridcell [ref=e2085]:
+                      - link [ref=e2086] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3df6c7bb6f667aea24/Profile"
+                        - img [ref=e2089]
+                    - gridcell "FirstName+c15e6a33-4abd-4528-9f2a-7f2796bca078" [ref=e2090]:
+                      - link "FirstName+c15e6a33-4abd-4528-9f2a-7f2796bca078" [ref=e2091] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3df6c7bb6f667aea24/Profile"
+                    - gridcell "LastName+c15e6a33-4abd-4528-9f2a-7f2796bca078" [ref=e2092]:
+                      - link "LastName+c15e6a33-4abd-4528-9f2a-7f2796bca078" [ref=e2093] [cursor=pointer]:
+                        - /url: "#/Employee/Detail/e4b7f1f868474f3df6c7bb6f667aea24/Profile"
+                    - gridcell "10/30/2025" [ref=e2094]
+                    - gridcell "cleaner" [ref=e2095]: cleaner
+                    - gridcell "dprtmnt" [ref=e2096]: dprtmnt
+                    - gridcell [ref=e2097]
+                    - gridcell "lokacija mile gg" [ref=e2098]: lokacija mile gg
+                    - gridcell "Active" [ref=e2099]: Active
+                    - gridcell [ref=e2100]
+                    - gridcell [ref=e2101]
+                    - gridcell [ref=e2102]
+                    - gridcell [ref=e2103]
+                    - gridcell [ref=e2104]
+                    - gridcell [ref=e2105]
+                    - gridcell [ref=e2106]
+                    - gridcell [ref=e2107]
+                    - gridcell [ref=e2108]
+                    - gridcell [ref=e2109]
+                    - gridcell [ref=e2110]
+                    - gridcell [ref=e2111]
+                    - gridcell [ref=e2112]
+                    - gridcell "Employee" [ref=e2113]
+              - generic [ref=e2114]:
+                - link "First page " [ref=e2115]:
+                  - /url: "#"
+                - link "Previous page" [ref=e2116]:
+                  - /url: "#"
+                - list [ref=e2117]:
+                  - listitem [ref=e2118]:
+                    - generic [ref=e2119]: "1"
+                  - listitem [ref=e2120]:
+                    - link "2" [ref=e2121] [cursor=pointer]:
+                      - /url: "#"
+                - link "Next page" [ref=e2122] [cursor=pointer]:
+                  - /url: "#"
+                - link "Last page " [ref=e2123] [cursor=pointer]:
+                  - /url: "#"
+                - generic [ref=e2124]:
+                  - listbox [ref=e2125] [cursor=pointer]:
+                    - generic [ref=e2126]:
+                      - generic [ref=e2127]: "50"
+                      - generic [ref=e2128]: select 
+                  - text: items per page
+                - generic [ref=e2129]: 1-50 of 52 items
+            - generic:
+              - generic: 
+          - generic:
+            - generic: 
+        - generic:
+          - generic: 
+      - generic:
+        - generic:           Enter your question...  
+  - generic:  
+  - generic:
+    - generic:
+      - generic: 
+  - region "Chat Widget" [ref=e2131]:
+    - iframe [ref=e2132]:
+      - button "Open live chat" [ref=f1e5]:
+        - img [ref=f1e8]
+        - img [ref=f1e15]
+    - text: 
+```

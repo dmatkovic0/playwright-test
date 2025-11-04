@@ -5,6 +5,20 @@ const ENVIRONMENTS = {
   prod: 'https://corehr.hrcloud.com/Start/#/Authentication/Login'
 };
 
+// Generate a unique identifier (GUID)
+export function generateGUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+// Generate a short unique identifier (for names)
+export function generateShortID() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+}
+
 export async function login(env, username, password, page) {
   // Normalize environment to lowercase
   const environment = env.toLowerCase();
