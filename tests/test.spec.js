@@ -28,9 +28,14 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: 'Enter location... ' }).click();
   await page.getByText('afgannnn').click();
   await page.getByRole('button', { name: 'Save' }).click();
-  await page.getByRole('button', { name: ' Back' }).click();
-  await page.getByRole('textbox', { name: 'First Name' }).click();
-  await page.getByRole('textbox', { name: 'First Name' }).fill(firstName.toLowerCase());
-  await page.getByRole('link', { name: firstName }).click();
-  await page.pause ();
+  
+  // Verify employee was created successfully by checking we're on the profile page
+  // Wait for navigation to complete
+  await page.waitForLoadState('networkidle');
+  
+  // Verify the employee name appears on the profile page
+  await expect(page.locator('text=' + firstName)).toBeVisible({ timeout: 10000 });
+  await expect(page.locator('text=' + lastName)).toBeVisible({ timeout: 10000 });
+  
+  console.log(`✓ Employee created successfully: ${firstName} ${lastName}`);
 });
