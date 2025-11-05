@@ -82,7 +82,7 @@ test('test4', async ({ page }) => {
   await page.pause();
 });
 
-test('test6', async ({ page }) => {
+test('test5', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
