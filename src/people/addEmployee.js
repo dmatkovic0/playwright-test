@@ -1,4 +1,4 @@
-import { generateShortID } from './utils.js';
+import { generateShortID } from '../utils.js';
 
 export async function addEmployeeOnboardingChecklist(page, expect) {
   // Generate unique identifiers for first and last name
