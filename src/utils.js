@@ -19,6 +19,26 @@ export function generateShortID() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
 }
 
+// Ensure sidebar is expanded
+export async function ensureSidebarExpanded(page) {
+  const sidebarOverlay = page.locator('.utility-navigation-tour-overlay');
+  const isExpanded = await sidebarOverlay.evaluate(el => el.classList.contains('utility-sidebar-open-navigation-tour-overlay'));
+  
+  if (!isExpanded) {
+    console.log('Sidebar is collapsed, expanding...');
+    await page.locator('//div[@class="menu-arrow-button tooltipstered"]//i[@class="icon icon-chevron-right"]').click();
+    await page.waitForTimeout(500); // Wait for sidebar animation
+  } else {
+    console.log('Sidebar is already expanded');
+  }
+}
+
+// Open People page and verify
+export async function openPeople(page, expect) {
+  await page.getByRole('link', { name: 'People' }).click();
+  await expect(page.getByRole('heading').getByText('People')).toBeVisible();
+}
+
 export async function login(env, username, password, page) {
   // Normalize environment to lowercase
   const environment = env.toLowerCase();
@@ -30,8 +50,19 @@ export async function login(env, username, password, page) {
     throw new Error(`Invalid environment: ${env}. Valid options are: qa, stg, prod`);
   }
   
-  // Navigate to login page
-  await page.goto(url);
+  // Navigate to login page with retry logic
+  let retries = 3;
+  while (retries > 0) {
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      break;
+    } catch (error) {
+      retries--;
+      if (retries === 0) throw error;
+      console.log(`Navigation failed, retrying... (${retries} attempts left)`);
+      await page.waitForTimeout(2000);
+    }
+  }
   
   // Handle cookie consent popup in iframe
   await page.getByRole('textbox', { name: 'Enter Account Email or Phone' }).dblclick();

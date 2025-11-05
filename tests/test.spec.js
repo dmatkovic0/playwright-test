@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { login, generateShortID } from '../src/utils.js';
+import { login, generateShortID, ensureSidebarExpanded, openPeople } from '../src/utils.js';
 
 test('test', async ({ page }) => {
   // Increase timeout for this test
@@ -7,8 +7,11 @@ test('test', async ({ page }) => {
   
   await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
   
-  await page.getByRole('link', { name: 'People' }).click();
-  await expect(page.getByRole('heading').getByText('People')).toBeVisible();
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+  
+  // Open People page
+  await openPeople(page, expect);
   
   // Generate unique identifiers for first and last name
   const uniqueID = generateShortID();
@@ -86,8 +89,7 @@ test('test', async ({ page }) => {
   await expect(page.locator(`text=${lastName}`)).toBeVisible();
   
   console.log(`✓ Employee created successfully: ${firstName} ${lastName} with start date: ${todayFormatted}`);
-
-  await page.pause();
-
   
+  // Pause to keep browser open
+  await page.pause();
 });
