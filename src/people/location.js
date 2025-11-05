@@ -1,9 +1,10 @@
 import { generateShortID } from '../utils.js';
 
 export async function addLocation(page, expect) {
-  // Generate unique identifiers for location name
+  // Generate unique identifiers for location name and code
   const uniqueID = generateShortID();
   const locationName = `Location_${uniqueID}`;
+  const locationCode = `LOC_${uniqueID}`;
 
   // Click add button - using more specific selector
   await page.locator('.aut-button-add').click();
@@ -11,6 +12,10 @@ export async function addLocation(page, expect) {
   // Fill Location Name
   await page.getByRole('textbox', { name: 'Location Name*' }).click();
   await page.getByRole('textbox', { name: 'Location Name*' }).fill(locationName);
+
+  // Fill Location Code
+  await page.getByRole('textbox', { name: 'Location Code*' }).click();
+  await page.getByRole('textbox', { name: 'Location Code*' }).fill(locationCode);
 
   // Click Save
   await page.getByRole('button', { name: 'Save' }).click();

@@ -1,0 +1,695 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - text: 
+        - generic [ref=e5] [cursor=pointer]:
+          - link "Workmates" [ref=e6]:
+            - /url: "#/Workmates"
+            - img [ref=e7]
+            - text: Workmates
+          - generic [ref=e8]: 
+          - text: 
+        - list [ref=e9]:
+          - listitem [ref=e10]:
+            - link " Tasks 1" [ref=e12] [cursor=pointer]:
+              - /url: "#/Tasks"
+              - generic [ref=e14]: 
+              - generic [ref=e15]: Tasks
+              - generic [ref=e16]: "1"
+            - text: 
+          - listitem [ref=e17]:
+            - link " Chat" [ref=e19] [cursor=pointer]:
+              - /url: "#/Messaging"
+              - generic [ref=e21]: 
+              - generic [ref=e22]: Chat
+            - text: 
+          - listitem [ref=e23]:
+            - link " Calendar" [ref=e25] [cursor=pointer]:
+              - /url: "#/Calendar"
+              - generic [ref=e27]: 
+              - generic [ref=e28]: Calendar
+            - text: 
+          - listitem [ref=e29]:
+            - link " Directory" [ref=e31] [cursor=pointer]:
+              - /url: "#/Directory"
+              - generic [ref=e33]: 
+              - generic [ref=e34]: Directory
+            - text: 
+          - listitem [ref=e35]:
+            - link " Files" [ref=e37] [cursor=pointer]:
+              - /url: "#/Files"
+              - generic [ref=e39]: 
+              - generic [ref=e40]: Files
+            - text: 
+          - listitem [ref=e41]:
+            - text: 
+            - link " Checklists" [ref=e43] [cursor=pointer]:
+              - /url: "#/Checklists"
+              - generic [ref=e45]: 
+              - generic [ref=e46]: Checklists
+          - listitem [ref=e47]:
+            - link " Reports" [ref=e49] [cursor=pointer]:
+              - /url: "#/Reports/Overview"
+              - generic [ref=e51]: 
+              - generic [ref=e52]: Reports
+            - text: 
+          - listitem [ref=e53]:
+            - link " Surveys" [ref=e55] [cursor=pointer]:
+              - /url: "#/SurveyApp"
+              - generic [ref=e57]: 
+              - generic [ref=e58]: Surveys
+            - text: 
+          - listitem [ref=e59]:
+            - link " Settings" [ref=e61] [cursor=pointer]:
+              - /url: "#/Settings"
+              - generic [ref=e63]: 
+              - generic [ref=e64]: Settings
+            - text: 
+        - generic [ref=e65]: Applications
+        - list [ref=e66]:
+          - listitem [ref=e67]:
+            - link "People" [ref=e68] [cursor=pointer]:
+              - /url: "#/CoreHr/People"
+              - img [ref=e70]
+              - generic [ref=e71]: People
+          - listitem [ref=e72]:
+            - link "Recruit" [ref=e73] [cursor=pointer]:
+              - /url: "#/Recruit/Applicants"
+              - img [ref=e75]
+              - generic [ref=e76]: Recruit
+          - listitem [ref=e77]:
+            - link "Onboard" [ref=e78] [cursor=pointer]:
+              - /url: "#/Portal/onboard/People"
+              - img [ref=e80]
+              - generic [ref=e81]: Onboard
+          - listitem [ref=e82]:
+            - link "Shift Planner" [ref=e83] [cursor=pointer]:
+              - /url: "#/ShiftPlanner/Schedule"
+              - img [ref=e85]
+              - generic [ref=e86]: Shift Planner
+          - listitem [ref=e87]:
+            - link "Time Clock" [ref=e88] [cursor=pointer]:
+              - /url: "#/TimeClock/Overview"
+              - img [ref=e90]
+              - generic [ref=e91]: Time Clock
+          - listitem [ref=e92]:
+            - link "Time Off" [ref=e93] [cursor=pointer]:
+              - /url: "#/TimeOff/Overview"
+              - img [ref=e95]
+              - generic [ref=e96]: Time Off
+          - listitem [ref=e97]:
+            - link "Perform" [ref=e98] [cursor=pointer]:
+              - /url: "#/Perform/People"
+              - img [ref=e100]
+              - generic [ref=e101]: Perform
+          - listitem [ref=e102]:
+            - link "Kudos" [ref=e103] [cursor=pointer]:
+              - /url: https://corehr.staging.hrcloud.net/#/Workmates/KudosApp/Overview
+              - img [ref=e105]
+              - generic [ref=e106]: Kudos
+          - listitem [ref=e107]:
+            - link "Assets" [ref=e108] [cursor=pointer]:
+              - /url: "#/Assets/List"
+              - img [ref=e110]
+              - generic [ref=e111]: Assets
+          - listitem [ref=e112]:
+            - link "Benefits" [ref=e113] [cursor=pointer]:
+              - /url: "#/Portal/benefits/People"
+              - img [ref=e115]
+              - generic [ref=e116]: Benefits
+          - listitem [ref=e117]:
+            - link "Offboard" [ref=e118] [cursor=pointer]:
+              - /url: "#/Portal/offboard/People"
+              - img [ref=e120]
+              - generic [ref=e121]: Offboard
+          - listitem [ref=e122]:
+            - link "Edukacija COM" [ref=e123] [cursor=pointer]:
+              - /url: "#/Cloud/List/Edukacija_COM/CustomObjectMultiple"
+              - img [ref=e125]
+              - generic [ref=e126]: Edukacija COM
+          - listitem [ref=e127]:
+            - link "Edukacija COM" [ref=e128] [cursor=pointer]:
+              - /url: "#/Cloud/List/Edukacija_COM_2/CustomObjectMultiple"
+              - img [ref=e130]
+              - generic [ref=e131]: Edukacija COM
+          - listitem [ref=e132]:
+            - link "dynamic regression 620" [ref=e133] [cursor=pointer]:
+              - /url: "#/Cloud/List/dynamic_regression_620/Form"
+              - img [ref=e135]
+              - generic [ref=e136]: dynamic regression 620
+          - listitem [ref=e137]:
+            - link "benefits only form" [ref=e138] [cursor=pointer]:
+              - /url: "#/Cloud/List/benefits_only_form/Form"
+              - img [ref=e140]
+              - generic [ref=e141]: benefits only form
+          - listitem [ref=e142]:
+            - link "universal form test" [ref=e143] [cursor=pointer]:
+              - /url: "#/Cloud/List/universal_form_test/Form"
+              - img [ref=e145]
+              - generic [ref=e146]: universal form test
+          - listitem [ref=e147]:
+            - link "offboard form test" [ref=e148] [cursor=pointer]:
+              - /url: "#/Cloud/List/offboard_form_test/Form"
+              - img [ref=e150]
+              - generic [ref=e151]: offboard form test
+          - listitem [ref=e152]:
+            - link "standalone test petra" [ref=e153] [cursor=pointer]:
+              - /url: "#/Cloud/List/standalone_test_petra/None"
+              - img [ref=e155]
+              - generic [ref=e156]: standalone test petra
+          - listitem [ref=e157]:
+            - link "dado test" [ref=e158] [cursor=pointer]:
+              - /url: "#/Cloud/List/dado_test/CustomObjectMultiple"
+              - img [ref=e160]
+              - generic [ref=e161]: dado test
+          - listitem [ref=e162]:
+            - link "dado test 2" [ref=e163] [cursor=pointer]:
+              - /url: "#/Cloud/List/dado_test_2/Form"
+              - img [ref=e165]
+              - generic [ref=e166]: dado test 2
+          - listitem [ref=e167]:
+            - link "test" [ref=e168] [cursor=pointer]:
+              - /url: "#/Cloud/List/test/Form"
+              - img [ref=e170]
+              - generic [ref=e171]: test
+          - listitem [ref=e172]:
+            - link "section test 22" [ref=e173] [cursor=pointer]:
+              - /url: "#/Cloud/List/section_test_22/None"
+              - img [ref=e175]
+              - generic [ref=e176]: section test 22
+          - listitem [ref=e177]:
+            - link "testttt123rttt" [ref=e178] [cursor=pointer]:
+              - /url: "#/Cloud/List/testttt123rttt/Form"
+              - img [ref=e180]
+              - generic [ref=e181]: testttt123rttt
+          - listitem [ref=e182]:
+            - link "Background hotfix toggle" [ref=e183] [cursor=pointer]:
+              - /url: "#/Cloud/List/Background_hotfix_toggle/Form"
+              - img [ref=e185]
+              - generic [ref=e186]: Background hotfix toggle
+          - listitem [ref=e187]:
+            - link "onboard form test" [ref=e188] [cursor=pointer]:
+              - /url: "#/Cloud/List/onboard_form_test/Form"
+              - img [ref=e190]
+              - generic [ref=e191]: onboard form test
+          - listitem [ref=e192]:
+            - link "Dynamic lea test regression" [ref=e193] [cursor=pointer]:
+              - /url: "#/Cloud/List/Dynamic_lea_test_regression/Form"
+              - img [ref=e195]
+              - generic [ref=e196]: Dynamic lea test regression
+          - listitem [ref=e197]:
+            - link "dadadadada" [ref=e198] [cursor=pointer]:
+              - /url: "#/Cloud/List/dadadadada/Form"
+              - img [ref=e200]
+              - generic [ref=e201]: dadadadada
+          - listitem [ref=e202]:
+            - link " Explore Apps" [ref=e203] [cursor=pointer]:
+              - /url: "#/exploreapps"
+              - generic [ref=e205]: 
+              - generic [ref=e206]: Explore Apps
+      - text:     
+      - generic [ref=e209] [cursor=pointer]: 
+    - generic:
+      - generic:
+        - generic: 
+    - generic:  
+    - generic [ref=e210]:
+      - list [ref=e211]:
+        - listitem [ref=e212]:
+          - generic [ref=e216] [cursor=pointer]: 
+          - text: 
+      - list [ref=e217]:
+        - listitem [ref=e218]:
+          - generic [ref=e220]:
+            - generic [ref=e221]: 
+            - generic [ref=e223]:
+              - generic [ref=e224]: RegTitle - RegMessage
+              - link "More detail" [ref=e225] [cursor=pointer]:
+                - /url: /Announcement/Product?id=d875a2c0a80c62b9
+            - generic [ref=e226] [cursor=pointer]: 
+            - generic [ref=e227] [cursor=pointer]: "+1"
+      - list [ref=e228]:
+        - listitem [ref=e229]:
+          - generic [ref=e231]:
+            - generic [ref=e232]:
+              - generic [ref=e234]: 
+              - textbox "Search" [ref=e235]
+              - generic [ref=e236]: 
+            - text:   
+          - text: 
+        - text: 
+        - listitem [ref=e237]:
+          - generic [ref=e240] [cursor=pointer]: 
+          - text:     
+        - listitem [ref=e241]:
+          - generic [ref=e244] [cursor=pointer]: 
+          - text:       
+        - listitem [ref=e245]:
+          - generic [ref=e248] [cursor=pointer]: 
+        - listitem [ref=e249]:
+          - generic [ref=e252] [cursor=pointer]: 
+          - text: 
+        - listitem [ref=e253]:
+          - link "Signed in user picture " [ref=e256] [cursor=pointer]:
+            - /url: "#/Employee/Detail/e4b7f1f868474f3d805178a1125bc268"
+            - img "Signed in user picture" [ref=e258]
+            - generic [ref=e261]: 
+          - text:     
+    - generic [ref=e262]:
+      - generic:
+        - generic:
+          - generic: 
+      - generic:  
+      - generic [ref=e263]:
+        - generic [ref=e265]:
+          - generic [ref=e266]:
+            - banner [ref=e267]:
+              - heading "People" [level=2] [ref=e272]:
+                - generic [ref=e273]: People
+            - navigation [ref=e274]:
+              - list [ref=e276]:
+                - listitem [ref=e277]:
+                  - link "Dashboard" [ref=e278] [cursor=pointer]:
+                    - /url: ""
+                - listitem [ref=e279]:
+                  - link "People" [ref=e280] [cursor=pointer]:
+                    - /url: ""
+                - listitem [ref=e281]:
+                  - link "Portals" [ref=e282] [cursor=pointer]:
+                    - /url: ""
+                - listitem [ref=e283]:
+                  - link "Positions" [ref=e284] [cursor=pointer]:
+                    - /url: ""
+                - listitem [ref=e285]:
+                  - link "Reports" [ref=e286] [cursor=pointer]:
+                    - /url: ""
+                - listitem [ref=e287]:
+                  - link "Locations" [ref=e288]:
+                    - /url: ""
+                - listitem [ref=e289]:
+                  - link "More" [ref=e290] [cursor=pointer]:
+                    - /url: ""
+                    - text: More
+          - generic [ref=e297]:
+            - generic [ref=e299]:
+              - generic [ref=e300]:
+                - list [ref=e301]:
+                  - listitem [ref=e302]:
+                    - link "" [ref=e303] [cursor=pointer]:
+                      - /url: "#/Cloud/Add/xLocation"
+                      - generic [ref=e304]: 
+                  - listitem [ref=e305]:
+                    - generic [ref=e306] [cursor=pointer]:
+                      - generic [ref=e307]: 
+                      - text: Standard 
+                  - listitem
+                  - listitem [ref=e308]:
+                    - generic:
+                      - generic: 
+                      - text: Actions 
+                - list [ref=e309]:
+                  - listitem [ref=e310]:
+                    - generic [ref=e312] [cursor=pointer]: 
+                  - listitem [ref=e313]:
+                    - generic [ref=e315] [cursor=pointer]: 
+                  - listitem [ref=e316]:
+                    - generic [ref=e318] [cursor=pointer]: 
+                  - listitem [ref=e319]:
+                    - generic [ref=e321] [cursor=pointer]: 
+                  - listitem [ref=e322]:
+                    - generic [ref=e324] [cursor=pointer]: 
+                - generic [ref=e325]:
+                  - generic [ref=e327]:
+                    - button "" [ref=e328] [cursor=pointer]:
+                      - generic [ref=e329]: 
+                    - button "" [ref=e330] [cursor=pointer]:
+                      - generic [ref=e331]: 
+                  - generic [ref=e334] [cursor=pointer]: 
+                  - text:  
+                  - table [ref=e336]:
+                    - row "   " [ref=e337]:
+                      - cell [ref=e338]
+                      - cell [ref=e339]
+                      - cell "" [ref=e340]:
+                        - generic [ref=e341]:
+                          - textbox "Location Name" [ref=e342]
+                          - generic [ref=e343]: 
+                          - text: 
+                      - cell "" [ref=e344]:
+                        - generic [ref=e345]:
+                          - textbox "Location Code" [ref=e346]
+                          - generic [ref=e347]: 
+                          - text: 
+                      - cell "" [ref=e348]:
+                        - generic [ref=e349]:
+                          - textbox "Address" [ref=e350]
+                          - generic [ref=e351]: 
+                          - text: 
+                      - text:  
+                      - cell "" [ref=e352]:
+                        - generic [ref=e353]:
+                          - textbox "Record Status" [ref=e354]
+                          - generic [ref=e355]: 
+                          - text: 
+                      - text:        
+              - grid [ref=e358]:
+                - rowgroup [ref=e366]:
+                  - row " Location Name Location Code Address Record Status" [ref=e367]:
+                    - columnheader "" [ref=e368]:
+                      - checkbox ""
+                      - generic [ref=e369] [cursor=pointer]: 
+                    - columnheader [ref=e370]
+                    - columnheader "Location Name" [ref=e372]:
+                      - link "Location Name" [ref=e373] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e374]: Location Name
+                    - columnheader "Location Code" [ref=e375]:
+                      - link "Location Code" [ref=e376] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e377]: Location Code
+                    - columnheader "Address" [ref=e378]:
+                      - link "Address" [ref=e379] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e380]: Address
+                    - columnheader "Record Status" [ref=e381]:
+                      - link "Record Status" [ref=e382] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e383]: Record Status
+              - grid [ref=e385]:
+                - rowgroup [ref=e393]:
+                  - row " Splitistan Splitistanc627b13f-763b-45d5-860a-7959a9e582dc Active" [ref=e394]:
+                    - gridcell "" [ref=e395]:
+                      - checkbox ""
+                      - generic [ref=e396] [cursor=pointer]: 
+                    - gridcell [ref=e397]
+                    - gridcell "Splitistan" [ref=e398]:
+                      - link "Splitistan" [ref=e399] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/16a4dc49bb6960319972540f37b7b975"
+                    - gridcell "Splitistanc627b13f-763b-45d5-860a-7959a9e582dc" [ref=e400]
+                    - gridcell [ref=e401]
+                    - gridcell "Active" [ref=e402]:
+                      - generic [ref=e403]: Active
+                  - row " Sample Location Name Sample Location Code Active" [ref=e404]:
+                    - gridcell "" [ref=e405]:
+                      - checkbox ""
+                      - generic [ref=e406] [cursor=pointer]: 
+                    - gridcell [ref=e407]
+                    - gridcell "Sample Location Name" [ref=e408]:
+                      - link "Sample Location Name" [ref=e409] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/16a4dc49bb696031eb97c2a500843a8c"
+                    - gridcell "Sample Location Code" [ref=e410]
+                    - gridcell [ref=e411]
+                    - gridcell "Active" [ref=e412]:
+                      - generic [ref=e413]: Active
+                  - row " yapyap yapyap yapalo33 Active" [ref=e414]:
+                    - gridcell "" [ref=e415]:
+                      - checkbox ""
+                      - generic [ref=e416] [cursor=pointer]: 
+                    - gridcell [ref=e417]
+                    - gridcell "yapyap" [ref=e418]:
+                      - link "yapyap" [ref=e419] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/16a4dc49bb696031cd71f1a19c57b07a"
+                    - gridcell "yapyap" [ref=e420]
+                    - gridcell "yapalo33" [ref=e421]
+                    - gridcell "Active" [ref=e422]:
+                      - generic [ref=e423]: Active
+                  - row " papapap papapapa123333 Yeaala Bin Hibat Allah Al Fodaili Street, Alranuj, 42392 Madinah, Saudi Arabia Active" [ref=e424]:
+                    - gridcell "" [ref=e425]:
+                      - checkbox ""
+                      - generic [ref=e426] [cursor=pointer]: 
+                    - gridcell [ref=e427]
+                    - gridcell "papapap" [ref=e428]:
+                      - link "papapap" [ref=e429] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/16a4dc49bb6960317a30f3c3cf9d8422"
+                    - gridcell "papapapa123333" [ref=e430]
+                    - gridcell "Yeaala Bin Hibat Allah Al Fodaili Street, Alranuj, 42392 Madinah, Saudi Arabia" [ref=e431]
+                    - gridcell "Active" [ref=e432]:
+                      - generic [ref=e433]: Active
+                  - row " lokacija mile gg ggwpeasy Adresa, Bulevar Mihajla Pupina 10З, 11070 Belgrade, Serbia Active" [ref=e434]:
+                    - gridcell "" [ref=e435]:
+                      - checkbox ""
+                      - generic [ref=e436] [cursor=pointer]: 
+                    - gridcell [ref=e437]
+                    - gridcell "lokacija mile gg" [ref=e438]:
+                      - link "lokacija mile gg" [ref=e439] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/bd1063355df4b3bf4492c4c001b74c84"
+                    - gridcell "ggwpeasy" [ref=e440]
+                    - gridcell "Adresa, Bulevar Mihajla Pupina 10З, 11070 Belgrade, Serbia" [ref=e441]
+                    - gridcell "Active" [ref=e442]:
+                      - generic [ref=e443]: Active
+                  - row " Los Angeles 4f377bd5-fe8d-4710-bbd7-1742f550466f Active" [ref=e444]:
+                    - gridcell "" [ref=e445]:
+                      - checkbox ""
+                      - generic [ref=e446] [cursor=pointer]: 
+                    - gridcell [ref=e447]
+                    - gridcell "Los Angeles" [ref=e448]:
+                      - link "Los Angeles" [ref=e449] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/f03ebd454f150e852d4dca71d008de02"
+                    - gridcell "4f377bd5-fe8d-4710-bbd7-1742f550466f" [ref=e450]
+                    - gridcell [ref=e451]
+                    - gridcell "Active" [ref=e452]:
+                      - generic [ref=e453]: Active
+                  - row " New York 9f097c6d-b037-42dd-af0e-8ebc94d9a6e6 Active" [ref=e454]:
+                    - gridcell "" [ref=e455]:
+                      - checkbox ""
+                      - generic [ref=e456] [cursor=pointer]: 
+                    - gridcell [ref=e457]
+                    - gridcell "New York" [ref=e458]:
+                      - link "New York" [ref=e459] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/f03ebd454f150e8577e00856dc2a5aeb"
+                    - gridcell "9f097c6d-b037-42dd-af0e-8ebc94d9a6e6" [ref=e460]
+                    - gridcell [ref=e461]
+                    - gridcell "Active" [ref=e462]:
+                      - generic [ref=e463]: Active
+                  - row " testnalokacija77 testnalokacija77 Rab, Croatia Active" [ref=e464]:
+                    - gridcell "" [ref=e465]:
+                      - checkbox ""
+                      - generic [ref=e466] [cursor=pointer]: 
+                    - gridcell [ref=e467]
+                    - gridcell "testnalokacija77" [ref=e468]:
+                      - link "testnalokacija77" [ref=e469] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/4ed59174be159d2354b872af60f3da77"
+                    - gridcell "testnalokacija77" [ref=e470]
+                    - gridcell "Rab, Croatia" [ref=e471]
+                    - gridcell "Active" [ref=e472]:
+                      - generic [ref=e473]: Active
+                  - row " teeeeest1 teeeeeeeeeeeeesttttt2 Split/Trajektni Terminal, Gat svetog Duje, HR-21000 Split, Croatia Active" [ref=e474]:
+                    - gridcell "" [ref=e475]:
+                      - checkbox ""
+                      - generic [ref=e476] [cursor=pointer]: 
+                    - gridcell [ref=e477]
+                    - gridcell "teeeeest1" [ref=e478]:
+                      - link "teeeeest1" [ref=e479] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/a267a2711acf3e1b7915d53831d5499d"
+                    - gridcell "teeeeeeeeeeeeesttttt2" [ref=e480]
+                    - gridcell "Split/Trajektni Terminal, Gat svetog Duje, HR-21000 Split, Croatia" [ref=e481]
+                    - gridcell "Active" [ref=e482]:
+                      - generic [ref=e483]: Active
+                  - row " releasemynigga releasehim Nigga's 505, 4A Calle Noreste, 15100 Tipitapa, Nicaragua Active" [ref=e484]:
+                    - gridcell "" [ref=e485]:
+                      - checkbox ""
+                      - generic [ref=e486] [cursor=pointer]: 
+                    - gridcell [ref=e487]
+                    - gridcell "releasemynigga" [ref=e488]:
+                      - link "releasemynigga" [ref=e489] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/fa1559787f5462696c13d398c83c3acf"
+                    - gridcell "releasehim" [ref=e490]
+                    - gridcell "Nigga's 505, 4A Calle Noreste, 15100 Tipitapa, Nicaragua" [ref=e491]
+                    - gridcell "Active" [ref=e492]:
+                      - generic [ref=e493]: Active
+                  - row " teeeeeeeeeeeeeeeeeeeeeeeeeest teeeeeeeeeeeeeeeeeeeeeeeeeest1 Nigga Room, Tobolska vulytsia, Kharkiv, 61072, Ukraine Active" [ref=e494]:
+                    - gridcell "" [ref=e495]:
+                      - checkbox ""
+                      - generic [ref=e496] [cursor=pointer]: 
+                    - gridcell [ref=e497]
+                    - gridcell "teeeeeeeeeeeeeeeeeeeeeeeeeest" [ref=e498]:
+                      - link "teeeeeeeeeeeeeeeeeeeeeeeeeest" [ref=e499] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/fa1559787f54626975142c08066dcae6"
+                    - gridcell "teeeeeeeeeeeeeeeeeeeeeeeeeest1" [ref=e500]
+                    - gridcell "Nigga Room, Tobolska vulytsia, Kharkiv, 61072, Ukraine" [ref=e501]
+                    - gridcell "Active" [ref=e502]:
+                      - generic [ref=e503]: Active
+                  - row " surveymaster1232 surveymaaaaster2 Active" [ref=e504]:
+                    - gridcell "" [ref=e505]:
+                      - checkbox ""
+                      - generic [ref=e506] [cursor=pointer]: 
+                    - gridcell [ref=e507]
+                    - gridcell "surveymaster1232" [ref=e508]:
+                      - link "surveymaster1232" [ref=e509] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/71fcfdd7487bd38da74b113e60a73004"
+                    - gridcell "surveymaaaaster2" [ref=e510]
+                    - gridcell [ref=e511]
+                    - gridcell "Active" [ref=e512]:
+                      - generic [ref=e513]: Active
+                  - row " afgannnn istannnnn Active" [ref=e514]:
+                    - gridcell "" [ref=e515]:
+                      - checkbox ""
+                      - generic [ref=e516] [cursor=pointer]: 
+                    - gridcell [ref=e517]
+                    - gridcell "afgannnn" [ref=e518]:
+                      - link "afgannnn" [ref=e519] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/c6cdeaf1748937cd0fa1fdc6565bd007"
+                    - gridcell "istannnnn" [ref=e520]
+                    - gridcell [ref=e521]
+                    - gridcell "Active" [ref=e522]:
+                      - generic [ref=e523]: Active
+                  - row " t1 t1 Ulica 141. brigade Hrvatske vojske 1, HR-21000 Split, Croatia Active" [ref=e524]:
+                    - gridcell "" [ref=e525]:
+                      - checkbox ""
+                      - generic [ref=e526] [cursor=pointer]: 
+                    - gridcell [ref=e527]
+                    - gridcell "t1" [ref=e528]:
+                      - link "t1" [ref=e529] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/bf61c34b5adda7737cd75cda8e6b4336"
+                    - gridcell "t1" [ref=e530]
+                    - gridcell "Ulica 141. brigade Hrvatske vojske 1, HR-21000 Split, Croatia" [ref=e531]
+                    - gridcell "Active" [ref=e532]:
+                      - generic [ref=e533]: Active
+                  - row " Poljicka 43, 21000 Split, Croatia 8a611c4b-8d40-4d59-bb77-ac292eadb65d Active" [ref=e534]:
+                    - gridcell "" [ref=e535]:
+                      - checkbox ""
+                      - generic [ref=e536] [cursor=pointer]: 
+                    - gridcell [ref=e537]
+                    - gridcell "Poljicka 43, 21000 Split, Croatia" [ref=e538]:
+                      - link "Poljicka 43, 21000 Split, Croatia" [ref=e539] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/bf61c34b5adda7735f8101fd031b4182"
+                    - gridcell "8a611c4b-8d40-4d59-bb77-ac292eadb65d" [ref=e540]
+                    - gridcell [ref=e541]
+                    - gridcell "Active" [ref=e542]:
+                      - generic [ref=e543]: Active
+                  - row " regression648 1 regression648 1 Active" [ref=e544]:
+                    - gridcell "" [ref=e545]:
+                      - checkbox ""
+                      - generic [ref=e546] [cursor=pointer]: 
+                    - gridcell [ref=e547]
+                    - gridcell "regression648 1" [ref=e548]:
+                      - link "regression648 1" [ref=e549] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/4d5c114718ddb088e70cba31a1d60da5"
+                    - gridcell "regression648 1" [ref=e550]
+                    - gridcell [ref=e551]
+                    - gridcell "Active" [ref=e552]:
+                      - generic [ref=e553]: Active
+                  - row " BIP BIP202020 Ulica Rade Bitange, 88000 Mostar, Bosnia and Herzegovina Active" [ref=e554]:
+                    - gridcell "" [ref=e555]:
+                      - checkbox ""
+                      - generic [ref=e556] [cursor=pointer]: 
+                    - gridcell [ref=e557]
+                    - gridcell "BIP" [ref=e558]:
+                      - link "BIP" [ref=e559] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/4d5c114718ddb088dba583ee9ad790b9"
+                    - gridcell "BIP202020" [ref=e560]
+                    - gridcell "Ulica Rade Bitange, 88000 Mostar, Bosnia and Herzegovina" [ref=e561]
+                    - gridcell "Active" [ref=e562]:
+                      - generic [ref=e563]: Active
+                  - row " guid1 guid2 Active" [ref=e564]:
+                    - gridcell "" [ref=e565]:
+                      - checkbox ""
+                      - generic [ref=e566] [cursor=pointer]: 
+                    - gridcell [ref=e567]
+                    - gridcell "guid1" [ref=e568]:
+                      - link "guid1" [ref=e569] [cursor=pointer]:
+                        - /url: "#/Cloud/Detail/xLocation/4d5c114718ddb0889c2ae606127d9ca6"
+                    - gridcell "guid2" [ref=e570]
+                    - gridcell [ref=e571]
+                    - gridcell "Active" [ref=e572]:
+                      - generic [ref=e573]: Active
+              - generic [ref=e574]:
+                - text:     
+                - generic [ref=e575]: 1-18 of 18 items
+            - generic:
+              - generic: 
+          - generic:
+            - generic: 
+        - generic [ref=e577]:
+          - banner [ref=e579]:
+            - generic [ref=e581]:
+              - heading "Add Location" [level=2] [ref=e584]:
+                - generic [ref=e586]: Add Location
+              - generic [ref=e587]:
+                - button
+                - button "Cancel" [ref=e588] [cursor=pointer]
+                - button "Save" [ref=e589] [cursor=pointer]
+            - text: 
+          - generic [ref=e599]:
+            - generic [ref=e601]:
+              - generic [ref=e602]:
+                - generic [ref=e604]: 
+                - generic [ref=e605]:
+                  - generic [ref=e606]: Form is incomplete
+                  - paragraph [ref=e607]: "We found 1 error:"
+                  - list [ref=e608]:
+                    - listitem [ref=e609]: Location Code is required.
+              - text: 
+            - generic [ref=e612]:
+              - generic [ref=e613]:
+                - generic [ref=e614]: Location Name*
+                - textbox "Location Name*" [ref=e615]:
+                  - /placeholder: Enter location name...
+                  - text: Location_mhm0iuyxsezt6
+              - generic [ref=e616]:
+                - generic [ref=e617]: Location Code*
+                - textbox "Location Code*" [ref=e618]:
+                  - /placeholder: Enter location code...
+                - generic [ref=e619]: Location Code is required.
+              - generic [ref=e620]:
+                - generic [ref=e621]: Address
+                - text: 
+                - generic [ref=e623]:
+                  - button "Select address... " [ref=e624] [cursor=pointer]
+                  - text:  
+              - generic [ref=e625]:
+                - generic [ref=e626]: Description
+                - application "Rich Text Editor, xLocation-xDescription" [ref=e628]:
+                  - group "Editor toolbars":
+                    - toolbar [ref=e629]:
+                      - button "Undo" [disabled] [ref=e630]
+                      - button "Redo" [disabled] [ref=e632]
+                      - button "Font" [ref=e634]:
+                        - generic [ref=e635]: Font
+                      - button "Size" [ref=e638]:
+                        - generic [ref=e639]: Size
+                      - button "Format" [ref=e642]:
+                        - generic [ref=e643]: Format
+                      - button "Text Color" [ref=e646]
+                      - button "Background Color" [ref=e649]
+                      - button "Bold" [ref=e652]
+                      - button "Italic" [ref=e654]
+                      - button "Underline" [ref=e656]
+                      - button "Block Quote" [ref=e658]
+                      - button "Insert/Remove Numbered List" [ref=e660]
+                      - button "Insert/Remove Bulleted List" [ref=e662]
+                      - button "Decrease Indent" [disabled] [ref=e664]
+                      - button "Increase Indent" [ref=e666]
+                      - button "Link" [ref=e668]
+                      - button "Image" [ref=e670]
+                      - button "Insert a Youtube, Vimeo or Dailymotion video" [ref=e672]
+                      - button "Table" [ref=e674]
+                  - iframe [ref=e676]:
+                    - paragraph [ref=f1e2]
+                  - generic "Resize" [ref=e677]: ◢
+                  - generic "Statistics"
+              - generic [ref=e678]:
+                - generic [ref=e679]: Record Status*
+                - generic [ref=e680]:
+                  - button "Active " [ref=e681] [cursor=pointer]
+                  - text: 
+            - button
+          - generic:
+            - generic: 
+      - generic:
+        - generic:           Enter your question...  
+  - generic:  
+  - generic:
+    - generic:
+      - generic: 
+  - region "Chat Widget" [ref=e683]:
+    - iframe [ref=e684]:
+      - button "Open live chat" [ref=f2e5]:
+        - img [ref=f2e8]
+        - img [ref=f2e15]
+    - text: 
+```
