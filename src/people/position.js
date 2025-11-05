@@ -1,80 +1,53 @@
-import { test, expect } from '@playwright/test';
-import { login, ensureSidebarExpanded, openPeople } from '../src/utils.js';
-import { addEmployeeOnboardingChecklist, addEmployeePrehireChecklist, addEmployeeNoAutoAssignmentChecklist } from '../src/People/addEmployee.js';
-import { addPosition, openPositions } from '../src/People/position.js';
+import { generateShortID } from '../utils.js';
 
-test('test', async ({ page }) => {
-  // Increase timeout for this test
-  test.setTimeout(60000);
+export async function addPosition(page, expect) {
+  // Generate unique identifiers for position title and code
+  const uniqueID = generateShortID();
+  const positionTitle = `Position_${uniqueID}`;
+  const positionCode = `Code_${uniqueID}`;
   
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  // Click add button - using more specific selector
+  await page.locator('.aut-button-add').click();
   
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
+  // Fill Position Title
+  await page.getByRole('textbox', { name: 'Position Title*' }).click();
+  await page.getByRole('textbox', { name: 'Position Title*' }).fill(positionTitle);
   
-  // Open People page
-  await openPeople(page, expect);
+  // Fill Position Code
+  await page.getByRole('textbox', { name: 'Position Code*' }).click();
+  await page.getByRole('textbox', { name: 'Position Code*' }).fill(positionCode);
   
-  // Add employee with onboarding checklist
-  await addEmployeeOnboardingChecklist(page, expect);
+  // Click Save
+  await page.getByRole('button', { name: 'Save' }).click();
   
-  // Pause to keep browser open
-  await page.pause();
-});
+  // Wait for save to complete and return to positions list
+  await page.waitForTimeout(2000);
+  
+  // Search for the created position using the search field (first one)
+  await page.getByRole('textbox', { name: 'Position Title' }).first().click();
+  await page.getByRole('textbox', { name: 'Position Title' }).first().fill(positionTitle);
+  
+  // Wait for search results
+  await page.waitForTimeout(1000);
+  
+  // Click on the position link
+  await page.getByRole('link', { name: positionTitle }).click();
+  
+  // Verify position page is loaded
+  await expect(page.locator(`text=${positionTitle}`)).toBeVisible({ timeout: 10000 });
+  
+  console.log(`✓ Position created successfully: ${positionTitle} with code: ${positionCode}`);
+  
+  // Return position details for further use if needed
+  return {
+    positionTitle,
+    positionCode
+  };
+}
 
-test('test2', async ({ page }) => {
-  // Increase timeout for this test
-  test.setTimeout(60000);
-  
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
-  
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-  
-  // Open People page
-  await openPeople(page, expect);
-  
-  // Add employee with prehire checklist
-  await addEmployeePrehireChecklist(page, expect);
-  
-  // Pause to keep browser open
-  await page.pause();
-});
-
-test('test3', async ({ page }) => {
-  // Increase timeout for this test
-  test.setTimeout(60000);
-  
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
-  
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-  
-  // Open People page
-  await openPeople(page, expect);
-  
-  // Add employee with no auto assignment
-  await addEmployeeNoAutoAssignmentChecklist(page, expect);
-  
-  // Pause to keep browser open
-  await page.pause();
-});
-
-test('test4', async ({ page }) => {
-  // Increase timeout for this test
-  test.setTimeout(60000);
-  
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
-  
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-  
-  // Open Positions page
-  await openPositions(page, expect);
-  
-  // Add new position
-  await addPosition(page, expect);
-  
-  // Pause to keep browser open
-  await page.pause();
-});
+// Open Positions page and verify
+export async function openPositions(page, expect) {
+  await page.getByRole('link', { name: 'Positions' }).click();
+  // Add verification if there's a heading or specific element on Positions page
+  await page.waitForTimeout(500);
+}
