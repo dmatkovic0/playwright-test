@@ -84,3 +84,45 @@ export async function addEmployeeOnboardingChecklist(page, expect) {
     startDate: todayFormatted
   };
 }
+
+export async function addEmployeePrehireChecklist(page, expect) {
+  // Generate unique identifiers for first and last name
+  const uniqueID = generateShortID();
+  const firstName = `First_${uniqueID}`;
+  const lastName = `Last_${uniqueID}`;
+  
+  // Click add button
+  await page.locator('.aut-button-add').click();
+  
+  // Fill First Name
+  await page.getByRole('textbox', { name: 'First Name*' }).click();
+  await page.getByRole('textbox', { name: 'First Name*' }).fill(firstName);
+  
+  // Fill Last Name
+  await page.getByRole('textbox', { name: 'Last Name*' }).click();
+  await page.getByRole('textbox', { name: 'Last Name*' }).fill(lastName);
+  
+  // Fill Account Email
+  await page.getByRole('textbox', { name: 'Account Email*' }).click();
+  await page.getByRole('textbox', { name: 'Account Email*' }).fill(`${uniqueID}@mail.com`);
+  
+  // Click on Prehire Checklist option
+  await page.locator('//div[@ng-click="vm.setAutomaticTaskAssignmentOption(\'Prehire\')"]//div[@class=\'widget-content\']').click();
+  
+  // Click Save
+  await page.getByRole('button', { name: 'Save' }).click();
+  
+  // Verify employee was created successfully
+  await expect(page.locator(`text=${firstName}`).or(page.locator(`text=${lastName}`))).toBeVisible({ timeout: 15000 });
+  await expect(page.locator(`text=${firstName}`)).toBeVisible();
+  await expect(page.locator(`text=${lastName}`)).toBeVisible();
+  
+  console.log(`✓ Employee with Prehire Checklist created successfully: ${firstName} ${lastName}`);
+  
+  // Return employee details for further use if needed
+  return {
+    firstName,
+    lastName,
+    email: `${uniqueID}@mail.com`
+  };
+}
