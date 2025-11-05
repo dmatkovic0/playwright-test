@@ -10,6 +10,8 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     viewport: null, // Disable fixed viewport
+    permissions: [], // Deny all permissions
+    geolocation: undefined, // Don't set geolocation
   },
   projects: [
     {
