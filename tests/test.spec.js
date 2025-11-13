@@ -4,6 +4,7 @@ import { addEmployeeOnboardingChecklist, addEmployeePrehireChecklist, addEmploye
 import { addPosition, openPositions, updatePosition } from '../src/people/position.js';
 import { addLocation, openLocations, updateLocation } from '../src/people/location.js';
 import { addDepartment, openDepartments, updateDepartment } from '../src/people/department.js';
+import { openCalendar, addEvent } from '../src/calendar/addEvent.js';
 
 test('test', async ({ page }) => {
   // Increase timeout for this test
@@ -183,6 +184,25 @@ test('test9', async ({ page }) => {
 
   // Update existing department
   await updateDepartment(page, expect);
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('test10', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open Calendar from sidebar
+  await openCalendar(page, expect);
+
+  // Add new event with GUID as event name
+  await addEvent(page, expect);
 
   // Pause to keep browser open
   await page.pause();
