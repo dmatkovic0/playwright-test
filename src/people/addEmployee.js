@@ -65,7 +65,19 @@ export async function addEmployeeOnboardingChecklist(page, expect) {
   } else {
     await locationItems[0].click();
   }
-  
+
+  // Select manager
+  await page.locator("//input[@id='xEmployee-xManagerLookup']").click();
+
+  // Wait for the manager selection flyout to open
+  await page.waitForTimeout(1000);
+
+  // Click on the first record in the grid
+  await page.locator("//body[1]/div[3]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/ngv-grid[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[3]").click();
+
+  // Wait for the flyout to close automatically
+  await page.waitForTimeout(1000);
+
   // Click Save
   await page.getByRole('button', { name: 'Save' }).click();
   
