@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { login, ensureSidebarExpanded, openPeople } from '../src/utils.js';
+import { login1 } from '../src/loginInfo/loginInfo.js';
 import { addEmployeeOnboardingChecklist, addEmployeePrehireChecklist, addEmployeeNoAutoAssignmentChecklist } from '../src/people/addEmployee.js';
 import { addPosition, openPositions, updatePosition } from '../src/people/position.js';
 import { addLocation, openLocations, updateLocation } from '../src/people/location.js';
@@ -10,7 +11,7 @@ test('test', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
   
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
   
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
@@ -29,7 +30,7 @@ test('test2', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
   
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
   
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
@@ -48,7 +49,7 @@ test('test3', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
   
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
   
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
@@ -67,7 +68,7 @@ test('test4', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
 
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
@@ -88,7 +89,7 @@ test('test5', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
 
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
@@ -109,7 +110,7 @@ test('test6', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
 
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
@@ -130,7 +131,7 @@ test('test7', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
 
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
@@ -151,7 +152,7 @@ test('test8', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
 
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
@@ -172,7 +173,7 @@ test('test9', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
 
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
@@ -193,7 +194,7 @@ test('test10', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await login('stg', 'hr2admin222@mail.com', 'Password123!!', page);
+  await login(login1.environment, login1.email, login1.password, page);
 
   // Ensure sidebar is expanded
   await ensureSidebarExpanded(page);
