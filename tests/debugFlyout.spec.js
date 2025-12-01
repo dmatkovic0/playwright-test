@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test';
-import { login, ensureSidebarExpanded, openPeople } from '../src/utils.js';
+import { ensureSidebarExpanded, openPeople } from '../src/utils.js';
 import { login1 } from '../src/loginInfo/loginInfo.js';
+import { LoginPage } from '../pom/LoginPage.js';
 
 test('DEBUG: Inspect flyout structure', async ({ page }) => {
   test.setTimeout(60000);
 
   // Login and navigate to People page
-  await login(login1.environment, login1.email, login1.password, page);
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
   await ensureSidebarExpanded(page);
   await openPeople(page, expect);
 

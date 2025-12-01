@@ -1,43 +1,43 @@
 import { test, expect } from '@playwright/test';
-import {
-  testLoginWithValidCredentials,
-  testLoginWithInvalidCredentials,
-  testLoginWithBothFieldsEmpty,
-  testLoginWithEmailEmpty,
-  testLoginWithPasswordEmpty
-} from '../src/login/loginTests.js';
+import { LoginPage } from '../pom/LoginPage.js';
+import { login1 } from '../src/loginInfo/loginInfo.js';
 
 test('should successfully login with valid credentials', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await testLoginWithValidCredentials(page, expect);
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.loginAndVerifySuccess(login1.environment, login1.email, login1.password);
 });
 
 test('should fail login with invalid credentials', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await testLoginWithInvalidCredentials(page, expect);
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.loginWithInvalidCredentials('stg');
 });
 
 test('should prevent login when both email and password fields are empty', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await testLoginWithBothFieldsEmpty(page, expect);
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.testEmptyFields('stg', 'both');
 });
 
 test('should show validation error when email is empty but password is filled', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await testLoginWithEmailEmpty(page, expect);
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.testEmptyFields('stg', 'email');
 });
 
 test('should show validation error when password is empty but email is filled', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  await testLoginWithPasswordEmpty(page, expect);
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.testEmptyFields('stg', 'password');
 });
