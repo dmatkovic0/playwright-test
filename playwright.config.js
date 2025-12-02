@@ -9,9 +9,9 @@ module.exports = defineConfig({
     headless: false, 
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    viewport: null, // Disable fixed viewport
-    permissions: [], // Deny all permissions
-    geolocation: undefined, // Don't set geolocation
+    viewport: null, 
+    permissions: [], 
+    geolocation: undefined, 
   },
   projects: [
     {
@@ -19,7 +19,7 @@ module.exports = defineConfig({
       use: { 
         browserName: 'chromium',
         launchOptions: {
-          args: ['--start-maximized'] // Open Chrome in maximized window
+          args: ['--start-maximized'] 
         }
       },
     },

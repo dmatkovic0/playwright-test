@@ -1,9 +1,8 @@
 import { generateShortID } from '../src/utils.js';
 
 export class Location {
-  constructor(page, expect) {
+  constructor(page) {
     this.page = page;
-    this.expect = expect;
 
     // Navigation
     this.moreLink = page.getByRole('link', { name: 'More', exact: true });
@@ -98,19 +97,23 @@ export class Location {
   }
 
   // ===========================================
-  // VERIFICATION METHODS
+  // HELPER METHODS (for tests to use with assertions)
   // ===========================================
 
-  async verifyLocationVisible(name) {
-    await this.expect(this.page.locator(`text=${name}`)).toBeVisible({ timeout: 10000 });
+  getLocationLocator(name) {
+    return this.page.locator(`text=${name}`);
   }
 
-  async verifyDetailPageVisible() {
-    await this.expect(this.detailPageHeading).toBeVisible({ timeout: 10000 });
+  getDetailPageHeading() {
+    return this.detailPageHeading;
   }
 
-  async verifyLocationLinkVisible() {
-    await this.expect(this.firstLocationLink).toBeVisible({ timeout: 10000 });
+  getFirstLocationLink() {
+    return this.firstLocationLink;
+  }
+
+  async waitForDetailPageVisible() {
+    await this.detailPageHeading.waitFor({ state: 'visible', timeout: 10000 });
   }
 
   // ===========================================
@@ -135,12 +138,11 @@ export class Location {
     // Save
     await this.save();
 
-    // Search and verify
+    // Search and navigate to detail page
     await this.searchByName(locationName);
     await this.clickLocationLink(locationName);
-    await this.verifyLocationVisible(locationName);
 
-    console.log(`✓ Location created successfully: ${locationName}`);
+    console.log(`✓ Location created: ${locationName}`);
 
     return {
       locationName,
@@ -172,15 +174,14 @@ export class Location {
     await this.saveButton.click();
     await this.page.waitForTimeout(3000);
 
-    console.log(`✓ Location updated successfully: ${locationName} with new code: ${updatedCode}`);
+    console.log(`✓ Location updated: ${locationName} with new code: ${updatedCode}`);
 
-    // Search and verify
+    // Search and navigate to detail page
     await this.searchByCode(updatedCode);
-    await this.verifyLocationLinkVisible();
     await this.clickFirstLocation();
-    await this.verifyDetailPageVisible();
+    await this.waitForDetailPageVisible();
 
-    console.log(`✓ Location verified successfully: ${locationName} with code: ${updatedCode}`);
+    console.log(`✓ Location detail page loaded: ${locationName} with code: ${updatedCode}`);
 
     return {
       locationName: locationName.trim(),

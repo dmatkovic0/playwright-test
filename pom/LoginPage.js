@@ -1,9 +1,8 @@
 import { environments } from '../src/loginInfo/loginInfo.js';
 
 export class LoginPage {
-  constructor(page, expect) {
+  constructor(page) {
     this.page = page;
-    this.expect = expect;
 
     // Environment URLs (imported from secure loginInfo file)
     this.environments = environments;
@@ -95,25 +94,25 @@ export class LoginPage {
   }
 
   // ===========================================
-  // VERIFICATION METHODS
+  // HELPER METHODS (for tests to use with assertions)
   // ===========================================
 
-  async verifyLoginPageLoaded() {
-    await this.expect(this.emailField).toBeVisible({ timeout: 10000 });
-    await this.expect(this.passwordField).toBeVisible({ timeout: 10000 });
-    await this.expect(this.signInButton).toBeVisible({ timeout: 10000 });
+  async waitForLoginPageElements() {
+    await this.emailField.waitFor({ state: 'visible', timeout: 10000 });
+    await this.passwordField.waitFor({ state: 'visible', timeout: 10000 });
+    await this.signInButton.waitFor({ state: 'visible', timeout: 10000 });
   }
 
-  async verifyEmailFieldVisible() {
-    await this.expect(this.emailField).toBeVisible();
+  getEmailField() {
+    return this.emailField;
   }
 
-  async verifyPasswordFieldVisible() {
-    await this.expect(this.passwordField).toBeVisible();
+  getPasswordField() {
+    return this.passwordField;
   }
 
-  async verifySignInButtonVisible() {
-    await this.expect(this.signInButton).toBeVisible();
+  getSignInButton() {
+    return this.signInButton;
   }
 
   // ===========================================
@@ -168,17 +167,17 @@ export class LoginPage {
   }
 
   // ===========================================
-  // VALIDATION TEST METHODS
+  // VALIDATION TEST METHODS (return elements for test assertions)
   // ===========================================
 
-  async loginAndVerifySuccess(environment, email, password) {
+  async loginAndGetDashboardElements(environment, email, password) {
     await this.login(environment, email, password);
 
-    // Verify successful login by checking dashboard
-    await this.expect(this.page.getByRole('heading', { name: 'Onboard' })).toBeVisible();
-    await this.expect(this.page.getByText('Welcome, HR2!')).toBeVisible();
-
-    console.log('✓ Login successful with valid credentials');
+    // Return elements for test to assert on
+    return {
+      onboardHeading: this.page.getByRole('heading', { name: 'Onboard' }),
+      welcomeText: this.page.getByText('Welcome, HR2!')
+    };
   }
 
   async loginWithInvalidCredentials(environment) {
@@ -193,20 +192,13 @@ export class LoginPage {
     // Wait for error message
     await this.page.waitForTimeout(3000);
 
-    // Verify error message is displayed
-    const errorMessage = this.page.locator('.alert-danger').first();
-    await this.expect(errorMessage).toBeVisible();
-
-    // Verify still on login page
-    await this.expect(this.emailField).toBeVisible();
-    await this.expect(this.signInButton).toBeVisible();
-
-    // Verify NOT on dashboard
-    const onboardHeading = this.page.getByRole('heading', { name: 'Onboard' });
-    const isOnboardVisible = await onboardHeading.isVisible({ timeout: 2000 }).catch(() => false);
-    this.expect(isOnboardVisible).toBe(false);
-
-    console.log('✓ Login correctly failed with invalid credentials');
+    // Return elements for test to assert on
+    return {
+      errorMessage: this.page.locator('.alert-danger').first(),
+      emailField: this.emailField,
+      signInButton: this.signInButton,
+      onboardHeading: this.page.getByRole('heading', { name: 'Onboard' })
+    };
   }
 
   async testEmptyFields(environment, scenario = 'both') {
@@ -240,16 +232,19 @@ export class LoginPage {
     // Check for validation
     const validationChecks = await this.checkValidationIndicators(scenario);
 
-    // Verify still on login page
-    await this.expect(this.emailField).toBeVisible({ timeout: 5000 });
-    const onLoginPage = await this.emailField.isVisible().catch(() => false);
-    this.expect(onLoginPage).toBe(true);
+    // Check if still on login page
+    const onLoginPage = await this.emailField.isVisible({ timeout: 5000 }).catch(() => false);
 
     console.log(`✓ Empty fields validation test completed (${scenario})`);
     console.log(`  Button disabled state: ${isDisabledBefore}`);
     console.log(`  Validation indicators found: ${validationChecks.found}`);
 
-    return validationChecks;
+    return {
+      validationChecks,
+      isDisabledBefore,
+      onLoginPage,
+      emailField: this.emailField
+    };
   }
 
   async checkValidationIndicators(context) {

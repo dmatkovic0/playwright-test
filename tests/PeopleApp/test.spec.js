@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { ensureSidebarExpanded, openPeople } from '../src/utils.js';
-import { login1 } from '../src/loginInfo/loginInfo.js';
-import { LoginPage } from '../pom/LoginPage.js';
-import { AddEmployeeFlyout } from '../pom/AddEmployeeFlyout.js';
-import { Position } from '../pom/Position.js';
-import { Location } from '../pom/Location.js';
-import { Department } from '../pom/Department.js';
-import { openCalendar, addEvent } from '../src/calendar/addEvent.js';
+import { ensureSidebarExpanded, openPeople } from '../../src/utils.js';
+import { login1 } from '../../src/loginInfo/loginInfo.js';
+import { LoginPage } from '../../pom/LoginPage.js';
+import { AddEmployeeFlyout } from '../../pom/AddEmployeeFlyout.js';
+import { Position } from '../../pom/Position.js';
+import { Location } from '../../pom/Location.js';
+import { Department } from '../../pom/Department.js';
+import { openCalendar, addEvent } from '../../src/calendar/addEvent.js';
 
 test('test', async ({ page }) => {
   // Increase timeout for this test

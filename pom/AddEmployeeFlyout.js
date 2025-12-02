@@ -1,9 +1,8 @@
 import { generateShortID } from '../src/utils.js';
 
 export class AddEmployeeFlyout {
-  constructor(page, expect) {
+  constructor(page) {
     this.page = page;
-    this.expect = expect;
 
     // Main flyout locators
     this.addButton = page.locator('.aut-button-add');
@@ -219,51 +218,66 @@ export class AddEmployeeFlyout {
   }
 
   // ===========================================
-  // VERIFICATION METHODS
+  // HELPER METHODS (for tests to use with assertions)
   // ===========================================
 
-  async verifyFlyoutIsOpen() {
-    await this.expect(this.flyoutContainer.first()).toBeVisible({ timeout: 5000 });
+  async waitForFlyoutOpen() {
+    await this.flyoutContainer.first().waitFor({ state: 'visible', timeout: 5000 });
   }
 
-  async verifyFlyoutIsClosed() {
+  async waitForFlyoutClosed() {
     await this.flyoutContainer.first().waitFor({ state: 'detached', timeout: 5000 }).catch(() => {});
   }
 
-  async verifyAllFieldsVisible() {
-    await this.expect(this.firstNameField).toBeVisible();
-    await this.expect(this.lastNameField).toBeVisible();
-    await this.expect(this.emailField).toBeVisible();
-    await this.expect(this.startDateField).toBeVisible();
-    await this.expect(this.departmentDropdown).toBeVisible();
-    await this.expect(this.positionDropdown).toBeVisible();
-    await this.expect(this.locationDropdown).toBeVisible();
-    await this.expect(this.managerLookupField).toBeVisible();
+  getFlyoutContainer() {
+    return this.flyoutContainer.first();
   }
 
-  async verifyRequiredFieldIndicators() {
-    // Verify asterisks are present in field labels
-    await this.expect(this.page.getByRole('textbox', { name: 'First Name*' })).toBeVisible();
-    await this.expect(this.page.getByRole('textbox', { name: 'Last Name*' })).toBeVisible();
-    await this.expect(this.page.getByRole('textbox', { name: 'Account Email*' })).toBeVisible();
-    await this.expect(this.page.getByRole('textbox', { name: 'Start Date*' })).toBeVisible();
+  getFirstNameField() {
+    return this.firstNameField;
   }
 
-  async verifySaveButtonVisible() {
-    await this.expect(this.saveButton).toBeVisible();
+  getLastNameField() {
+    return this.lastNameField;
   }
 
-  async verifyCancelButtonVisible() {
-    await this.expect(this.cancelButton).toBeVisible();
+  getEmailField() {
+    return this.emailField;
   }
 
-  async verifyEmployeeCreated(firstName, lastName) {
-    await this.expect(
-      this.page.locator(`text=${firstName}`).or(this.page.locator(`text=${lastName}`))
-    ).toBeVisible({ timeout: 15000 });
+  getStartDateField() {
+    return this.startDateField;
   }
 
-  async verifyFieldValue(fieldName, expectedValue) {
+  getDepartmentDropdown() {
+    return this.departmentDropdown;
+  }
+
+  getPositionDropdown() {
+    return this.positionDropdown;
+  }
+
+  getLocationDropdown() {
+    return this.locationDropdown;
+  }
+
+  getManagerLookupField() {
+    return this.managerLookupField;
+  }
+
+  getSaveButton() {
+    return this.saveButton;
+  }
+
+  getCancelButton() {
+    return this.cancelButton;
+  }
+
+  getEmployeeLocator(firstName, lastName) {
+    return this.page.locator(`text=${firstName}`).or(this.page.locator(`text=${lastName}`));
+  }
+
+  async getFieldValue(fieldName) {
     let field;
     switch(fieldName.toLowerCase()) {
       case 'firstname':
@@ -282,8 +296,7 @@ export class AddEmployeeFlyout {
         throw new Error(`Unknown field: ${fieldName}`);
     }
 
-    const value = await field.inputValue();
-    this.expect(value).toBe(expectedValue);
+    return await field.inputValue();
   }
 
   // ===========================================
@@ -318,7 +331,6 @@ export class AddEmployeeFlyout {
     const { firstName, lastName, email } = await this.fillRequiredFields(uniqueID);
     await this.selectNoAutoAssignment();
     await this.save();
-    await this.verifyEmployeeCreated(firstName, lastName);
     return { firstName, lastName, email, uniqueID };
   }
 
@@ -328,7 +340,6 @@ export class AddEmployeeFlyout {
     await this.selectAllDropdowns();
     await this.selectFirstManager();
     await this.save();
-    await this.verifyEmployeeCreated(firstName, lastName);
     return { firstName, lastName, email, startDate, uniqueID };
   }
 
@@ -356,10 +367,7 @@ export class AddEmployeeFlyout {
     // Onboarding is default, so just save
     await this.save();
 
-    // Verify
-    await this.verifyEmployeeCreated(firstName, lastName);
-
-    console.log(`✓ Employee created successfully: ${firstName} ${lastName} with start date: ${startDate}`);
+    console.log(`✓ Employee created: ${firstName} ${lastName} with start date: ${startDate}`);
 
     return {
       firstName,
@@ -387,10 +395,7 @@ export class AddEmployeeFlyout {
     // Save
     await this.save();
 
-    // Verify
-    await this.verifyEmployeeCreated(firstName, lastName);
-
-    console.log(`✓ Employee with Prehire Checklist created successfully: ${firstName} ${lastName}`);
+    console.log(`✓ Employee with Prehire Checklist created: ${firstName} ${lastName}`);
 
     return {
       firstName,
@@ -417,10 +422,7 @@ export class AddEmployeeFlyout {
     // Save
     await this.save();
 
-    // Verify
-    await this.verifyEmployeeCreated(firstName, lastName);
-
-    console.log(`✓ Employee with No Auto Assignment created successfully: ${firstName} ${lastName}`);
+    console.log(`✓ Employee with No Auto Assignment created: ${firstName} ${lastName}`);
 
     return {
       firstName,

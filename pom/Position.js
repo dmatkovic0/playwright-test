@@ -1,9 +1,8 @@
 import { generateShortID } from '../src/utils.js';
 
 export class Position {
-  constructor(page, expect) {
+  constructor(page) {
     this.page = page;
-    this.expect = expect;
 
     // Navigation
     this.positionsLink = page.getByRole('link', { name: 'Positions' });
@@ -96,19 +95,23 @@ export class Position {
   }
 
   // ===========================================
-  // VERIFICATION METHODS
+  // HELPER METHODS (for tests to use with assertions)
   // ===========================================
 
-  async verifyPositionVisible(title) {
-    await this.expect(this.page.locator(`text=${title}`)).toBeVisible({ timeout: 10000 });
+  getPositionLocator(title) {
+    return this.page.locator(`text=${title}`);
   }
 
-  async verifyDetailPageVisible() {
-    await this.expect(this.detailPageHeading).toBeVisible({ timeout: 10000 });
+  getDetailPageHeading() {
+    return this.detailPageHeading;
   }
 
-  async verifyPositionLinkVisible() {
-    await this.expect(this.firstPositionLink).toBeVisible({ timeout: 10000 });
+  getFirstPositionLink() {
+    return this.firstPositionLink;
+  }
+
+  async waitForDetailPageVisible() {
+    await this.detailPageHeading.waitFor({ state: 'visible', timeout: 10000 });
   }
 
   // ===========================================
@@ -133,12 +136,11 @@ export class Position {
     // Save
     await this.save();
 
-    // Search and verify
+    // Search and navigate to detail page
     await this.searchByTitle(positionTitle);
     await this.clickPositionLink(positionTitle);
-    await this.verifyPositionVisible(positionTitle);
 
-    console.log(`✓ Position created successfully: ${positionTitle} with code: ${positionCode}`);
+    console.log(`✓ Position created: ${positionTitle} with code: ${positionCode}`);
 
     return {
       positionTitle,
@@ -170,15 +172,14 @@ export class Position {
     await this.saveButton.click();
     await this.page.waitForTimeout(3000);
 
-    console.log(`✓ Position updated successfully: ${positionTitle} with new code: ${updatedCode}`);
+    console.log(`✓ Position updated: ${positionTitle} with new code: ${updatedCode}`);
 
-    // Search and verify
+    // Search and navigate to detail page
     await this.searchByCode(updatedCode);
-    await this.verifyPositionLinkVisible();
     await this.clickFirstPosition();
-    await this.verifyDetailPageVisible();
+    await this.waitForDetailPageVisible();
 
-    console.log(`✓ Position verified successfully: ${positionTitle} with code: ${updatedCode}`);
+    console.log(`✓ Position detail page loaded: ${positionTitle} with code: ${updatedCode}`);
 
     return {
       positionTitle: positionTitle.trim(),

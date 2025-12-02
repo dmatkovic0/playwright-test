@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pom/LoginPage.js';
-import { login1 } from '../src/loginInfo/loginInfo.js';
+import { LoginPage } from '../../pom/LoginPage.js';
+import { login1 } from '../../src/loginInfo/loginInfo.js';
 
 test('should successfully login with valid credentials', async ({ page }) => {
   // Increase timeout for this test

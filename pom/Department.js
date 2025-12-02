@@ -1,9 +1,8 @@
 import { generateShortID } from '../src/utils.js';
 
 export class Department {
-  constructor(page, expect) {
+  constructor(page) {
     this.page = page;
-    this.expect = expect;
 
     // Navigation
     this.moreLink = page.getByRole('link', { name: 'More', exact: true });
@@ -98,19 +97,23 @@ export class Department {
   }
 
   // ===========================================
-  // VERIFICATION METHODS
+  // HELPER METHODS (for tests to use with assertions)
   // ===========================================
 
-  async verifyDepartmentVisible(name) {
-    await this.expect(this.page.locator(`text=${name}`)).toBeVisible({ timeout: 10000 });
+  getDepartmentLocator(name) {
+    return this.page.locator(`text=${name}`);
   }
 
-  async verifyDetailPageVisible() {
-    await this.expect(this.detailPageHeading).toBeVisible({ timeout: 10000 });
+  getDetailPageHeading() {
+    return this.detailPageHeading;
   }
 
-  async verifyDepartmentLinkVisible() {
-    await this.expect(this.firstDepartmentLink).toBeVisible({ timeout: 10000 });
+  getFirstDepartmentLink() {
+    return this.firstDepartmentLink;
+  }
+
+  async waitForDetailPageVisible() {
+    await this.detailPageHeading.waitFor({ state: 'visible', timeout: 10000 });
   }
 
   // ===========================================
@@ -135,12 +138,11 @@ export class Department {
     // Save
     await this.save();
 
-    // Search and verify
+    // Search and navigate to detail page
     await this.searchByName(departmentName);
     await this.clickDepartmentLink(departmentName);
-    await this.verifyDepartmentVisible(departmentName);
 
-    console.log(`✓ Department created successfully: ${departmentName}`);
+    console.log(`✓ Department created: ${departmentName}`);
 
     return {
       departmentName,
@@ -172,15 +174,14 @@ export class Department {
     await this.saveButton.click();
     await this.page.waitForTimeout(3000);
 
-    console.log(`✓ Department updated successfully: ${departmentName} with new code: ${updatedCode}`);
+    console.log(`✓ Department updated: ${departmentName} with new code: ${updatedCode}`);
 
-    // Search and verify
+    // Search and navigate to detail page
     await this.searchByCode(updatedCode);
-    await this.verifyDepartmentLinkVisible();
     await this.clickFirstDepartment();
-    await this.verifyDetailPageVisible();
+    await this.waitForDetailPageVisible();
 
-    console.log(`✓ Department verified successfully: ${departmentName} with code: ${updatedCode}`);
+    console.log(`✓ Department detail page loaded: ${departmentName} with code: ${updatedCode}`);
 
     return {
       departmentName: departmentName.trim(),

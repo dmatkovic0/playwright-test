@@ -1,20 +1,20 @@
 import { test, expect } from '@playwright/test';
-import { ensureSidebarExpanded, openPeople } from '../src/utils.js';
-import { login1 } from '../src/loginInfo/loginInfo.js';
-import { LoginPage } from '../pom/LoginPage.js';
-import { AddEmployeeFlyout } from '../pom/AddEmployeeFlyout.js';
+import { ensureSidebarExpanded, openPeople } from '../../src/utils.js';
+import { login1 } from '../../src/loginInfo/loginInfo.js';
+import { LoginPage } from '../../pom/LoginPage.js';
+import { AddEmployeeFlyout } from '../../pom/AddEmployeeFlyout.js';
 
 // ============================================
 // SETUP HELPER
 // ============================================
 
-async function setupTest(page, expect) {
+async function setupTest(page) {
   test.setTimeout(30000);
-  const loginPage = new LoginPage(page, expect);
+  const loginPage = new LoginPage(page);
   await loginPage.login(login1.environment, login1.email, login1.password);
   await ensureSidebarExpanded(page);
   await openPeople(page, expect);
-  return new AddEmployeeFlyout(page, expect);
+  return new AddEmployeeFlyout(page);
 }
 
 // ============================================
@@ -22,25 +22,35 @@ async function setupTest(page, expect) {
 // ============================================
 
 test('should open add employee flyout when clicking add button', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
-  await flyout.verifyFlyoutIsOpen();
+  await expect(flyout.getFlyoutContainer()).toBeVisible({ timeout: 5000 });
   console.log('✓ Flyout opened successfully');
 });
 
 test('should display all form fields in the flyout', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.dismissOverlays();
   await flyout.open();
-  await flyout.verifyAllFieldsVisible();
+  await expect(flyout.getFirstNameField()).toBeVisible();
+  await expect(flyout.getLastNameField()).toBeVisible();
+  await expect(flyout.getEmailField()).toBeVisible();
+  await expect(flyout.getStartDateField()).toBeVisible();
+  await expect(flyout.getDepartmentDropdown()).toBeVisible();
+  await expect(flyout.getPositionDropdown()).toBeVisible();
+  await expect(flyout.getLocationDropdown()).toBeVisible();
+  await expect(flyout.getManagerLookupField()).toBeVisible();
   await flyout.close();
   console.log('✓ All form fields are visible');
 });
 
 test('should show required field indicators (*) for mandatory fields', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
-  await flyout.verifyRequiredFieldIndicators();
+  await expect(page.getByRole('textbox', { name: 'First Name*' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Last Name*' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Account Email*' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Start Date*' })).toBeVisible();
   console.log('✓ Required field indicators (*) are present');
 });
 
@@ -49,17 +59,17 @@ test('should show required field indicators (*) for mandatory fields', async ({ 
 // ============================================
 
 test('should prevent save when all required fields are empty', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.save();
   await page.waitForTimeout(1000);
-  await flyout.verifyFlyoutIsOpen();
+  await expect(flyout.getFlyoutContainer()).toBeVisible({ timeout: 5000 });
   await flyout.close();
   console.log('✓ Validation works - Save prevented with empty fields');
 });
 
 test('should prevent save when only first name is filled', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.fillFirstName('TestFirst');
   await flyout.save();
@@ -71,9 +81,10 @@ test('should prevent save when only first name is filled', async ({ page }) => {
 });
 
 test('should successfully save with minimum required fields', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   const employee = await flyout.createEmployeeWithMinimumFields();
+  await expect(flyout.getEmployeeLocator(employee.firstName, employee.lastName)).toBeVisible({ timeout: 15000 });
   console.log(`✓ Employee created with minimum required fields: ${employee.firstName} ${employee.lastName}`);
 });
 
@@ -82,27 +93,28 @@ test('should successfully save with minimum required fields', async ({ page }) =
 // ============================================
 
 test('should validate email field format', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.fillFirstName('TestFirst');
   await flyout.fillLastName('TestLast');
   await flyout.fillEmail('notanemail');
   await flyout.save();
   await page.waitForTimeout(1000);
-  await flyout.verifyFlyoutIsOpen();
+  await expect(flyout.getFlyoutContainer()).toBeVisible({ timeout: 5000 });
   await flyout.close();
   console.log('✓ Email validation tested for invalid format');
 });
 
 test('should accept valid email format', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   const employee = await flyout.createEmployeeWithMinimumFields();
+  await expect(flyout.getEmployeeLocator(employee.firstName, employee.lastName)).toBeVisible({ timeout: 15000 });
   console.log(`✓ Valid email format accepted: ${employee.email}`);
 });
 
 test('should validate date field format', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   const dateField = flyout.startDateField;
   await dateField.fill('invalid-date');
@@ -120,35 +132,35 @@ test('should validate date field format', async ({ page }) => {
 // ============================================
 
 test('should open and select from department dropdown', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.selectDepartment(1);
   console.log('✓ Department dropdown works correctly');
 });
 
 test('should open and select from position dropdown', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.selectPosition(1);
   console.log('✓ Position dropdown works correctly');
 });
 
 test('should open and select from location dropdown', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.selectLocation(1);
   console.log('✓ Location dropdown works correctly');
 });
 
 test('should work with all dropdowns sequentially', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.selectAllDropdowns();
   console.log('✓ All dropdowns work correctly');
 });
 
 test('should allow changing dropdown selection', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.dismissOverlays();
   await flyout.open();
   await flyout.selectDepartment(1);
@@ -161,7 +173,7 @@ test('should allow changing dropdown selection', async ({ page }) => {
 // ============================================
 
 test('should open manager lookup flyout', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.openManagerLookup();
   await expect(flyout.managerGrid.first()).toBeVisible({ timeout: 5000 });
@@ -169,7 +181,7 @@ test('should open manager lookup flyout', async ({ page }) => {
 });
 
 test('should select manager from lookup grid', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.dismissOverlays();
   await flyout.open();
   await flyout.selectFirstManager();
@@ -179,7 +191,7 @@ test('should select manager from lookup grid', async ({ page }) => {
 });
 
 test('should allow canceling manager lookup without selection', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.openManagerLookup();
   await page.keyboard.press('Escape');
@@ -194,7 +206,7 @@ test('should allow canceling manager lookup without selection', async ({ page })
 // ============================================
 
 test('should select Onboarding checklist option', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.dismissOverlays();
   await flyout.open();
   await flyout.selectOnboardingChecklist();
@@ -204,7 +216,7 @@ test('should select Onboarding checklist option', async ({ page }) => {
 });
 
 test('should select Prehire checklist option', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.selectPrehireChecklist();
   await expect(flyout.prehireChecklistOption).toBeVisible();
@@ -212,7 +224,7 @@ test('should select Prehire checklist option', async ({ page }) => {
 });
 
 test('should select No Auto Assignment option', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.selectNoAutoAssignment();
   await expect(flyout.noAutoAssignmentOption).toBeVisible();
@@ -220,7 +232,7 @@ test('should select No Auto Assignment option', async ({ page }) => {
 });
 
 test('should allow switching between checklist options', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.dismissOverlays();
   await flyout.open();
   await flyout.selectOnboardingChecklist();
@@ -234,17 +246,18 @@ test('should allow switching between checklist options', async ({ page }) => {
 // ============================================
 
 test('should successfully save employee with all fields filled', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.dismissOverlays();
   await flyout.open();
   const employee = await flyout.createEmployeeWithAllFields();
+  await expect(flyout.getEmployeeLocator(employee.firstName, employee.lastName)).toBeVisible({ timeout: 15000 });
   console.log(`✓ Employee created successfully with all fields: ${employee.firstName} ${employee.lastName}`);
 });
 
 test('should verify save button state', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
-  await flyout.verifySaveButtonVisible();
+  await expect(flyout.getSaveButton()).toBeVisible();
   const isDisabled = await flyout.saveButton.isDisabled().catch(() => false);
   console.log(`✓ Save button is ${isDisabled ? 'disabled' : 'enabled'} initially`);
 });
@@ -254,7 +267,7 @@ test('should verify save button state', async ({ page }) => {
 // ============================================
 
 test('should close flyout with close button without saving', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.dismissOverlays();
   await flyout.open();
   await flyout.fillFirstName('TestFirst');
@@ -264,7 +277,7 @@ test('should close flyout with close button without saving', async ({ page }) =>
 });
 
 test('should close flyout with ESC key', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.fillFirstName('TestFirst');
   await page.keyboard.press('Escape');
@@ -279,7 +292,7 @@ test('should close flyout with ESC key', async ({ page }) => {
 });
 
 test('should close flyout with cancel button', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.dismissOverlays();
   await flyout.open();
   await flyout.fillFirstName('TestFirst');
@@ -293,7 +306,7 @@ test('should close flyout with cancel button', async ({ page }) => {
 // ============================================
 
 test('should maintain field values when switching between fields', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   const firstName = 'TestFirst';
   const lastName = 'TestLast';
@@ -302,14 +315,14 @@ test('should maintain field values when switching between fields', async ({ page
   await flyout.fillLastName(lastName);
   await flyout.fillEmail(email);
   await flyout.startDateField.click();
-  await flyout.verifyFieldValue('firstName', firstName);
-  await flyout.verifyFieldValue('lastName', lastName);
-  await flyout.verifyFieldValue('email', email);
+  expect(await flyout.getFieldValue('firstName')).toBe(firstName);
+  expect(await flyout.getFieldValue('lastName')).toBe(lastName);
+  expect(await flyout.getFieldValue('email')).toBe(email);
   console.log('✓ Data persists when switching between fields');
 });
 
 test('should maintain field values during dropdown interactions', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   const firstName = 'TestFirst';
   const lastName = 'TestLast';
@@ -319,8 +332,8 @@ test('should maintain field values during dropdown interactions', async ({ page 
   await page.waitForTimeout(500);
   await page.keyboard.press('Escape');
   await page.waitForTimeout(500);
-  await flyout.verifyFieldValue('firstName', firstName);
-  await flyout.verifyFieldValue('lastName', lastName);
+  expect(await flyout.getFieldValue('firstName')).toBe(firstName);
+  expect(await flyout.getFieldValue('lastName')).toBe(lastName);
   console.log('✓ Data persists during dropdown interactions');
 });
 
@@ -329,7 +342,7 @@ test('should maintain field values during dropdown interactions', async ({ page 
 // ============================================
 
 test('should support keyboard navigation through form fields', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.open();
   await flyout.firstNameField.focus();
   await page.keyboard.press('Tab');
@@ -346,17 +359,20 @@ test('should support keyboard navigation through form fields', async ({ page }) 
 // ============================================
 
 test('should complete full employee creation workflow', async ({ page }) => {
-  const flyout = await setupTest(page, expect);
+  const flyout = await setupTest(page);
   await flyout.dismissOverlays();
   console.log('Starting complete flyout workflow test...');
 
   await flyout.open();
   console.log('  ✓ Flyout opened');
 
-  await flyout.verifyAllFieldsVisible();
+  await expect(flyout.getFirstNameField()).toBeVisible();
+  await expect(flyout.getLastNameField()).toBeVisible();
+  await expect(flyout.getEmailField()).toBeVisible();
   console.log('  ✓ All fields visible');
 
   const employee = await flyout.createEmployeeWithAllFields();
+  await expect(flyout.getEmployeeLocator(employee.firstName, employee.lastName)).toBeVisible({ timeout: 15000 });
   console.log(`✓ COMPLETE WORKFLOW TEST PASSED: ${employee.firstName} ${employee.lastName}`);
 });
 
@@ -367,31 +383,34 @@ test('should complete full employee creation workflow', async ({ page }) => {
 // You can also group tests and run them selectively
 test.describe('Add Employee Flyout - Critical Path Tests', () => {
   test('critical: open flyout and verify layout', async ({ page }) => {
-    const flyout = await setupTest(page, expect);
+    const flyout = await setupTest(page);
     await flyout.open();
-    await flyout.verifyFlyoutIsOpen();
-    await flyout.verifyAllFieldsVisible();
+    await expect(flyout.getFlyoutContainer()).toBeVisible({ timeout: 5000 });
+    await expect(flyout.getFirstNameField()).toBeVisible();
+    await expect(flyout.getLastNameField()).toBeVisible();
+    await expect(flyout.getEmailField()).toBeVisible();
   });
 
   test('critical: required field validation', async ({ page }) => {
-    const flyout = await setupTest(page, expect);
+    const flyout = await setupTest(page);
     await flyout.open();
     await flyout.save();
     await page.waitForTimeout(1000);
-    await flyout.verifyFlyoutIsOpen();
+    await expect(flyout.getFlyoutContainer()).toBeVisible({ timeout: 5000 });
   });
 
   test('critical: successful employee creation', async ({ page }) => {
-    const flyout = await setupTest(page, expect);
+    const flyout = await setupTest(page);
     await flyout.dismissOverlays();
     await flyout.open();
-    await flyout.createEmployeeWithAllFields();
+    const employee = await flyout.createEmployeeWithAllFields();
+    await expect(flyout.getEmployeeLocator(employee.firstName, employee.lastName)).toBeVisible({ timeout: 15000 });
   });
 });
 
 test.describe('Add Employee Flyout - Dropdown Tests', () => {
   test('all dropdowns should work correctly', async ({ page }) => {
-    const flyout = await setupTest(page, expect);
+    const flyout = await setupTest(page);
     await flyout.open();
     await flyout.selectAllDropdowns();
   });
@@ -399,7 +418,7 @@ test.describe('Add Employee Flyout - Dropdown Tests', () => {
 
 test.describe('Add Employee Flyout - Manager Selection', () => {
   test('manager lookup workflow', async ({ page }) => {
-    const flyout = await setupTest(page, expect);
+    const flyout = await setupTest(page);
     await flyout.open();
     await flyout.openManagerLookup();
     await expect(flyout.managerGrid.first()).toBeVisible({ timeout: 5000 });
