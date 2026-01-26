@@ -49,7 +49,7 @@ export async function addEvent(page, expect) {
 
   // Wait for address options to load and select
   await page.waitForTimeout(1000);
-  await page.getByText('Split, Croatia').click();
+  await page.getByText('Split, Croatia').first().click();
 
   // Go back to event name and add "1" at the end
   await page.locator('#companyEventTitle').click();

@@ -5,7 +5,7 @@ export class PeoplePortals {
     this.page = page;
 
     // Navigation
-    this.portalsLink = page.locator('//*[@id="main-menu-dropdown"]/ul[1]/li[3]/a[1]');
+    this.portalsLink = page.locator('//a[@ng-show=\'!menuItem.SubMenus.length\'][normalize-space()=\'Portals\']');
 
     // Add/Edit form locators
     this.addButton = page.locator('.aut-button-add');
@@ -21,7 +21,8 @@ export class PeoplePortals {
     this.titleSearchField = page.getByPlaceholder('Title').first();
 
     // Detail page locators
-    this.detailPageHeading = page.locator('h1, h2').first();
+    // Target the portal title heading specifically (not "People" or "Portal Administration")
+    this.detailPageHeading = page.locator('h1').first();
   }
 
   // ===========================================
@@ -30,14 +31,16 @@ export class PeoplePortals {
 
   async open() {
     await this.portalsLink.click();
-    await this.page.waitForTimeout(500);
+    // Wait for the Portals page to load by checking for the Add button
+    await this.addButton.waitFor({ state: 'visible', timeout: 10000 });
   }
 
   async openAddForm() {
     // Dismiss any overlays first
     await this.dismissOverlays();
     await this.addButton.click();
-    await this.page.waitForTimeout(500);
+    // Wait for the form to open by checking if title field is visible
+    await this.titleField.waitFor({ state: 'visible', timeout: 5000 });
   }
 
   async dismissOverlays() {
@@ -46,23 +49,21 @@ export class PeoplePortals {
     const overlayCount = await overlay.count();
     if (overlayCount > 0) {
       await overlay.first().click({ force: true }).catch(() => {});
-      await this.page.waitForTimeout(500);
     }
 
     // Also try pressing Escape
     await this.page.keyboard.press('Escape').catch(() => {});
-    await this.page.waitForTimeout(300);
 
     // Wait for overlays to be removed
     await this.page.locator('.overlay.show').first().waitFor({ state: 'detached', timeout: 2000 }).catch(() => {});
     await this.page.locator('.flyout-large').first().waitFor({ state: 'hidden', timeout: 1000 }).catch(() => {});
-    await this.page.waitForTimeout(300);
   }
 
   async openEditForm() {
     const editButton = this.page.getByRole('button', { name: 'Edit' });
     await editButton.click();
-    await this.page.waitForTimeout(500);
+    // Wait for the edit form to open by checking if title field is visible
+    await this.titleField.waitFor({ state: 'visible', timeout: 5000 });
   }
 
   // ===========================================
@@ -81,12 +82,14 @@ export class PeoplePortals {
 
   async save() {
     await this.saveButton.click();
-    await this.page.waitForTimeout(2000);
+    // Wait for the form to close by checking if save button disappears
+    await this.saveButton.waitFor({ state: 'hidden', timeout: 10000 });
   }
 
   async cancel() {
     await this.cancelButton.click();
-    await this.page.waitForTimeout(500);
+    // Wait for the form to close by checking if cancel button disappears
+    await this.cancelButton.waitFor({ state: 'hidden', timeout: 5000 });
   }
 
   // ===========================================
@@ -96,20 +99,23 @@ export class PeoplePortals {
   async searchByTitle(title) {
     await this.titleSearchField.click();
     await this.titleSearchField.fill(title);
-    await this.page.waitForTimeout(1000);
+    // Wait for search results to load - wait for network to be idle
+    await this.page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {});
   }
 
   async clickPortalByName(portalName) {
     // Click on portal link in the title column using xpath pattern
     const portalLink = this.page.locator(`//td[@role='gridcell']//a[contains(text(),'${portalName}')]`);
     await portalLink.click();
-    await this.page.waitForTimeout(1000);
+    // Wait for detail page to load
+    await this.detailPageHeading.waitFor({ state: 'visible', timeout: 10000 });
   }
 
   async clickFirstPortal() {
     const portalTitle = await this.firstPortalLink.textContent();
     await this.firstPortalLink.click();
-    await this.page.waitForTimeout(1000);
+    // Wait for detail page to load
+    await this.detailPageHeading.waitFor({ state: 'visible', timeout: 10000 });
     return portalTitle;
   }
 
@@ -179,8 +185,8 @@ export class PeoplePortals {
       updatedTitle = `UpdatedPortal_${uniqueID}`;
     }
 
-    // Wait for grid to load
-    await this.page.waitForTimeout(1000);
+    // Wait for grid to load by checking if first portal link is visible
+    await this.firstPortalLink.waitFor({ state: 'visible', timeout: 10000 });
 
     // Click first portal
     const originalTitle = await this.clickFirstPortal();
@@ -194,7 +200,14 @@ export class PeoplePortals {
 
     // Save
     await this.saveButton.click();
-    await this.page.waitForTimeout(3000);
+    // Wait for the form to close and page to update
+    await this.saveButton.waitFor({ state: 'hidden', timeout: 10000 });
+    // Wait for the updated title to appear in the heading
+    await this.page.waitForFunction(
+      (expectedTitle) => document.querySelector('h1')?.textContent?.includes(expectedTitle),
+      updatedTitle,
+      { timeout: 5000 }
+    ).catch(() => {});
 
     console.log(` Portal updated: ${originalTitle} to ${updatedTitle}`);
 

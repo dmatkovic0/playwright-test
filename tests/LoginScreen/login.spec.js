@@ -6,8 +6,12 @@ test('should successfully login with valid credentials', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
-  const loginPage = new LoginPage(page, expect);
-  await loginPage.loginAndVerifySuccess(login1.environment, login1.email, login1.password);
+  const loginPage = new LoginPage(page);
+  const elements = await loginPage.loginAndGetDashboardElements(login1.environment, login1.email, login1.password);
+
+  // Verify successful login by checking dashboard elements
+  await expect(elements.onboardHeading).toBeVisible();
+  await expect(elements.welcomeText).toBeVisible();
 });
 
 test('should fail login with invalid credentials', async ({ page }) => {

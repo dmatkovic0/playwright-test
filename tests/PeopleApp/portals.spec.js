@@ -45,8 +45,19 @@ test('should open add portal form', async ({ page }) => {
 test('should create a new portal with title', async ({ page }) => {
   const portals = await setupTest(page);
   const portal = await portals.createPortal();
+
+  // Verify portal appears in list
   await expect(portals.getPortalLocator(portal.portalTitle)).toBeVisible({ timeout: 10000 });
   console.log(`✓ Portal created successfully: ${portal.portalTitle}`);
+
+  // Open the newly created portal to verify it exists
+  await portals.clickPortalByName(portal.portalTitle);
+  await portals.waitForDetailPageVisible();
+
+  // Verify the detail page heading matches the portal title
+  const heading = portals.getDetailPageHeading();
+  await expect(heading).toContainText(portal.portalTitle, { timeout: 5000 });
+  console.log(`✓ Portal opened successfully with title: ${portal.portalTitle}`);
 });
 
 test('should create portal with custom title', async ({ page }) => {
@@ -57,8 +68,18 @@ test('should create portal with custom title', async ({ page }) => {
   await portals.fillTitle(customTitle);
   await portals.save();
 
+  // Verify portal appears in list
   await expect(portals.getPortalLocator(customTitle)).toBeVisible({ timeout: 10000 });
   console.log(`✓ Portal created with custom title: ${customTitle}`);
+
+  // Open the newly created portal to verify it exists
+  await portals.clickPortalByName(customTitle);
+  await portals.waitForDetailPageVisible();
+
+  // Verify the detail page heading matches the portal title
+  const heading = portals.getDetailPageHeading();
+  await expect(heading).toContainText(customTitle, { timeout: 5000 });
+  console.log(`✓ Portal opened successfully with title: ${customTitle}`);
 });
 
 // ============================================
@@ -83,7 +104,6 @@ test('should allow canceling portal creation', async ({ page }) => {
   await portals.openAddForm();
   await portals.fillTitle('Test Portal');
   await portals.cancel();
-  await page.waitForTimeout(1000);
 
   // Add button should be visible again (form closed)
   await expect(portals.addButton).toBeVisible({ timeout: 5000 });
@@ -153,6 +173,15 @@ test('complete portal creation workflow', async ({ page }) => {
   await expect(portals.getPortalLocator(portal.portalTitle)).toBeVisible({ timeout: 10000 });
   console.log('  ✓ Portal visible in list');
 
+  // Step 3: Open the portal to verify it exists
+  await portals.clickPortalByName(portal.portalTitle);
+  await portals.waitForDetailPageVisible();
+
+  // Step 4: Verify the detail page heading matches the portal title
+  const heading = portals.getDetailPageHeading();
+  await expect(heading).toContainText(portal.portalTitle, { timeout: 5000 });
+  console.log('  ✓ Portal opened and verified');
+
   console.log('✓ COMPLETE WORKFLOW TEST PASSED');
 });
 
@@ -164,7 +193,17 @@ test.describe('Portals - Critical Path', () => {
   test('critical: navigate and create portal', async ({ page }) => {
     const portals = await setupTest(page);
     const portal = await portals.createPortal();
+
+    // Verify portal appears in list
     await expect(portals.getPortalLocator(portal.portalTitle)).toBeVisible({ timeout: 10000 });
+
+    // Open the newly created portal to verify it exists
+    await portals.clickPortalByName(portal.portalTitle);
+    await portals.waitForDetailPageVisible();
+
+    // Verify the detail page heading matches the portal title
+    const heading = portals.getDetailPageHeading();
+    await expect(heading).toContainText(portal.portalTitle, { timeout: 5000 });
   });
 
   test('critical: form validation', async ({ page }) => {

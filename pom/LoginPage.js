@@ -86,8 +86,10 @@ export class LoginPage {
 
   async closeChatWidget() {
     try {
+      // Wait for chat widget iframe with a short timeout
+      await this.chatWidgetFrame.waitFor({ state: 'attached', timeout: 1500 });
       const frame = await this.chatWidgetFrame.contentFrame();
-      await frame.locator('[data-test-id="ai-welcome-msg-close-button"]').click();
+      await frame.locator('[data-test-id="ai-welcome-msg-close-button"]').click({ timeout: 1500 });
     } catch (error) {
       console.log('Chat widget close failed or not present:', error.message);
     }
