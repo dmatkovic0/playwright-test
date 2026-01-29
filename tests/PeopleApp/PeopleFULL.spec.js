@@ -6,9 +6,8 @@ import { AddEmployeeFlyout } from '../../pom/AddEmployeeFlyout.js';
 import { Position } from '../../pom/Position.js';
 import { Location } from '../../pom/Location.js';
 import { Department } from '../../pom/Department.js';
-import { openCalendar, addEvent } from '../../src/calendar/addEvent.js';
 
-test('test', async ({ page }) => {
+test('AddEmployeeOnboardingChecklist', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -33,7 +32,7 @@ test('test', async ({ page }) => {
   await page.pause();
 });
 
-test('test2', async ({ page }) => {
+test('AddEmployeePrehireChecklist', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -57,7 +56,7 @@ test('test2', async ({ page }) => {
   await page.pause();
 });
 
-test('test3', async ({ page }) => {
+test('AddEmployeeNoAutoAssignment', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -81,7 +80,7 @@ test('test3', async ({ page }) => {
   await page.pause();
 });
 
-test('test4', async ({ page }) => {
+test('AddPosition', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -106,7 +105,7 @@ test('test4', async ({ page }) => {
   await page.pause();
 });
 
-test('test5', async ({ page }) => {
+test('AddLocation', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -131,7 +130,7 @@ test('test5', async ({ page }) => {
   await page.pause();
 });
 
-test('test6', async ({ page }) => {
+test('UpdatePosition', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -156,7 +155,7 @@ test('test6', async ({ page }) => {
   await page.pause();
 });
 
-test('test7', async ({ page }) => {
+test('UpdateLocation', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -181,7 +180,7 @@ test('test7', async ({ page }) => {
   await page.pause();
 });
 
-test('test8', async ({ page }) => {
+test('AddDepartment', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -206,7 +205,7 @@ test('test8', async ({ page }) => {
   await page.pause();
 });
 
-test('test9', async ({ page }) => {
+test('UpdateDepartment', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -226,26 +225,6 @@ test('test9', async ({ page }) => {
 
   // Update existing department
   await department.updateDepartmentCode();
-
-  // Pause to keep browser open
-  await page.pause();
-});
-
-test('test10', async ({ page }) => {
-  // Increase timeout for this test
-  test.setTimeout(60000);
-
-  const loginPage = new LoginPage(page, expect);
-  await loginPage.login(login1.environment, login1.email, login1.password);
-
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open Calendar from sidebar
-  await openCalendar(page, expect);
-
-  // Add new event with GUID as event name
-  await addEvent(page, expect);
 
   // Pause to keep browser open
   await page.pause();
