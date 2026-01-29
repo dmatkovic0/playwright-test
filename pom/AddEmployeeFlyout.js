@@ -1,8 +1,9 @@
 import { generateShortID } from '../src/utils.js';
 
 export class AddEmployeeFlyout {
-  constructor(page) {
+  constructor(page, expect = null) {
     this.page = page;
+    this.expect = expect;
 
     // Main flyout locators
     this.addButton = page.locator('.aut-button-add');
@@ -35,6 +36,36 @@ export class AddEmployeeFlyout {
 
     // Confirmation dialog
     this.confirmCancelButton = page.locator('//confirm-dialog//button').first();
+
+    // Employee Grid & Profile locators
+    this.backButton = page.locator('//span[normalize-space()="Back"]');
+    this.backButtonAlt = page.getByRole('button', { name: ' Back' });
+    this.firstNameSearchField = page.getByRole('textbox', { name: 'First Name' });
+    this.lastNameSearchField = page.getByRole('textbox', { name: 'Last Name' });
+    this.searchClearIcon = page.locator('td:nth-child(3) > .search-field > .icon.icon-xs.icon-close');
+
+    // Profile tabs
+    this.personalTab = page.getByRole('tab', { name: 'Personal' });
+
+    // Personal section edit
+    this.personalSectionEditButton = page.locator('#details-xEmployee-xPersonalSection').getByRole('link', { name: ' Edit' });
+    this.firstNameEditInput = page.getByRole('textbox', { name: 'First Name*' });
+    this.lastNameEditInput = page.getByRole('textbox', { name: 'Last Name*' });
+    this.saveEditButton = page.getByRole('button', { name: 'Save' });
+
+    // Actions menu locators
+    this.actionsMenuButton = page.getByRole('link', { name: ' Actions ' });
+    this.changeStartDateOption = page.getByRole('link', { name: 'Change Start Date' });
+    this.changeSalaryOption = page.getByRole('link', { name: 'Change Salary' });
+
+    // Change Start Date dialog locators
+    this.startDateInput = page.getByRole('textbox', { name: 'Start Date*' });
+    this.startDateDisplayField = page.locator('#details-xEmployee-xStartDate');
+
+    // Change Salary dialog locators
+    this.effectiveDateInput = page.getByRole('textbox', { name: 'Effective Date*' });
+    this.salaryInput = page.getByRole('textbox', { name: '00.00' });
+    this.salaryDisplayField = page.locator('#details-xEmployee-xSalarySection');
   }
 
   // ===========================================
@@ -430,5 +461,308 @@ export class AddEmployeeFlyout {
       email,
       uniqueID
     };
+  }
+
+  // ===========================================
+  // EMPLOYEE GRID & PROFILE METHODS
+  // ===========================================
+
+  /**
+   * Click Back button to return to employee grid
+   */
+  async clickBack() {
+    await this.backButton.click();
+    await this.page.waitForTimeout(2000);
+  }
+
+  /**
+   * Click Back button (alternative locator)
+   */
+  async clickBackAlt() {
+    await this.backButtonAlt.click();
+    await this.page.waitForTimeout(2000);
+  }
+
+  /**
+   * Search for employee by first name
+   * @param {string} firstName - First name to search for
+   */
+  async searchByFirstName(firstName) {
+    await this.firstNameSearchField.fill(firstName);
+    await this.firstNameSearchField.press('Enter');
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Search for employee by last name
+   * @param {string} lastName - Last name to search for
+   */
+  async searchByLastName(lastName) {
+    await this.lastNameSearchField.fill(lastName);
+    await this.lastNameSearchField.press('Enter');
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Clear the first name search field
+   */
+  async clearFirstNameSearch() {
+    await this.firstNameSearchField.click();
+    await this.searchClearIcon.click();
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Open employee profile from grid by clicking on their name link
+   * @param {string} employeeName - Full name or first name of employee
+   * @param {boolean} exact - Whether to match the name exactly (default: false)
+   */
+  async openEmployeeProfile(employeeName, exact = false) {
+    await this.page.getByRole('link', { name: employeeName, exact: exact }).click();
+    await this.page.waitForTimeout(2000);
+  }
+
+  /**
+   * Verify employee appears in grid search results
+   * @param {string} employeeName - Name to verify
+   */
+  async verifyEmployeeInGrid(employeeName) {
+    if (!this.expect) {
+      throw new Error('expect object is required for assertions. Pass it in constructor.');
+    }
+    await this.expect(this.page.getByRole('link', { name: employeeName })).toBeVisible({ timeout: 10000 });
+  }
+
+  /**
+   * Navigate to Personal tab
+   */
+  async goToPersonalTab() {
+    await this.personalTab.click();
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Click Edit button in Personal section
+   */
+  async clickEditInPersonalSection() {
+    await this.personalSectionEditButton.click();
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Update first name in edit mode
+   * @param {string} firstName - New first name value
+   */
+  async updateFirstName(firstName) {
+    await this.firstNameEditInput.click();
+    await this.firstNameEditInput.fill(firstName);
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Update last name in edit mode
+   * @param {string} lastName - New last name value
+   */
+  async updateLastName(lastName) {
+    await this.lastNameEditInput.click();
+    await this.lastNameEditInput.fill(lastName);
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Click Save button to save profile changes
+   */
+  async saveProfileChanges() {
+    await this.saveEditButton.click();
+    await this.page.waitForTimeout(3000);
+  }
+
+  /**
+   * Verify employee name heading on profile page
+   * @param {string} name - Expected name in heading
+   */
+  async verifyProfileHeading(name) {
+    if (!this.expect) {
+      throw new Error('expect object is required for assertions. Pass it in constructor.');
+    }
+    await this.expect(this.page.getByRole('heading', { name: name })).toBeVisible({ timeout: 10000 });
+  }
+
+  /**
+   * Complete workflow to edit employee personal information
+   * @param {string} firstName - New first name
+   * @param {string} lastName - New last name
+   */
+  async editPersonalInfo(firstName, lastName) {
+    await this.goToPersonalTab();
+    await this.clickEditInPersonalSection();
+    await this.updateFirstName(firstName);
+    await this.updateLastName(lastName);
+    await this.saveProfileChanges();
+  }
+
+  /**
+   * Search, open, and edit employee
+   * @param {string} originalName - Name to search for
+   * @param {string} newFirstName - New first name
+   * @param {string} newLastName - New last name
+   */
+  async searchOpenAndEdit(originalName, newFirstName, newLastName) {
+    await this.searchByFirstName(originalName);
+    await this.openEmployeeProfile(originalName);
+    await this.editPersonalInfo(newFirstName, newLastName);
+    await this.verifyProfileHeading(newFirstName);
+  }
+
+  // ===========================================
+  // ACTIONS MENU METHODS
+  // ===========================================
+
+  /**
+   * Search for employee by first and last name
+   * @param {string} firstName - First name to search for
+   * @param {string} lastName - Last name to search for
+   */
+  async searchByFirstAndLastName(firstName, lastName) {
+    await this.firstNameSearchField.click();
+    await this.firstNameSearchField.fill(firstName);
+    await this.lastNameSearchField.click();
+    await this.lastNameSearchField.fill(lastName);
+    await this.lastNameSearchField.press('Enter');
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Open the Actions menu on employee profile
+   */
+  async openActionsMenu() {
+    await this.actionsMenuButton.click();
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Click Change Start Date option in Actions menu
+   */
+  async clickChangeStartDate() {
+    await this.changeStartDateOption.click();
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Select a specific date in the calendar picker
+   * @param {string} day - Day number to select (e.g., '15')
+   */
+  async selectDateInCalendar(day) {
+    await this.startDateInput.click();
+    await this.page.waitForTimeout(500);
+    await this.page.getByRole('link', { name: day, exact: true }).click();
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Set start date by typing the full date
+   * @param {string} date - Full date in MM/DD/YYYY format
+   */
+  async setStartDateByTyping(date) {
+    await this.startDateInput.click();
+    await this.page.waitForTimeout(500);
+    await this.startDateInput.fill(date);
+    await this.startDateInput.press('Enter');
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Save the start date change
+   */
+  async saveStartDateChange() {
+    await this.saveEditButton.click();
+    await this.page.waitForTimeout(2000);
+  }
+
+  /**
+   * Verify start date field value
+   * @param {string} expectedDate - Expected date value
+   */
+  async verifyStartDate(expectedDate) {
+    const actualDate = await this.startDateDisplayField.textContent();
+    console.log(`Start Date verified: ${actualDate}`);
+    return actualDate;
+  }
+
+  /**
+   * Get start date field element for assertions
+   */
+  getStartDateField() {
+    return this.startDateDisplayField;
+  }
+
+  // ===========================================
+  // CHANGE SALARY METHODS
+  // ===========================================
+
+  /**
+   * Click Change Salary option in Actions menu
+   */
+  async clickChangeSalary() {
+    await this.changeSalaryOption.click();
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Set effective date for salary change by typing
+   * @param {string} date - Full date in MM/DD/YYYY format
+   */
+  async setEffectiveDateByTyping(date) {
+    await this.effectiveDateInput.click();
+    await this.page.waitForTimeout(500);
+    await this.effectiveDateInput.fill(date);
+    await this.effectiveDateInput.press('Enter');
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Select effective date in the calendar picker
+   * @param {string} day - Day number to select (e.g., '29')
+   */
+  async selectEffectiveDateInCalendar(day) {
+    await this.effectiveDateInput.click();
+    await this.page.waitForTimeout(500);
+    await this.page.getByRole('link', { name: day, exact: true }).click();
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Enter salary amount
+   * @param {string} salary - Salary amount (e.g., '1000')
+   */
+  async enterSalary(salary) {
+    await this.salaryInput.click();
+    await this.salaryInput.fill(salary);
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Save the salary change
+   */
+  async saveSalaryChange() {
+    await this.saveEditButton.click();
+    await this.page.waitForTimeout(2000);
+  }
+
+  /**
+   * Verify salary field value
+   * @returns {string} The salary text from the display field
+   */
+  async verifySalary() {
+    const salaryText = await this.salaryDisplayField.textContent();
+    console.log(`Salary verified: ${salaryText}`);
+    return salaryText;
+  }
+
+  /**
+   * Get salary field element for assertions
+   */
+  getSalaryField() {
+    return this.salaryDisplayField;
   }
 }
