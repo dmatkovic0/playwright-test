@@ -1,4 +1,4 @@
-import { BasePage } from './BasePage.js';
+import { BasePage } from '../BasePage.js';
 
 export class ChangeStartDateFlyout extends BasePage {
   constructor(page, expect = null) {

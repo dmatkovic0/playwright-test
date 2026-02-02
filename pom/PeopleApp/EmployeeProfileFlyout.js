@@ -20,6 +20,7 @@ export class EmployeeProfileFlyout extends BasePage {
     this.locationDisplayField = page.locator('#details-xEmployee-xLocationLookup');
     this.startDateDisplayField = page.locator('#details-xEmployee-xStartDate');
     this.salaryDisplayField = page.locator('//span[@id=\'details-xEmployee-xSalary\']');
+    this.employmentStatusDisplayField = page.locator('employee-information-picture');
   }
 
   // ===========================================
@@ -170,6 +171,18 @@ export class EmployeeProfileFlyout extends BasePage {
     return text.trim();
   }
 
+  /**
+   * Get employment status value from profile display field
+   * @returns {string} The employment status text
+   */
+  async getEmploymentStatusValue() {
+    await this.employmentStatusDisplayField.waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.waitForTimeout(500);
+    const text = await this.employmentStatusDisplayField.textContent();
+    console.log(`Employment Status verified: ${text}`);
+    return text.trim();
+  }
+
   // ===========================================
   // DISPLAY FIELD GETTERS FOR ASSERTIONS
   // ===========================================
@@ -220,5 +233,13 @@ export class EmployeeProfileFlyout extends BasePage {
    */
   getSalaryField() {
     return this.salaryDisplayField;
+  }
+
+  /**
+   * Get employment status field element for assertions
+   * @returns {Locator} Employment status display field
+   */
+  getEmploymentStatusField() {
+    return this.employmentStatusDisplayField;
   }
 }

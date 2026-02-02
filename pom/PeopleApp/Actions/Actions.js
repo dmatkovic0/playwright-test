@@ -1,4 +1,4 @@
-import { BasePage } from './BasePage.js';
+import { BasePage } from '../BasePage.js';
 
 export class Actions extends BasePage {
   constructor(page, expect = null) {
@@ -9,6 +9,7 @@ export class Actions extends BasePage {
     this.changeStartDateOption = page.getByRole('link', { name: 'Change Start Date' });
     this.changeSalaryOption = page.getByRole('link', { name: 'Change Salary' });
     this.changePositionOption = page.getByRole('link', { name: 'Change Position' });
+    this.changeEmploymentStatusOption = page.getByRole('link', { name: 'Change Employment Status' });
   }
 
   // ===========================================
@@ -44,6 +45,14 @@ export class Actions extends BasePage {
    */
   async clickChangePosition() {
     await this.changePositionOption.click();
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Click Change Employment Status option in Actions menu
+   */
+  async clickChangeEmploymentStatus() {
+    await this.changeEmploymentStatusOption.click();
     await this.page.waitForTimeout(1500);
   }
 }

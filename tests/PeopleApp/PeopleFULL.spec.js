@@ -5,10 +5,10 @@ import { LoginPage } from '../../pom/LoginPage.js';
 import { AddEmployeeFlyout } from '../../pom/PeopleApp/AddEmployeeFlyout.js';
 import { PeopleGrid } from '../../pom/PeopleApp/PeopleGrid.js';
 import { EmployeeProfileFlyout } from '../../pom/PeopleApp/EmployeeProfileFlyout.js';
-import { Actions } from '../../pom/PeopleApp/Actions.js';
-import { ChangeStartDateFlyout } from '../../pom/PeopleApp/ChangeStartDateFlyout.js';
-import { ChangeSalaryFlyout } from '../../pom/PeopleApp/ChangeSalaryFlyout.js';
-import { ChangePositionFlyout } from '../../pom/PeopleApp/ChangePositionFlyout.js';
+import { Actions } from '../../pom/PeopleApp/Actions/Actions.js';
+import { ChangeStartDateFlyout } from '../../pom/PeopleApp/Actions/ChangeStartDateFlyout.js';
+import { ChangeSalaryFlyout } from '../../pom/PeopleApp/Actions/ChangeSalaryFlyout.js';
+import { ChangePositionFlyout } from '../../pom/PeopleApp/Actions/ChangePositionFlyout.js';
 import { Position } from '../../pom/PeopleApp/Position.js';
 import { Location } from '../../pom/PeopleApp/Location.js';
 import { Department } from '../../pom/PeopleApp/Department.js';
@@ -27,12 +27,29 @@ test('AddEmployeeOnboardingChecklist', async ({ page }) => {
   // Open People page
   await openPeople(page, expect);
 
-  // Create AddEmployeeFlyout POM instance
+  // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  const peopleGrid = new PeopleGrid(page, expect);
 
   // Open flyout and add employee with onboarding checklist
   await addEmployeeFlyout.open();
-  await addEmployeeFlyout.createEmployeeWithOnboardingChecklist();
+  const employeeData = await addEmployeeFlyout.createEmployeeWithOnboardingChecklist();
+
+  console.log(`Created employee: ${employeeData.firstName} ${employeeData.lastName}`);
+
+  // Wait for save to complete
+  await page.waitForTimeout(3000);
+
+  // Click Back to return to employee grid
+  await peopleGrid.clickBack();
+
+  // Search for the employee by first name
+  await peopleGrid.searchByFirstName(employeeData.firstName);
+
+  // Verify employee appears in search results
+  await peopleGrid.verifyEmployeeInGrid(employeeData.firstName);
+
+  console.log(`✓ Verified employee appears in grid: ${employeeData.firstName} ${employeeData.lastName}`);
 
   // Pause to keep browser open
   await page.pause();
@@ -128,12 +145,29 @@ test('AddEmployeePrehireChecklist', async ({ page }) => {
   // Open People page
   await openPeople(page, expect);
 
-  // Create AddEmployeeFlyout POM instance
+  // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  const peopleGrid = new PeopleGrid(page, expect);
 
   // Open flyout and add employee with prehire checklist
   await addEmployeeFlyout.open();
-  await addEmployeeFlyout.createEmployeeWithPrehireChecklist();
+  const employeeData = await addEmployeeFlyout.createEmployeeWithPrehireChecklist();
+
+  console.log(`Created employee: ${employeeData.firstName} ${employeeData.lastName}`);
+
+  // Wait for save to complete
+  await page.waitForTimeout(3000);
+
+  // Click Back to return to employee grid
+  await peopleGrid.clickBack();
+
+  // Search for the employee by first name
+  await peopleGrid.searchByFirstName(employeeData.firstName);
+
+  // Verify employee appears in search results
+  await peopleGrid.verifyEmployeeInGrid(employeeData.firstName);
+
+  console.log(`✓ Verified employee appears in grid: ${employeeData.firstName} ${employeeData.lastName}`);
 
   // Pause to keep browser open
   await page.pause();
@@ -152,12 +186,29 @@ test('AddEmployeeNoAutoAssignment', async ({ page }) => {
   // Open People page
   await openPeople(page, expect);
 
-  // Create AddEmployeeFlyout POM instance
+  // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  const peopleGrid = new PeopleGrid(page, expect);
 
   // Open flyout and add employee with no auto assignment
   await addEmployeeFlyout.open();
-  await addEmployeeFlyout.createEmployeeWithNoAutoAssignment();
+  const employeeData = await addEmployeeFlyout.createEmployeeWithNoAutoAssignment();
+
+  console.log(`Created employee: ${employeeData.firstName} ${employeeData.lastName}`);
+
+  // Wait for save to complete
+  await page.waitForTimeout(3000);
+
+  // Click Back to return to employee grid
+  await peopleGrid.clickBack();
+
+  // Search for the employee by first name
+  await peopleGrid.searchByFirstName(employeeData.firstName);
+
+  // Verify employee appears in search results
+  await peopleGrid.verifyEmployeeInGrid(employeeData.firstName);
+
+  console.log(`✓ Verified employee appears in grid: ${employeeData.firstName} ${employeeData.lastName}`);
 
   // Pause to keep browser open
   await page.pause();
@@ -522,4 +573,67 @@ test('ChangePosition', async ({ page }) => {
   // Pause to keep browser open
   await page.pause();
 });
+
+
+test('ChangeEmploymentStatus', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instances
+  const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  const actions = new Actions(page, expect);
+  const changeEmploymentStatusFlyout = new ChangeEmploymentStatusFlyout(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
+
+  // Create new employee with onboarding checklist
+  await addEmployeeFlyout.open();
+  const employeeData = await addEmployeeFlyout.createEmployeeWithOnboardingChecklist();
+
+  console.log(`Created employee: ${employeeData.firstName} ${employeeData.lastName}`);
+
+  // Wait for employee creation to complete
+  await page.waitForTimeout(3000);
+
+  // Get today's date
+  const today = new Date();
+  const expectedDate = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;
+
+  console.log(`Setting effective date: ${expectedDate}`);
+
+  // Open Actions menu
+  await actions.openActionsMenu();
+
+  // Click Change Employment Status
+  await actions.clickChangeEmploymentStatus();
+
+  // Type today's date for effective date
+  await changeEmploymentStatusFlyout.setEffectiveDateByTyping(expectedDate);
+
+  // Select "Leave of Absence" status
+  await changeEmploymentStatusFlyout.selectEmploymentStatus('Leave of Absence');
+
+  // Save the employment status change
+  await changeEmploymentStatusFlyout.saveEmploymentStatusChange();
+
+  // Get the actual employment status from the field
+  const actualEmploymentStatus = await employeeProfile.getEmploymentStatusValue();
+
+  // Verify the employment status contains "Leave of Absence"
+  expect(actualEmploymentStatus).toContain('Leave of Absence');
+  console.log(`✓ Employment Status verified: Expected "Leave of Absence", Got "${actualEmploymentStatus}"`);
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
 

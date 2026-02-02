@@ -1,21 +1,22 @@
 import { BasePage } from '../BasePage.js';
 
-export class ChangeSalaryFlyout extends BasePage {
+export class ChangeEmploymentStatusFlyout extends BasePage {
   constructor(page, expect = null) {
     super(page, expect);
 
-    // Change Salary dialog locators
+    // Change Employment Status dialog locators
     this.effectiveDateInput = page.getByRole('textbox', { name: 'Effective Date*' });
-    this.salaryInput = page.getByRole('textbox', { name: '00.00' });
+    this.doneButton = page.getByRole('button', { name: 'Done' });
+    this.employmentStatusButton = page.getByRole('button', { name: 'Active ' });
     this.saveButton = page.getByRole('button', { name: 'Save' });
   }
 
   // ===========================================
-  // DATE SELECTION METHODS
+  // DATE SELECTION METHOD
   // ===========================================
 
   /**
-   * Set effective date for salary change by typing
+   * Set effective date for employment status change by typing
    * @param {string} date - Full date in MM/DD/YYYY format
    */
   async setEffectiveDateByTyping(date) {
@@ -27,27 +28,29 @@ export class ChangeSalaryFlyout extends BasePage {
   }
 
   /**
-   * Select effective date in the calendar picker
-   * @param {string} day - Day number to select (e.g., '29')
+   * Set effective date by clicking on calendar day
+   * @param {string} day - Day number to click
    */
-  async selectEffectiveDateInCalendar(day) {
+  async setEffectiveDateByCalendar(day) {
     await this.effectiveDateInput.click();
     await this.page.waitForTimeout(500);
     await this.page.getByRole('link', { name: day, exact: true }).click();
+    await this.doneButton.click();
     await this.page.waitForTimeout(500);
   }
 
   // ===========================================
-  // SALARY INPUT METHOD
+  // EMPLOYMENT STATUS SELECTION METHOD
   // ===========================================
 
   /**
-   * Enter salary amount
-   * @param {string} salary - Salary amount (e.g., '1000')
+   * Select employment status from dropdown
+   * @param {string} status - Employment status: 'Active', 'Leave of Absence', or 'Prehire'
    */
-  async enterSalary(salary) {
-    await this.salaryInput.click();
-    await this.salaryInput.fill(salary);
+  async selectEmploymentStatus(status) {
+    await this.employmentStatusButton.click();
+    await this.page.waitForTimeout(500);
+    await this.page.getByText(status, { exact: true }).click();
     await this.page.waitForTimeout(500);
   }
 
@@ -56,9 +59,9 @@ export class ChangeSalaryFlyout extends BasePage {
   // ===========================================
 
   /**
-   * Save the salary change
+   * Save the employment status change
    */
-  async saveSalaryChange() {
+  async saveEmploymentStatusChange() {
     await this.saveButton.click();
     // Wait for the dialog to close
     await this.page.waitForTimeout(2000);
