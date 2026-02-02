@@ -2,10 +2,16 @@ import { test, expect } from '@playwright/test';
 import { ensureSidebarExpanded, openPeople } from '../../src/utils.js';
 import { login1 } from '../../src/loginInfo/loginInfo.js';
 import { LoginPage } from '../../pom/LoginPage.js';
-import { AddEmployeeFlyout } from '../../pom/AddEmployeeFlyout.js';
-import { Position } from '../../pom/Position.js';
-import { Location } from '../../pom/Location.js';
-import { Department } from '../../pom/Department.js';
+import { AddEmployeeFlyout } from '../../pom/PeopleApp/AddEmployeeFlyout.js';
+import { PeopleGrid } from '../../pom/PeopleApp/PeopleGrid.js';
+import { EmployeeProfileFlyout } from '../../pom/PeopleApp/EmployeeProfileFlyout.js';
+import { Actions } from '../../pom/PeopleApp/Actions.js';
+import { ChangeStartDateFlyout } from '../../pom/PeopleApp/ChangeStartDateFlyout.js';
+import { ChangeSalaryFlyout } from '../../pom/PeopleApp/ChangeSalaryFlyout.js';
+import { ChangePositionFlyout } from '../../pom/PeopleApp/ChangePositionFlyout.js';
+import { Position } from '../../pom/PeopleApp/Position.js';
+import { Location } from '../../pom/PeopleApp/Location.js';
+import { Department } from '../../pom/PeopleApp/Department.js';
 
 test('AddEmployeeOnboardingChecklist', async ({ page }) => {
   // Increase timeout for this test
@@ -46,8 +52,12 @@ test('UpdateExistingEmployee', async ({ page }) => {
   // Open People page
   await openPeople(page, expect);
 
-  // Create AddEmployeeFlyout POM instance and create employee
+  // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  const peopleGrid = new PeopleGrid(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
+
+  // Create employee
   await addEmployeeFlyout.open();
   const employeeData = await addEmployeeFlyout.createEmployeeWithOnboardingChecklist();
 
@@ -63,41 +73,41 @@ test('UpdateExistingEmployee', async ({ page }) => {
   await page.waitForTimeout(3000);
 
   // Click Back to return to employee grid
-  await addEmployeeFlyout.clickBack();
+  await peopleGrid.clickBack();
 
   // Search for the employee by first name
-  await addEmployeeFlyout.searchByFirstName(originalFirstName);
+  await peopleGrid.searchByFirstName(originalFirstName);
 
   // Open employee profile
-  await addEmployeeFlyout.openEmployeeProfile(originalFirstName);
+  await peopleGrid.openEmployeeProfile(originalFirstName);
 
   // Navigate to Personal tab and edit
-  await addEmployeeFlyout.goToPersonalTab();
-  await addEmployeeFlyout.clickEditInPersonalSection();
+  await employeeProfile.goToPersonalTab();
+  await employeeProfile.clickEditInPersonalSection();
 
   // Update first and last names
-  await addEmployeeFlyout.updateFirstName(editedFirstName);
-  await addEmployeeFlyout.updateLastName(editedLastName);
+  await employeeProfile.updateFirstName(editedFirstName);
+  await employeeProfile.updateLastName(editedLastName);
 
   // Save changes
-  await addEmployeeFlyout.saveProfileChanges();
+  await employeeProfile.saveProfileChanges();
 
   // Verify the heading shows edited first name
-  await addEmployeeFlyout.verifyProfileHeading(editedFirstName);
+  await employeeProfile.verifyProfileHeading(editedFirstName);
 
   console.log(`Successfully updated employee: ${editedFirstName} ${editedLastName}`);
 
   // Go back to grid
-  await addEmployeeFlyout.clickBackAlt();
+  await peopleGrid.clickBackAlt();
 
   // Clear previous search
-  await addEmployeeFlyout.clearFirstNameSearch();
+  await peopleGrid.clearFirstNameSearch();
 
   // Search for edited employee using full updated first name
-  await addEmployeeFlyout.searchByFirstName(editedFirstName);
+  await peopleGrid.searchByFirstName(editedFirstName);
 
   // Verify edited employee appears in search results
-  await addEmployeeFlyout.verifyEmployeeInGrid(editedFirstName);
+  await peopleGrid.verifyEmployeeInGrid(editedFirstName);
 
   console.log(`Verified edited employee appears in search results`);
 
@@ -317,8 +327,11 @@ test('UpdateStartDate', async ({ page }) => {
   // Open People page
   await openPeople(page, expect);
 
-  // Create AddEmployeeFlyout POM instance
-  const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  // Create POM instances
+  const peopleGrid = new PeopleGrid(page, expect);
+  const actions = new Actions(page, expect);
+  const changeStartDateFlyout = new ChangeStartDateFlyout(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
 
   // Get today's date
   const today = new Date();
@@ -328,25 +341,25 @@ test('UpdateStartDate', async ({ page }) => {
   console.log(`Selecting today's date: ${expectedDate} (day: ${todayDay})`);
 
   // Search for HR Employee by first and last name
-  await addEmployeeFlyout.searchByFirstAndLastName('HR', 'Employee');
+  await peopleGrid.searchByFirstAndLastName('HR', 'Employee');
 
   // Open employee profile (exact match for 'HR')
-  await addEmployeeFlyout.openEmployeeProfile('HR', true);
+  await peopleGrid.openEmployeeProfile('HR', true);
 
   // Open Actions menu
-  await addEmployeeFlyout.openActionsMenu();
+  await actions.openActionsMenu();
 
   // Click Change Start Date
-  await addEmployeeFlyout.clickChangeStartDate();
+  await actions.clickChangeStartDate();
 
   // Type today's date directly
-  await addEmployeeFlyout.setStartDateByTyping(expectedDate);
+  await changeStartDateFlyout.setStartDateByTyping(expectedDate);
 
   // Save the start date change
-  await addEmployeeFlyout.saveStartDateChange();
+  await changeStartDateFlyout.saveStartDateChange();
 
   // Get the actual start date from the field
-  const actualStartDate = await addEmployeeFlyout.verifyStartDate();
+  const actualStartDate = await employeeProfile.getStartDateValue();
 
   // Verify the start date matches expected date
   expect(actualStartDate.trim()).toBe(expectedDate);
@@ -371,8 +384,11 @@ test('ChangeSalary', async ({ page }) => {
   // Open People page
   await openPeople(page, expect);
 
-  // Create AddEmployeeFlyout POM instance
-  const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  // Create POM instances
+  const peopleGrid = new PeopleGrid(page, expect);
+  const actions = new Actions(page, expect);
+  const changeSalaryFlyout = new ChangeSalaryFlyout(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
 
   // Generate random 4-digit salary
   const randomSalary = Math.floor(1000 + Math.random() * 9000).toString();
@@ -386,28 +402,28 @@ test('ChangeSalary', async ({ page }) => {
   console.log(`Selecting today's date: ${expectedDate} (day: ${todayDay})`);
 
   // Search for HR Employee by first and last name
-  await addEmployeeFlyout.searchByFirstAndLastName('HR', 'Employee');
+  await peopleGrid.searchByFirstAndLastName('HR', 'Employee');
 
   // Open employee profile (exact match for 'HR')
-  await addEmployeeFlyout.openEmployeeProfile('HR', true);
+  await peopleGrid.openEmployeeProfile('HR', true);
 
   // Open Actions menu
-  await addEmployeeFlyout.openActionsMenu();
+  await actions.openActionsMenu();
 
   // Click Change Salary
-  await addEmployeeFlyout.clickChangeSalary();
+  await actions.clickChangeSalary();
 
   // Type today's date for effective date
-  await addEmployeeFlyout.setEffectiveDateByTyping(expectedDate);
+  await changeSalaryFlyout.setEffectiveDateByTyping(expectedDate);
 
   // Enter salary
-  await addEmployeeFlyout.enterSalary(randomSalary);
+  await changeSalaryFlyout.enterSalary(randomSalary);
 
   // Save the salary change
-  await addEmployeeFlyout.saveSalaryChange();
+  await changeSalaryFlyout.saveSalaryChange();
 
   // Get the actual salary from the field
-  const actualSalary = await addEmployeeFlyout.verifySalary();
+  const actualSalary = await employeeProfile.getSalaryValue();
 
   // Format expected salary (e.g., "1,234.00 USD")
   const formattedSalary = Number(randomSalary).toLocaleString('en-US', {
@@ -423,3 +439,87 @@ test('ChangeSalary', async ({ page }) => {
   // Pause to keep browser open
   await page.pause();
 });
+
+test('ChangePosition', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instances
+  const peopleGrid = new PeopleGrid(page, expect);
+  const actions = new Actions(page, expect);
+  const changePositionFlyout = new ChangePositionFlyout(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
+
+  // Get today's date
+  const today = new Date();
+  const expectedDate = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;
+
+  console.log(`Selecting today's date: ${expectedDate}`);
+
+  // Search for HR Employee by first and last name
+  await peopleGrid.searchByFirstAndLastName('HR', 'Employee');
+
+  // Open employee profile (exact match for 'HR')
+  await peopleGrid.openEmployeeProfile('HR', true);
+
+  // Open Actions menu
+  await actions.openActionsMenu();
+
+  // Click Change Position
+  await actions.clickChangePosition();
+
+  // Type today's date for effective date
+  await changePositionFlyout.setEffectiveDateByTyping(expectedDate);
+
+  // Randomly select department and store selected value
+  const selectedDepartment = await changePositionFlyout.selectRandomDepartment();
+  console.log(`Selected department: ${selectedDepartment}`);
+
+  // Randomly select division and store selected value
+  const selectedDivision = await changePositionFlyout.selectRandomDivision();
+  console.log(`Selected division: ${selectedDivision}`);
+
+  // Randomly select location and store selected value
+  const selectedLocation = await changePositionFlyout.selectRandomLocation();
+  console.log(`Selected location: ${selectedLocation}`);
+
+  // Randomly select position and store selected value
+  const selectedPosition = await changePositionFlyout.selectRandomPosition();
+  console.log(`Selected position: ${selectedPosition}`);
+
+  // Save the position change
+  await changePositionFlyout.savePositionChange();
+
+  // Verify all fields are properly updated
+  const actualDepartment = await employeeProfile.getDepartmentValue();
+  const actualPosition = await employeeProfile.getPositionValue();
+  const actualDivision = await employeeProfile.getDivisionValue();
+  const actualLocation = await employeeProfile.getLocationValue();
+
+  // Verify each field matches what was selected
+  expect(actualDepartment).toBe(selectedDepartment);
+  console.log(`✓ Department verified: Expected ${selectedDepartment}, Got ${actualDepartment}`);
+
+  expect(actualDivision).toBe(selectedDivision);
+  console.log(`✓ Division verified: Expected ${selectedDivision}, Got ${actualDivision}`);
+
+  expect(actualLocation).toBe(selectedLocation);
+  console.log(`✓ Location verified: Expected ${selectedLocation}, Got ${actualLocation}`);
+
+  expect(actualPosition).toBe(selectedPosition);
+  console.log(`✓ Position verified: Expected ${selectedPosition}, Got ${actualPosition}`);
+
+  // Pause to keep browser open
+  await page.pause();
+});
+

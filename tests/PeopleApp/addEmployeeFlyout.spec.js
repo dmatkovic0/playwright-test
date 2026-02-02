@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { ensureSidebarExpanded, openPeople } from '../../src/utils.js';
 import { login1 } from '../../src/loginInfo/loginInfo.js';
 import { LoginPage } from '../../pom/LoginPage.js';
-import { AddEmployeeFlyout } from '../../pom/AddEmployeeFlyout.js';
+import { AddEmployeeFlyout } from '../../pom/PeopleApp/AddEmployeeFlyout.js';
 
 // ============================================
 // SETUP HELPER

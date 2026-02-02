@@ -1,4 +1,4 @@
-import { generateShortID } from '../src/utils.js';
+import { generateShortID } from '../../src/utils.js';
 
 export class Position {
   constructor(page) {
