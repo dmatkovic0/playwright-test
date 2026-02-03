@@ -9,6 +9,8 @@ import { Actions } from '../../pom/PeopleApp/Actions/Actions.js';
 import { ChangeStartDateFlyout } from '../../pom/PeopleApp/Actions/ChangeStartDateFlyout.js';
 import { ChangeSalaryFlyout } from '../../pom/PeopleApp/Actions/ChangeSalaryFlyout.js';
 import { ChangePositionFlyout } from '../../pom/PeopleApp/Actions/ChangePositionFlyout.js';
+import { ChangeEmploymentStatusFlyout } from '../../pom/PeopleApp/Actions/ChangeEmploymentStatusFlyout.js';
+import { AddBonusFlyout } from '../../pom/PeopleApp/Actions/AddBonusFlyout.js';
 import { Position } from '../../pom/PeopleApp/Position.js';
 import { Location } from '../../pom/PeopleApp/Location.js';
 import { Department } from '../../pom/PeopleApp/Department.js';
@@ -575,7 +577,7 @@ test('ChangePosition', async ({ page }) => {
 });
 
 
-test('ChangeEmploymentStatus', async ({ page }) => {
+test('ChangeEmploymentStatusLoA', async ({ page }) => {
   // Increase timeout for this test
   test.setTimeout(60000);
 
@@ -636,4 +638,134 @@ test('ChangeEmploymentStatus', async ({ page }) => {
   await page.pause();
 });
 
+test('ChangeEmploymentStatusPrehire', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instances
+  const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  const actions = new Actions(page, expect);
+  const changeEmploymentStatusFlyout = new ChangeEmploymentStatusFlyout(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
+
+  // Create new employee with onboarding checklist
+  await addEmployeeFlyout.open();
+  const employeeData = await addEmployeeFlyout.createEmployeeWithOnboardingChecklist();
+
+  console.log(`Created employee: ${employeeData.firstName} ${employeeData.lastName}`);
+
+  // Wait for employee creation to complete
+  await page.waitForTimeout(3000);
+
+  // Get today's date
+  const today = new Date();
+  const expectedDate = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;
+
+  console.log(`Setting effective date: ${expectedDate}`);
+
+  // Open Actions menu
+  await actions.openActionsMenu();
+
+  // Click Change Employment Status
+  await actions.clickChangeEmploymentStatus();
+
+  // Type today's date for effective date
+  await changeEmploymentStatusFlyout.setEffectiveDateByTyping(expectedDate);
+
+  // Select "Prehire" status
+  await changeEmploymentStatusFlyout.selectEmploymentStatus('Prehire');
+
+  // Save the employment status change
+  await changeEmploymentStatusFlyout.saveEmploymentStatusChange();
+
+  // Get the actual employment status from the field
+  const actualEmploymentStatus = await employeeProfile.getEmploymentStatusValue();
+
+  // Verify the employment status contains "Prehire"
+  expect(actualEmploymentStatus).toContain('Prehire');
+  console.log(`✓ Employment Status verified: Expected "Prehire", Got "${actualEmploymentStatus}"`);
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+
+test('AddBonus', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instances
+  const peopleGrid = new PeopleGrid(page, expect);
+  const actions = new Actions(page, expect);
+  const addBonusFlyout = new AddBonusFlyout(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
+
+  // Search for HR Employee by first and last name
+  await peopleGrid.searchByFirstAndLastName('HR', 'Employee');
+
+  // Open employee profile (exact match for 'HR')
+  await peopleGrid.openEmployeeProfile('HR', true);
+
+  // Get initial bonus value
+  const initialBonusValue = await employeeProfile.getBonusValueAsNumber();
+  console.log(`Initial bonus value: ${initialBonusValue}`);
+
+  // Define bonus to add
+  const bonusToAdd = 500;
+
+  // Get today's date
+  const today = new Date();
+  const expectedDate = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;
+
+  console.log(`Adding bonus: ${bonusToAdd}`);
+  console.log(`Selecting today's date: ${expectedDate}`);
+
+  // Open Actions menu
+  await actions.openActionsMenu();
+
+  // Click Add Bonus
+  await actions.clickAddBonus();
+
+  // Enter bonus amount
+  await addBonusFlyout.enterBonusAmount(bonusToAdd.toString());
+
+  // Type today's date for effective date
+  await addBonusFlyout.setEffectiveDateByTyping(expectedDate);
+
+  // Save the bonus change
+  await addBonusFlyout.saveBonusChange();
+
+  // Get the new bonus value
+  const newBonusValue = await employeeProfile.getBonusValueAsNumber();
+
+  // Calculate expected bonus
+  const expectedBonusValue = initialBonusValue + bonusToAdd;
+
+  // Verify the bonus was added correctly
+  expect(newBonusValue).toBe(expectedBonusValue);
+  console.log(`✓ Bonus verified: Initial ${initialBonusValue}, Added ${bonusToAdd}, New ${newBonusValue} (Expected ${expectedBonusValue})`);
+
+  // Pause to keep browser open
+  await page.pause();
+});
 

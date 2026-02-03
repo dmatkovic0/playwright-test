@@ -21,6 +21,7 @@ export class EmployeeProfileFlyout extends BasePage {
     this.startDateDisplayField = page.locator('#details-xEmployee-xStartDate');
     this.salaryDisplayField = page.locator('//span[@id=\'details-xEmployee-xSalary\']');
     this.employmentStatusDisplayField = page.locator('employee-information-picture');
+    this.bonusDisplayField = page.locator('#details-xEmployee-xBonus');
   }
 
   // ===========================================
@@ -181,6 +182,29 @@ export class EmployeeProfileFlyout extends BasePage {
     const text = await this.employmentStatusDisplayField.textContent();
     console.log(`Employment Status verified: ${text}`);
     return text.trim();
+  }
+
+  /**
+   * Get bonus value from profile display field
+   * @returns {string} The bonus text
+   */
+  async getBonusValue() {
+    await this.bonusDisplayField.waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.waitForTimeout(500);
+    const text = await this.bonusDisplayField.textContent();
+    console.log(`Bonus verified: ${text}`);
+    return text.trim();
+  }
+
+  /**
+   * Parse bonus value and return as number (removes formatting and USD)
+   * @returns {number} The bonus amount as a number
+   */
+  async getBonusValueAsNumber() {
+    const bonusText = await this.getBonusValue();
+    // Remove commas, USD, and convert to number (e.g., "1,000.00 USD" -> 1000.00)
+    const numericValue = parseFloat(bonusText.replace(/,/g, '').replace(' USD', ''));
+    return numericValue;
   }
 
   // ===========================================

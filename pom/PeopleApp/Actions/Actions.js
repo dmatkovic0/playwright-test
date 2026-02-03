@@ -10,6 +10,7 @@ export class Actions extends BasePage {
     this.changeSalaryOption = page.getByRole('link', { name: 'Change Salary' });
     this.changePositionOption = page.getByRole('link', { name: 'Change Position' });
     this.changeEmploymentStatusOption = page.getByRole('link', { name: 'Change Employment Status' });
+    this.addBonusOption = page.getByRole('link', { name: 'Add Bonus' });
   }
 
   // ===========================================
@@ -53,6 +54,14 @@ export class Actions extends BasePage {
    */
   async clickChangeEmploymentStatus() {
     await this.changeEmploymentStatusOption.click();
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Click Add Bonus option in Actions menu
+   */
+  async clickAddBonus() {
+    await this.addBonusOption.click();
     await this.page.waitForTimeout(1500);
   }
 }

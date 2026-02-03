@@ -34,7 +34,7 @@ export class ChangeEmploymentStatusFlyout extends BasePage {
   async setEffectiveDateByCalendar(day) {
     await this.effectiveDateInput.click();
     await this.page.waitForTimeout(500);
-    await this.page.getByRole('link', { name: day, exact: true }).click();
+    await this.page.locator('#ui-datepicker-div').getByRole('link', { name: day, exact: true }).click();
     await this.doneButton.click();
     await this.page.waitForTimeout(500);
   }
@@ -48,10 +48,19 @@ export class ChangeEmploymentStatusFlyout extends BasePage {
    * @param {string} status - Employment status: 'Active', 'Leave of Absence', or 'Prehire'
    */
   async selectEmploymentStatus(status) {
+    // Click the employment status button to open dropdown
     await this.employmentStatusButton.click();
     await this.page.waitForTimeout(500);
-    await this.page.getByText(status, { exact: true }).click();
-    await this.page.waitForTimeout(500);
+
+    // For Prehire, use the specific locator
+    if (status === 'Prehire') {
+      await this.page.locator('#xEmploymentStatusHistory-xEmploymentStatusLookup').getByText('Prehire').click();
+      await this.page.waitForTimeout(500);
+    } else {
+      // For other statuses (Active, Leave of Absence), use getByText
+      await this.page.getByText(status, { exact: true }).click();
+      await this.page.waitForTimeout(500);
+    }
   }
 
   // ===========================================
