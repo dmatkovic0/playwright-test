@@ -22,6 +22,7 @@ export class AddEmployeeFlyout extends BasePage {
     this.departmentDropdown = this.flyoutContainer.getByRole('button', { name: 'Enter department... ' });
     this.positionDropdown = this.flyoutContainer.getByRole('button', { name: 'Enter position... ' });
     this.locationDropdown = this.flyoutContainer.getByRole('button', { name: 'Enter location... ' });
+    this.divisionDropdown = this.flyoutContainer.getByRole('button', { name: 'Enter division... ' });
 
     // Manager lookup locators
     this.managerLookupField = page.locator("//input[@id='xEmployee-xManagerLookup']");
@@ -192,6 +193,14 @@ export class AddEmployeeFlyout extends BasePage {
   }
 
   /**
+   * Select division from dropdown
+   * @param {number} itemIndex - Index of division to select
+   */
+  async selectDivision(itemIndex = 0) {
+    await this.selectFromDropdown(this.divisionDropdown, itemIndex);
+  }
+
+  /**
    * Select all dropdowns (department, position, location)
    * @param {number} deptIndex - Department index
    * @param {number} posIndex - Position index
@@ -201,6 +210,19 @@ export class AddEmployeeFlyout extends BasePage {
     await this.selectDepartment(deptIndex);
     await this.selectPosition(posIndex);
     await this.selectLocation(locIndex);
+  }
+
+  /**
+   * Select random values from all dropdowns and return selected values
+   * @returns {object} Selected values
+   */
+  async selectRandomFromAllDropdowns() {
+    const department = await this.selectRandomFromDropdown(this.departmentDropdown);
+    const position = await this.selectRandomFromDropdown(this.positionDropdown);
+    const location = await this.selectRandomFromDropdown(this.locationDropdown);
+    const division = await this.selectRandomFromDropdown(this.divisionDropdown);
+
+    return { department, position, location, division };
   }
 
   // ===========================================

@@ -12,6 +12,21 @@ export function generateShortID() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
 }
 
+// Generate a random date within the last N days (default: 30 days)
+// Returns date in MM/DD/YYYY format
+export function generateRandomPastDate(daysBack = 30) {
+  const today = new Date();
+  const randomDaysAgo = Math.floor(Math.random() * daysBack);
+  const randomDate = new Date(today);
+  randomDate.setDate(today.getDate() - randomDaysAgo);
+
+  const month = String(randomDate.getMonth() + 1).padStart(2, '0');
+  const day = String(randomDate.getDate()).padStart(2, '0');
+  const year = randomDate.getFullYear();
+
+  return `${month}/${day}/${year}`;
+}
+
 // Ensure sidebar is expanded
 export async function ensureSidebarExpanded(page) {
   try {

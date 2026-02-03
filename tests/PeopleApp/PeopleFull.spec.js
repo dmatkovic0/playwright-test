@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { ensureSidebarExpanded, openPeople } from '../../src/utils.js';
+import { ensureSidebarExpanded, openPeople, generateRandomPastDate } from '../../src/utils.js';
 import { login1 } from '../../src/loginInfo/loginInfo.js';
 import { LoginPage } from '../../pom/LoginPage.js';
 import { AddEmployeeFlyout } from '../../pom/PeopleApp/AddEmployeeFlyout.js';
@@ -11,6 +11,8 @@ import { ChangeSalaryFlyout } from '../../pom/PeopleApp/Actions/ChangeSalaryFlyo
 import { ChangePositionFlyout } from '../../pom/PeopleApp/Actions/ChangePositionFlyout.js';
 import { ChangeEmploymentStatusFlyout } from '../../pom/PeopleApp/Actions/ChangeEmploymentStatusFlyout.js';
 import { AddBonusFlyout } from '../../pom/PeopleApp/Actions/AddBonusFlyout.js';
+import { BulkChangePosition } from '../../pom/PeopleApp/BulkActions/BulkChangePosition.js';
+import { BulkChangeDepartment } from '../../pom/PeopleApp/BulkActions/BulkChangeDepartment.js';
 import { Position } from '../../pom/PeopleApp/Position.js';
 import { Location } from '../../pom/PeopleApp/Location.js';
 import { Department } from '../../pom/PeopleApp/Department.js';
@@ -386,12 +388,10 @@ test('UpdateStartDate', async ({ page }) => {
   const changeStartDateFlyout = new ChangeStartDateFlyout(page, expect);
   const employeeProfile = new EmployeeProfileFlyout(page, expect);
 
-  // Get today's date
-  const today = new Date();
-  const todayDay = String(today.getDate());
-  const expectedDate = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;
+  // Generate random date within last 30 days
+  const expectedDate = generateRandomPastDate(30);
 
-  console.log(`Selecting today's date: ${expectedDate} (day: ${todayDay})`);
+  console.log(`Selecting random date: ${expectedDate}`);
 
   // Search for HR Employee by first and last name
   await peopleGrid.searchByFirstAndLastName('HR', 'Employee');
@@ -405,7 +405,7 @@ test('UpdateStartDate', async ({ page }) => {
   // Click Change Start Date
   await actions.clickChangeStartDate();
 
-  // Type today's date directly
+  // Type random date directly
   await changeStartDateFlyout.setStartDateByTyping(expectedDate);
 
   // Save the start date change
@@ -769,3 +769,83 @@ test('AddBonus', async ({ page }) => {
   await page.pause();
 });
 
+test('BulkChangeManager', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangePosition = new BulkChangePosition(page, expect);
+
+  // Get today's date
+  const todayDate = bulkChangePosition.getTodayDate();
+  console.log(`Using date: ${todayDate}`);
+
+  // Define employees to select (by partial row text)
+  const employeesToSelect = [
+    ' HR Operation 11/25/2025',
+    ' HR User 01/19/2016 pozicija',
+    ' IT Operation 06/18/2024'
+  ];
+
+  // Perform bulk manager change and get the selected manager name
+  const selectedManager = await bulkChangePosition.bulkChangeManager(employeesToSelect, todayDate);
+
+  console.log(`Will verify manager: ${selectedManager}`);
+
+  // Verify manager for all 3 employees (using indices 1, 2, 3)
+  // Note: Adjust indices based on which row positions in grid they appear
+  await bulkChangePosition.verifyManagerForEmployees([1, 2, 3], selectedManager);
+
+  console.log('✓ All employees have been updated with new manager');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangeDepartment', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangeDepartment = new BulkChangeDepartment(page, expect);
+
+  // Get today's date
+  const todayDate = bulkChangeDepartment.getTodayDate();
+  console.log(`Using date: ${todayDate}`);
+
+  // Select first 3 employees and change their department
+  const { selectedDepartment, selectedIndices } = await bulkChangeDepartment.bulkChangeDepartmentGeneric(3, todayDate);
+
+  console.log(`Will verify department: ${selectedDepartment}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify department for all selected employees
+  // After bulk update, verify first N occurrences of the department (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeDepartment.verifyDepartmentForEmployees(verificationIndices, selectedDepartment);
+
+  console.log('✓ All employees have been updated with new department');
+
+  // Pause to keep browser open
+  await page.pause();
+});
