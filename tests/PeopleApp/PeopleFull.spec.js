@@ -11,8 +11,12 @@ import { ChangeSalaryFlyout } from '../../pom/PeopleApp/Actions/ChangeSalaryFlyo
 import { ChangePositionFlyout } from '../../pom/PeopleApp/Actions/ChangePositionFlyout.js';
 import { ChangeEmploymentStatusFlyout } from '../../pom/PeopleApp/Actions/ChangeEmploymentStatusFlyout.js';
 import { AddBonusFlyout } from '../../pom/PeopleApp/Actions/AddBonusFlyout.js';
-import { BulkChangePosition } from '../../pom/PeopleApp/BulkActions/BulkChangePosition.js';
+import { BulkChangeManager } from '../../pom/PeopleApp/BulkActions/BulkChangeManager.js';
 import { BulkChangeDepartment } from '../../pom/PeopleApp/BulkActions/BulkChangeDepartment.js';
+import { BulkChangeDivision } from '../../pom/PeopleApp/BulkActions/BulkChangeDivision.js';
+import { BulkChangeLocation } from '../../pom/PeopleApp/BulkActions/BulkChangeLocation.js';
+import { BulkChangePosition } from '../../pom/PeopleApp/BulkActions/BulkChangePosition.js';
+import { BulkChangeEmploymentType } from '../../pom/PeopleApp/BulkActions/BulkChangeEmploymentType.js';
 import { Position } from '../../pom/PeopleApp/Position.js';
 import { Location } from '../../pom/PeopleApp/Location.js';
 import { Department } from '../../pom/PeopleApp/Department.js';
@@ -784,27 +788,22 @@ test('BulkChangeManager', async ({ page }) => {
   await openPeople(page, expect);
 
   // Create POM instance
-  const bulkChangePosition = new BulkChangePosition(page, expect);
+  const bulkChangeManager = new BulkChangeManager(page, expect);
 
   // Get today's date
-  const todayDate = bulkChangePosition.getTodayDate();
+  const todayDate = bulkChangeManager.getTodayDate();
   console.log(`Using date: ${todayDate}`);
 
-  // Define employees to select (by partial row text)
-  const employeesToSelect = [
-    ' HR Operation 11/25/2025',
-    ' HR User 01/19/2016 pozicija',
-    ' IT Operation 06/18/2024'
-  ];
-
-  // Perform bulk manager change and get the selected manager name
-  const selectedManager = await bulkChangePosition.bulkChangeManager(employeesToSelect, todayDate);
+  // Select first 3 employees and change their manager
+  const { selectedManager, selectedIndices } = await bulkChangeManager.bulkChangeManagerGeneric(3, todayDate);
 
   console.log(`Will verify manager: ${selectedManager}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
 
-  // Verify manager for all 3 employees (using indices 1, 2, 3)
-  // Note: Adjust indices based on which row positions in grid they appear
-  await bulkChangePosition.verifyManagerForEmployees([1, 2, 3], selectedManager);
+  // Verify manager for all selected employees
+  // After bulk update, verify first N occurrences of the manager (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeManager.verifyManagerForEmployees(verificationIndices, selectedManager);
 
   console.log('✓ All employees have been updated with new manager');
 
@@ -845,6 +844,158 @@ test('BulkChangeDepartment', async ({ page }) => {
   await bulkChangeDepartment.verifyDepartmentForEmployees(verificationIndices, selectedDepartment);
 
   console.log('✓ All employees have been updated with new department');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangeDivision', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangeDivision = new BulkChangeDivision(page, expect);
+
+  // Get today's date
+  const todayDate = bulkChangeDivision.getTodayDate();
+  console.log(`Using date: ${todayDate}`);
+
+  // Select first 3 employees and change their division
+  const { selectedDivision, selectedIndices } = await bulkChangeDivision.bulkChangeDivisionGeneric(3, todayDate);
+
+  console.log(`Will verify division: ${selectedDivision}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify division for all selected employees
+  // After bulk update, verify first N occurrences of the division (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeDivision.verifyDivisionForEmployees(verificationIndices, selectedDivision);
+
+  console.log('✓ All employees have been updated with new division');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangeLocation', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangeLocation = new BulkChangeLocation(page, expect);
+
+  // Get today's date
+  const todayDate = bulkChangeLocation.getTodayDate();
+  console.log(`Using date: ${todayDate}`);
+
+  // Select first 3 employees and change their location
+  const { selectedLocation, selectedIndices } = await bulkChangeLocation.bulkChangeLocationGeneric(3, todayDate);
+
+  console.log(`Will verify location: ${selectedLocation}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify location for all selected employees
+  // After bulk update, verify first N occurrences of the location (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeLocation.verifyLocationForEmployees(verificationIndices, selectedLocation);
+
+  console.log('✓ All employees have been updated with new location');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangePosition', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangePosition = new BulkChangePosition(page, expect);
+
+  // Get today's date
+  const todayDate = bulkChangePosition.getTodayDate();
+  console.log(`Using date: ${todayDate}`);
+
+  // Select first 3 employees and change their position
+  const { selectedPosition, selectedIndices } = await bulkChangePosition.bulkChangePositionGeneric(3, todayDate);
+
+  console.log(`Will verify position: ${selectedPosition}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify position for all selected employees
+  // After bulk update, verify first N occurrences of the position (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangePosition.verifyPositionForEmployees(verificationIndices, selectedPosition);
+
+  console.log('✓ All employees have been updated with new position');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangeEmploymentType', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangeEmploymentType = new BulkChangeEmploymentType(page, expect);
+
+  // Get today's date
+  const todayDate = bulkChangeEmploymentType.getTodayDate();
+  console.log(`Using date: ${todayDate}`);
+
+  // Select first 3 employees and change their employment type
+  const { selectedEmploymentType, selectedIndices } = await bulkChangeEmploymentType.bulkChangeEmploymentTypeGeneric(3, todayDate);
+
+  console.log(`Will verify employment type: ${selectedEmploymentType}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify employment type for all selected employees
+  // After bulk update, verify first N occurrences of the employment type (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeEmploymentType.verifyEmploymentTypeForEmployees(verificationIndices, selectedEmploymentType);
+
+  console.log('✓ All employees have been updated with new employment type');
 
   // Pause to keep browser open
   await page.pause();

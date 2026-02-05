@@ -1,6 +1,6 @@
 import { BasePage } from '../BasePage.js';
 
-export class BulkChangePosition extends BasePage {
+export class BulkChangeDivision extends BasePage {
   constructor(page, expect = null) {
     super(page, expect);
 
@@ -14,12 +14,12 @@ export class BulkChangePosition extends BasePage {
 
     // Field selector dropdown
     this.fieldSelectorDropdown = page.getByRole('button', { name: 'Select one... ' });
-    this.positionOption = page.getByRole('menu').getByText('Position', { exact: true });
+    this.divisionOption = page.getByRole('menu').getByText('Division');
 
-    // Position selection
-    this.choosePositionButton = page.getByRole('button', { name: 'Choose...' });
-    // Position grid - column 3 contains position names (same pattern as other grids)
-    this.positionGrid = page.locator('.content-scroll > .content-grid > .ng-isolate-scope > .k-grid > .k-grid-content > .k-selectable > tbody > tr > td:nth-child(3)');
+    // Division selection
+    this.chooseDivisionButton = page.getByRole('button', { name: 'Choose...' });
+    // Division grid - will determine the correct column
+    this.divisionGrid = page.locator('.content-scroll > .content-grid > .ng-isolate-scope > .k-grid > .k-grid-content > .k-selectable > tbody > tr > td:nth-child(3)');
 
     // Update buttons
     this.updateButton = page.getByRole('button', { name: 'Update' });
@@ -81,46 +81,46 @@ export class BulkChangePosition extends BasePage {
   // ===========================================
 
   /**
-   * Select Position field
+   * Select Division field
    */
-  async selectPositionField() {
+  async selectDivisionField() {
     await this.fieldSelectorDropdown.click();
     await this.page.waitForTimeout(300);
-    await this.positionOption.click();
+    await this.divisionOption.click();
     await this.page.waitForTimeout(500);
   }
 
   /**
-   * Select random position from grid and return the position name
-   * @returns {string} Selected position name
+   * Select random division from grid and return the division name
+   * @returns {string} Selected division name
    */
-  async selectRandomPosition() {
-    await this.choosePositionButton.click();
+  async selectRandomDivision() {
+    await this.chooseDivisionButton.click();
     await this.page.waitForTimeout(2000);
 
-    // Wait for position grid to load
-    await this.positionGrid.first().waitFor({ state: 'visible', timeout: 5000 });
+    // Wait for division grid to load
+    await this.divisionGrid.first().waitFor({ state: 'visible', timeout: 5000 });
 
-    // Get all position cells from column 3
-    const positionCells = await this.positionGrid.all();
+    // Get all division cells from column 3
+    const divisionCells = await this.divisionGrid.all();
 
-    if (positionCells.length === 0) {
-      throw new Error('No positions found in grid');
+    if (divisionCells.length === 0) {
+      throw new Error('No divisions found in grid');
     }
 
-    // Select random position
-    const randomIndex = Math.floor(Math.random() * positionCells.length);
-    const selectedPositionCell = positionCells[randomIndex];
+    // Select random division
+    const randomIndex = Math.floor(Math.random() * divisionCells.length);
+    const selectedDivisionCell = divisionCells[randomIndex];
 
-    // Get position name before clicking
-    const positionName = await selectedPositionCell.textContent();
+    // Get division name before clicking
+    const divisionName = await selectedDivisionCell.textContent();
 
-    // Click the selected position
-    await selectedPositionCell.click();
+    // Click the selected division
+    await selectedDivisionCell.click();
     await this.page.waitForTimeout(500);
 
-    console.log(`Selected random position: ${positionName.trim()}`);
-    return positionName.trim();
+    console.log(`Selected random division: ${divisionName.trim()}`);
+    return divisionName.trim();
   }
 
   // ===========================================
@@ -150,35 +150,35 @@ export class BulkChangePosition extends BasePage {
   // ===========================================
 
   /**
-   * Get position value for employee by row index
+   * Get division value for employee by row index
    * @param {number} rowIndex - Row index (0-based)
-   * @param {string} expectedPosition - Expected position name to look for
-   * @returns {string} Position name
+   * @param {string} expectedDivision - Expected division name to look for
+   * @returns {string} Division name
    */
-  async getPositionForEmployeeByIndex(rowIndex, expectedPosition) {
-    // Click on position cell to view
-    const positionCell = this.page.getByRole('gridcell', { name: expectedPosition }).nth(rowIndex);
-    await positionCell.click();
+  async getDivisionForEmployeeByIndex(rowIndex, expectedDivision) {
+    // Click on division cell to view
+    const divisionCell = this.page.getByRole('gridcell', { name: expectedDivision }).nth(rowIndex);
+    await divisionCell.click();
     await this.page.waitForTimeout(500);
 
-    const positionText = await positionCell.textContent();
-    return positionText.trim();
+    const divisionText = await divisionCell.textContent();
+    return divisionText.trim();
   }
 
   /**
-   * Verify position for multiple employees by their indices
+   * Verify division for multiple employees by their indices
    * @param {Array<number>} employeeIndices - Array of employee indices to verify
-   * @param {string} expectedPosition - Expected position name
+   * @param {string} expectedDivision - Expected division name
    */
-  async verifyPositionForEmployees(employeeIndices, expectedPosition) {
+  async verifyDivisionForEmployees(employeeIndices, expectedDivision) {
     for (const index of employeeIndices) {
-      const actualPosition = await this.getPositionForEmployeeByIndex(index, expectedPosition);
+      const actualDivision = await this.getDivisionForEmployeeByIndex(index, expectedDivision);
 
       if (this.expect) {
-        this.expect(actualPosition).toContain(expectedPosition);
+        this.expect(actualDivision).toContain(expectedDivision);
       }
 
-      console.log(`✓ Employee ${index + 1} position verified: ${actualPosition}`);
+      console.log(`✓ Employee ${index + 1} division verified: ${actualDivision}`);
     }
   }
 
@@ -187,12 +187,12 @@ export class BulkChangePosition extends BasePage {
   // ===========================================
 
   /**
-   * Bulk change position for selected employees
+   * Bulk change division for selected employees
    * @param {Array<string>} employeeIdentifiers - Array of employee row identifiers
    * @param {string} effectiveDate - Date in MM/DD/YYYY format (optional, for PeopleFull)
-   * @returns {string} Selected position name
+   * @returns {string} Selected division name
    */
-  async bulkChangePosition(employeeIdentifiers, effectiveDate = null) {
+  async bulkChangeDivision(employeeIdentifiers, effectiveDate = null) {
     // Select employees
     await this.selectEmployees(employeeIdentifiers);
 
@@ -205,11 +205,11 @@ export class BulkChangePosition extends BasePage {
       await this.selectDateByTyping(effectiveDate);
     }
 
-    // Select Position field
-    await this.selectPositionField();
+    // Select Division field
+    await this.selectDivisionField();
 
-    // Select random position from grid and get the name
-    const selectedPosition = await this.selectRandomPosition();
+    // Select random division from grid and get the name
+    const selectedDivision = await this.selectRandomDivision();
 
     // Click Update
     await this.clickUpdate();
@@ -217,18 +217,18 @@ export class BulkChangePosition extends BasePage {
     // Confirm update
     await this.confirmBulkUpdate(employeeIdentifiers.length);
 
-    console.log(`✓ Bulk position change completed for ${employeeIdentifiers.length} employees`);
+    console.log(`✓ Bulk division change completed for ${employeeIdentifiers.length} employees`);
 
-    return selectedPosition;
+    return selectedDivision;
   }
 
   /**
-   * Bulk change position for first N employees (generic version)
+   * Bulk change division for first N employees (generic version)
    * @param {number} employeeCount - Number of employees to select
    * @param {string} effectiveDate - Date in MM/DD/YYYY format (optional, for PeopleFull)
-   * @returns {object} Object with selectedPosition and selectedIndices
+   * @returns {object} Object with selectedDivision and selectedIndices
    */
-  async bulkChangePositionGeneric(employeeCount, effectiveDate = null) {
+  async bulkChangeDivisionGeneric(employeeCount, effectiveDate = null) {
     // Select first N employees and get their indices
     const selectedIndices = await this.selectFirstNEmployees(employeeCount);
 
@@ -241,11 +241,11 @@ export class BulkChangePosition extends BasePage {
       await this.selectDateByTyping(effectiveDate);
     }
 
-    // Select Position field
-    await this.selectPositionField();
+    // Select Division field
+    await this.selectDivisionField();
 
-    // Select random position from grid and get the name
-    const selectedPosition = await this.selectRandomPosition();
+    // Select random division from grid and get the name
+    const selectedDivision = await this.selectRandomDivision();
 
     // Click Update
     await this.clickUpdate();
@@ -253,10 +253,10 @@ export class BulkChangePosition extends BasePage {
     // Confirm update
     await this.confirmBulkUpdate(employeeCount);
 
-    console.log(`✓ Bulk position change completed for ${employeeCount} employees`);
+    console.log(`✓ Bulk division change completed for ${employeeCount} employees`);
 
     return {
-      selectedPosition,
+      selectedDivision,
       selectedIndices
     };
   }

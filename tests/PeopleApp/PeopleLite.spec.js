@@ -9,6 +9,12 @@ import { Actions } from '../../pom/PeopleApp/Actions/Actions.js';
 import { ChangeStartDateFlyout } from '../../pom/PeopleApp/Actions/ChangeStartDateFlyout.js';
 import { ChangeEmploymentStatusFlyout } from '../../pom/PeopleApp/Actions/ChangeEmploymentStatusFlyout.js';
 import { generateShortID } from '../../src/utils.js';
+import { BulkChangeManager } from '../../pom/PeopleApp/BulkActions/BulkChangeManager.js';
+import { BulkChangeDepartment } from '../../pom/PeopleApp/BulkActions/BulkChangeDepartment.js';
+import { BulkChangeDivision } from '../../pom/PeopleApp/BulkActions/BulkChangeDivision.js';
+import { BulkChangeLocation } from '../../pom/PeopleApp/BulkActions/BulkChangeLocation.js';
+import { BulkChangePosition } from '../../pom/PeopleApp/BulkActions/BulkChangePosition.js';
+import { BulkChangeEmploymentType } from '../../pom/PeopleApp/BulkActions/BulkChangeEmploymentType.js';
 
 test('AddEmployeeOnboardingChecklist', async ({ page }) => {
   // Increase timeout for this test
@@ -409,6 +415,210 @@ test('ChangeEmploymentStatusPrehire', async ({ page }) => {
   // Verify the employment status contains "Prehire"
   expect(actualEmploymentStatus).toContain('Prehire');
   console.log(`✓ Employment Status verified: Expected "Prehire", Got "${actualEmploymentStatus}"`);
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangeManager', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM with login2
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login2.environment, login2.email, login2.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangeManager = new BulkChangeManager(page, expect);
+
+  // Select first 3 employees and change their manager (no date for PeopleLite)
+  const { selectedManager, selectedIndices } = await bulkChangeManager.bulkChangeManagerGeneric(3);
+
+  console.log(`Will verify manager: ${selectedManager}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify manager for all selected employees
+  // After bulk update, verify first N occurrences of the manager (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeManager.verifyManagerForEmployees(verificationIndices, selectedManager);
+
+  console.log('✓ All employees have been updated with new manager');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangeDepartment', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM with login2
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login2.environment, login2.email, login2.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangeDepartment = new BulkChangeDepartment(page, expect);
+
+  // Select first 3 employees and change their department (no date for PeopleLite)
+  const { selectedDepartment, selectedIndices } = await bulkChangeDepartment.bulkChangeDepartmentGeneric(3);
+
+  console.log(`Will verify department: ${selectedDepartment}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify department for all selected employees
+  // After bulk update, verify first N occurrences of the department (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeDepartment.verifyDepartmentForEmployees(verificationIndices, selectedDepartment);
+
+  console.log('✓ All employees have been updated with new department');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangeDivision', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM with login2
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login2.environment, login2.email, login2.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangeDivision = new BulkChangeDivision(page, expect);
+
+  // Select first 3 employees and change their division (no date for PeopleLite)
+  const { selectedDivision, selectedIndices } = await bulkChangeDivision.bulkChangeDivisionGeneric(3);
+
+  console.log(`Will verify division: ${selectedDivision}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify division for all selected employees
+  // After bulk update, verify first N occurrences of the division (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeDivision.verifyDivisionForEmployees(verificationIndices, selectedDivision);
+
+  console.log('✓ All employees have been updated with new division');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangeLocation', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM with login2
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login2.environment, login2.email, login2.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangeLocation = new BulkChangeLocation(page, expect);
+
+  // Select first 3 employees and change their location (no date for PeopleLite)
+  const { selectedLocation, selectedIndices } = await bulkChangeLocation.bulkChangeLocationGeneric(3);
+
+  console.log(`Will verify location: ${selectedLocation}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify location for all selected employees
+  // After bulk update, verify first N occurrences of the location (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeLocation.verifyLocationForEmployees(verificationIndices, selectedLocation);
+
+  console.log('✓ All employees have been updated with new location');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangePosition', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM with login2
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login2.environment, login2.email, login2.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangePosition = new BulkChangePosition(page, expect);
+
+  // Select first 3 employees and change their position (no date for PeopleLite)
+  const { selectedPosition, selectedIndices } = await bulkChangePosition.bulkChangePositionGeneric(3);
+
+  console.log(`Will verify position: ${selectedPosition}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify position for all selected employees
+  // After bulk update, verify first N occurrences of the position (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangePosition.verifyPositionForEmployees(verificationIndices, selectedPosition);
+
+  console.log('✓ All employees have been updated with new position');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkChangeEmploymentType', async ({ page }) => {
+  // Increase timeout for this test
+  test.setTimeout(60000);
+
+  // Login using POM with login2
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login2.environment, login2.email, login2.password);
+
+  // Ensure sidebar is expanded
+  await ensureSidebarExpanded(page);
+
+  // Open People page
+  await openPeople(page, expect);
+
+  // Create POM instance
+  const bulkChangeEmploymentType = new BulkChangeEmploymentType(page, expect);
+
+  // Select first 3 employees and change their employment type (no date for PeopleLite)
+  const { selectedEmploymentType, selectedIndices } = await bulkChangeEmploymentType.bulkChangeEmploymentTypeGeneric(3);
+
+  console.log(`Will verify employment type: ${selectedEmploymentType}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Verify employment type for all selected employees
+  // After bulk update, verify first N occurrences of the employment type (0, 1, 2)
+  const verificationIndices = [0, 1, 2];
+  await bulkChangeEmploymentType.verifyEmploymentTypeForEmployees(verificationIndices, selectedEmploymentType);
+
+  console.log('✓ All employees have been updated with new employment type');
 
   // Pause to keep browser open
   await page.pause();

@@ -41,48 +41,6 @@ export class BulkChangeDepartment extends BasePage {
     console.log(`Selected ${employeeIdentifiers.length} employees`);
   }
 
-  /**
-   * Select first N employees by clicking their checkboxes
-   * @param {number} count - Number of employees to select
-   * @returns {Array<number>} Array of row indices that were selected (0-based)
-   */
-  async selectFirstNEmployees(count) {
-    // Wait for grid to load
-    await this.page.waitForTimeout(2000);
-
-    // Get all rows in the grid (using getByRole like original code)
-    const allRows = await this.page.getByRole('row').all();
-
-    // Filter to exclude header rows (rows typically have data cells)
-    const dataRows = [];
-    for (const row of allRows) {
-      const labels = await row.locator('label').count();
-      if (labels > 0) {
-        dataRows.push(row);
-      }
-    }
-
-    if (dataRows.length === 0) {
-      throw new Error('No employee rows found in grid');
-    }
-
-    const selectedIndices = [];
-
-    // Skip first 2 rows: 0 = "select all" checkbox, 1 = HR Admin
-    const startIndex = 2;
-
-    for (let i = startIndex; i < Math.min(startIndex + count, dataRows.length); i++) {
-      // Find checkbox/label within each row
-      const checkbox = dataRows[i].locator('label').first();
-      await checkbox.click();
-      await this.page.waitForTimeout(300);
-      selectedIndices.push(i);
-    }
-
-    console.log(`Selected ${selectedIndices.length} employees (indices: ${selectedIndices.join(', ')}), skipped first 2 rows`);
-    return selectedIndices;
-  }
-
   // ===========================================
   // BULK ACTIONS MENU METHODS
   // ===========================================
@@ -231,10 +189,10 @@ export class BulkChangeDepartment extends BasePage {
   /**
    * Bulk change department for selected employees
    * @param {Array<string>} employeeIdentifiers - Array of employee row identifiers
-   * @param {string} effectiveDate - Date in MM/DD/YYYY format
+   * @param {string} effectiveDate - Date in MM/DD/YYYY format (optional, for PeopleFull)
    * @returns {string} Selected department name
    */
-  async bulkChangeDepartment(employeeIdentifiers, effectiveDate) {
+  async bulkChangeDepartment(employeeIdentifiers, effectiveDate = null) {
     // Select employees
     await this.selectEmployees(employeeIdentifiers);
 
@@ -242,8 +200,10 @@ export class BulkChangeDepartment extends BasePage {
     await this.openBulkActionsMenu();
     await this.clickChangePosition();
 
-    // Set effective date
-    await this.selectDateByTyping(effectiveDate);
+    // Set effective date (only if provided - for PeopleFull)
+    if (effectiveDate) {
+      await this.selectDateByTyping(effectiveDate);
+    }
 
     // Select Department field
     await this.selectDepartmentField();
@@ -265,10 +225,10 @@ export class BulkChangeDepartment extends BasePage {
   /**
    * Bulk change department for first N employees (generic version)
    * @param {number} employeeCount - Number of employees to select
-   * @param {string} effectiveDate - Date in MM/DD/YYYY format
+   * @param {string} effectiveDate - Date in MM/DD/YYYY format (optional, for PeopleFull)
    * @returns {object} Object with selectedDepartment and selectedIndices
    */
-  async bulkChangeDepartmentGeneric(employeeCount, effectiveDate) {
+  async bulkChangeDepartmentGeneric(employeeCount, effectiveDate = null) {
     // Select first N employees and get their indices
     const selectedIndices = await this.selectFirstNEmployees(employeeCount);
 
@@ -276,8 +236,10 @@ export class BulkChangeDepartment extends BasePage {
     await this.openBulkActionsMenu();
     await this.clickChangePosition();
 
-    // Set effective date
-    await this.selectDateByTyping(effectiveDate);
+    // Set effective date (only if provided - for PeopleFull)
+    if (effectiveDate) {
+      await this.selectDateByTyping(effectiveDate);
+    }
 
     // Select Department field
     await this.selectDepartmentField();

@@ -83,4 +83,55 @@ export class BasePage {
 
     return selectedText.trim();
   }
+
+  /**
+   * Select first N employees by clicking their checkboxes
+   * @param {number} count - Number of employees to select
+   * @returns {Array<number>} Array of row indices that were selected (0-based)
+   */
+  async selectFirstNEmployees(count) {
+    // Wait for grid to load
+    await this.page.waitForTimeout(2000);
+
+    // Get all rows in the grid (using getByRole like original code)
+    const allRows = await this.page.getByRole('row').all();
+
+    // Filter to exclude header rows (rows typically have data cells)
+    const dataRows = [];
+    for (const row of allRows) {
+      const labels = await row.locator('label').count();
+      if (labels > 0) {
+        dataRows.push(row);
+      }
+    }
+
+    if (dataRows.length === 0) {
+      throw new Error('No employee rows found in grid');
+    }
+
+    const selectedIndices = [];
+    const selectedEmployeeNames = [];
+
+    // Skip first 2 rows: 0 = "select all" checkbox, 1 = HR Admin
+    const startIndex = 2;
+
+    for (let i = startIndex; i < Math.min(startIndex + count, dataRows.length); i++) {
+      // Get employee name from the row before clicking
+      const rowText = await dataRows[i].textContent();
+      selectedEmployeeNames.push(rowText.trim());
+
+      // Find checkbox/label within each row
+      const checkbox = dataRows[i].locator('label').first();
+      await checkbox.click();
+      await this.page.waitForTimeout(300);
+      selectedIndices.push(i);
+    }
+
+    console.log(`Selected ${selectedIndices.length} employees (indices: ${selectedIndices.join(', ')}), skipped first 2 rows`);
+
+    // Store employee names for later use (e.g., excluding from manager selection)
+    this.selectedEmployeeNames = selectedEmployeeNames;
+
+    return selectedIndices;
+  }
 }
