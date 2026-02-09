@@ -26,31 +26,3 @@ export function generateRandomPastDate(daysBack = 30) {
 
   return `${month}/${day}/${year}`;
 }
-
-// Ensure sidebar is expanded
-export async function ensureSidebarExpanded(page) {
-  try {
-    const sidebarOverlay = page.locator('.utility-navigation-tour-overlay');
-
-    // Wait for the element to be present before evaluating
-    await sidebarOverlay.waitFor({ state: 'attached', timeout: 5000 });
-
-    const isExpanded = await sidebarOverlay.evaluate(el => el.classList.contains('utility-sidebar-open-navigation-tour-overlay'));
-
-    if (!isExpanded) {
-      console.log('Sidebar is collapsed, expanding...');
-      await page.locator('//div[@class="menu-arrow-button tooltipstered"]//i[@class="icon icon-chevron-right"]').click();
-      await page.waitForTimeout(500); // Wait for sidebar animation
-    } else {
-      console.log('Sidebar is already expanded');
-    }
-  } catch (error) {
-    console.log('Could not verify sidebar state, continuing anyway...', error.message);
-  }
-}
-
-// Open People page and verify
-export async function openPeople(page, expect) {
-  await page.getByRole('link', { name: 'People' }).click();
-  await expect(page.getByRole('heading').getByText('People')).toBeVisible();
-}

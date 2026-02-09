@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { ensureSidebarExpanded, openPeople } from '../../src/utils.js';
 import { login1 } from '../../src/loginInfo/loginInfo.js';
 import { LoginPage } from '../../pom/LoginPage.js';
+import { NavbarAndSidebar } from '../../pom/NavbarAndSidebar.js';
 import { AddEmployeeFlyout } from '../../pom/PeopleApp/AddEmployeeFlyout.js';
 
 // ============================================
@@ -12,8 +12,9 @@ async function setupTest(page) {
   test.setTimeout(30000);
   const loginPage = new LoginPage(page);
   await loginPage.login(login1.environment, login1.email, login1.password);
-  await ensureSidebarExpanded(page);
-  await openPeople(page, expect);
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
   return new AddEmployeeFlyout(page);
 }
 

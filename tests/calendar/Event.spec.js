@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { ensureSidebarExpanded } from '../../src/utils.js';
 import { login1 } from '../../src/loginInfo/loginInfo.js';
 import { LoginPage } from '../../pom/LoginPage.js';
+import { NavbarAndSidebar } from '../../pom/NavbarAndSidebar.js';
 import { openCalendar, addEvent } from '../../pom/addEvent.js';
 
 test('CreateNewEvent', async ({ page }) => {
@@ -12,7 +12,8 @@ test('CreateNewEvent', async ({ page }) => {
   await loginPage.login(login1.environment, login1.email, login1.password);
 
   // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
 
   // Open Calendar from sidebar
   await openCalendar(page, expect);

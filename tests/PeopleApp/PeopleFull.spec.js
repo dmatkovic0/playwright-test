@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { ensureSidebarExpanded, openPeople, generateRandomPastDate } from '../../src/utils.js';
+import { generateRandomPastDate } from '../../src/utils.js';
 import { login1 } from '../../src/loginInfo/loginInfo.js';
 import { LoginPage } from '../../pom/LoginPage.js';
+import { NavbarAndSidebar } from '../../pom/NavbarAndSidebar.js';
 import { AddEmployeeFlyout } from '../../pom/PeopleApp/AddEmployeeFlyout.js';
 import { PeopleGrid } from '../../pom/PeopleApp/PeopleGrid.js';
 import { EmployeeProfileFlyout } from '../../pom/PeopleApp/EmployeeProfileFlyout.js';
@@ -29,11 +30,10 @@ test('AddEmployeeOnboardingChecklist', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
@@ -71,11 +71,10 @@ test('UpdateExistingEmployee', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
@@ -147,11 +146,10 @@ test('AddEmployeePrehireChecklist', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
@@ -188,11 +186,10 @@ test('AddEmployeeNoAutoAssignment', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
@@ -229,10 +226,10 @@ test('AddPosition', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create Position POM instance
   const position = new Position(page, expect);
@@ -254,10 +251,10 @@ test('AddLocation', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create Location POM instance
   const location = new Location(page, expect);
@@ -279,10 +276,10 @@ test('UpdatePosition', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create Position POM instance
   const position = new Position(page, expect);
@@ -304,10 +301,10 @@ test('UpdateLocation', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create Location POM instance
   const location = new Location(page, expect);
@@ -329,10 +326,10 @@ test('AddDepartment', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create Department POM instance
   const department = new Department(page, expect);
@@ -354,10 +351,10 @@ test('UpdateDepartment', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create Department POM instance
   const department = new Department(page, expect);
@@ -380,11 +377,10 @@ test('UpdateStartDate', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const peopleGrid = new PeopleGrid(page, expect);
@@ -435,11 +431,10 @@ test('ChangeSalary', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const peopleGrid = new PeopleGrid(page, expect);
@@ -505,11 +500,10 @@ test('ChangePosition', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const peopleGrid = new PeopleGrid(page, expect);
@@ -589,11 +583,10 @@ test('ChangeEmploymentStatusLoA', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
@@ -650,11 +643,10 @@ test('ChangeEmploymentStatusPrehire', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
@@ -712,11 +704,10 @@ test('AddBonus', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instances
   const peopleGrid = new PeopleGrid(page, expect);
@@ -781,11 +772,10 @@ test('BulkChangeManager', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instance
   const bulkChangeManager = new BulkChangeManager(page, expect);
@@ -819,11 +809,10 @@ test('BulkChangeDepartment', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instance
   const bulkChangeDepartment = new BulkChangeDepartment(page, expect);
@@ -857,11 +846,10 @@ test('BulkChangeDivision', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instance
   const bulkChangeDivision = new BulkChangeDivision(page, expect);
@@ -895,11 +883,10 @@ test('BulkChangeLocation', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instance
   const bulkChangeLocation = new BulkChangeLocation(page, expect);
@@ -933,11 +920,10 @@ test('BulkChangePosition', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instance
   const bulkChangePosition = new BulkChangePosition(page, expect);
@@ -971,11 +957,10 @@ test('BulkChangeEmploymentType', async ({ page }) => {
   const loginPage = new LoginPage(page, expect);
   await loginPage.login(login1.environment, login1.email, login1.password);
 
-  // Ensure sidebar is expanded
-  await ensureSidebarExpanded(page);
-
-  // Open People page
-  await openPeople(page, expect);
+  // Ensure sidebar is expanded and open People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
 
   // Create POM instance
   const bulkChangeEmploymentType = new BulkChangeEmploymentType(page, expect);

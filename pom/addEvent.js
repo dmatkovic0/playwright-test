@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { NavbarAndSidebar } from './NavbarAndSidebar.js';
 
 /**
  * Opens Calendar from sidebar
@@ -6,7 +7,8 @@ import { randomUUID } from 'crypto';
  * @param {import('@playwright/test').Expect} expect - Playwright expect object
  */
 export async function openCalendar(page, expect) {
-  await page.getByRole('link', { name: ' Calendar' }).click();
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.goToCalendar();
 
   // Wait for the Add event button to be visible
   await page.locator("//button[@class='btn btn-add-new-event']").waitFor({ state: 'visible' });
