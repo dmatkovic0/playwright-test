@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { generateRandomPastDate } from '../../src/utils.js';
+import { generateRandomPastDate, generateShortID } from '../../src/utils.js';
 import { login1 } from '../../src/loginInfo/loginInfo.js';
 import { LoginPage } from '../../pom/LoginPage.js';
 import { NavbarAndSidebar } from '../../pom/NavbarAndSidebar.js';
@@ -18,6 +18,7 @@ import { BulkChangeDivision } from '../../pom/PeopleApp/BulkActions/BulkChangeDi
 import { BulkChangeLocation } from '../../pom/PeopleApp/BulkActions/BulkChangeLocation.js';
 import { BulkChangePosition } from '../../pom/PeopleApp/BulkActions/BulkChangePosition.js';
 import { BulkChangeEmploymentType } from '../../pom/PeopleApp/BulkActions/BulkChangeEmploymentType.js';
+import { BulkCreateTasks } from '../../pom/PeopleApp/BulkActions/BulkCreateTasks.js';
 import { Position } from '../../pom/PeopleApp/Position.js';
 import { Location } from '../../pom/PeopleApp/Location.js';
 import { Department } from '../../pom/PeopleApp/Department.js';
@@ -981,6 +982,132 @@ test('BulkChangeEmploymentType', async ({ page }) => {
   await bulkChangeEmploymentType.verifyEmploymentTypeForEmployees(verificationIndices, selectedEmploymentType);
 
   console.log('✓ All employees have been updated with new employment type');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkCreatePlainTasks', async ({ page }) => {
+  test.setTimeout(120000);
+
+  // Login and navigate to People
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
+
+  // Create POM instances
+  const bulkCreateTasks = new BulkCreateTasks(page, expect);
+  const peopleGrid      = new PeopleGrid(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
+
+  // Generate a unique task name and resolve today's date values
+  const taskName = `AutomationTask_${generateShortID()}`;
+  const todayDay = new Date().getDate().toString();
+
+  console.log(`Creating task: ${taskName}`);
+
+  // ========================================
+  // Select 3 employees and bulk-create task
+  // ========================================
+  const { employeeNames, selectedIndices } = await bulkCreateTasks.bulkCreateTasksGeneric(
+    3,
+    taskName,
+    todayDay
+  );
+
+  console.log(`Task created. Employees to verify: ${employeeNames.join(', ')}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Navigate back to the People grid after task creation
+  await nav.goToPeopleAndVerify();
+
+  // ========================================
+  // Verify task exists in each employee's profile
+  // ========================================
+  for (let i = 0; i < selectedIndices.length; i++) {
+    const rowIndex  = selectedIndices[i];
+    const name      = employeeNames[i];
+    console.log(`Verifying task for employee: ${name} (row ${rowIndex})`);
+
+    // Open employee profile using the row index (avoids name-ambiguity in the grid)
+    await peopleGrid.openEmployeeProfileByRowIndex(rowIndex);
+
+    // Navigate to the Tasks tab
+    await employeeProfile.goToTasksTab();
+
+    // Search for the task and verify it's visible
+    await employeeProfile.verifyTaskExists(taskName);
+
+    // Open the task to confirm it is accessible
+    await employeeProfile.openTaskByTitle(taskName);
+
+    // Navigate back to the People grid for all employees except the last
+    if (i < selectedIndices.length - 1) {
+      await employeeProfile.closeTaskFlyout();
+      await employeeProfile.goBackFromTaskEdit();
+      await peopleGrid.clickBackAlt();
+    }
+  }
+
+  console.log('✓ Task verified for all employees');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkCreateTaskFromLibrary', async ({ page }) => {
+  test.setTimeout(120000);
+
+  // Login and navigate to People
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
+
+  // Create POM instances
+  const bulkCreateTasks = new BulkCreateTasks(page, expect);
+  const peopleGrid      = new PeopleGrid(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
+
+  // ========================================
+  // Select 3 employees and bulk-assign a random library task
+  // ========================================
+  const { taskName, employeeNames, selectedIndices } = await bulkCreateTasks.bulkCreateTaskFromLibraryGeneric(3);
+
+  console.log(`Library task assigned: "${taskName}"`);
+  console.log(`Employees to verify: ${employeeNames.join(', ')}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Navigate back to the People grid after task assignment
+  await nav.goToPeopleAndVerify();
+
+  // ========================================
+  // Verify task exists in each employee's profile
+  // ========================================
+  for (let i = 0; i < selectedIndices.length; i++) {
+    const rowIndex = selectedIndices[i];
+    const name     = employeeNames[i];
+    console.log(`Verifying task for employee: ${name} (row ${rowIndex})`);
+
+    await peopleGrid.openEmployeeProfileByRowIndex(rowIndex);
+    await employeeProfile.goToTasksTab();
+    await employeeProfile.verifyTaskExists(taskName);
+    await employeeProfile.openTaskByTitle(taskName);
+
+    // Navigate back to the People grid for all employees except the last
+    if (i < selectedIndices.length - 1) {
+      await employeeProfile.closeTaskFlyout();
+      await employeeProfile.goBackFromTaskEdit();
+      await peopleGrid.clickBackAlt();
+    }
+  }
+
+  console.log('✓ Library task verified for all employees');
 
   // Pause to keep browser open
   await page.pause();

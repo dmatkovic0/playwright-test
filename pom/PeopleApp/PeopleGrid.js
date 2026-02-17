@@ -94,6 +94,18 @@ export class PeopleGrid extends BasePage {
   }
 
   /**
+   * Open employee profile from the grid by their tbody row index.
+   * Useful after bulk operations where you know the selected row positions.
+   * Row index matches the dataRows index used during selection (e.g. 2 = first data employee row).
+   * XPath structure: //tbody/tr[rowIndex]/td[2]/a[2]
+   * @param {number} rowIndex - 1-based tbody row index (e.g. 2 for the first employee row)
+   */
+  async openEmployeeProfileByRowIndex(rowIndex) {
+    await this.page.locator(`//tbody/tr[${rowIndex}]/td[2]/a[2]`).click();
+    await this.page.waitForTimeout(2000);
+  }
+
+  /**
    * Verify employee appears in grid search results
    * @param {string} employeeName - Name to verify
    */

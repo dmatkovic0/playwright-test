@@ -6,6 +6,8 @@ export class EmployeeProfileFlyout extends BasePage {
 
     // Profile tabs
     this.personalTab = page.getByRole('tab', { name: 'Personal' });
+    // Tasks tab inside the employee profile flyout
+    this.tasksTab = page.locator('.aut-button-tasks');
 
     // Personal section edit locators
     this.personalSectionEditButton = page.locator('#details-xEmployee-xPersonalSection').getByRole('link', { name: ' Edit' });
@@ -22,6 +24,11 @@ export class EmployeeProfileFlyout extends BasePage {
     this.salaryDisplayField = page.locator('//span[@id=\'details-xEmployee-xSalary\']');
     this.employmentStatusDisplayField = page.locator('employee-information-picture');
     this.bonusDisplayField = page.locator('#details-xEmployee-xBonus');
+
+    // ----- Tasks grid -----
+    this.taskTitleSearchField  = page.getByRole('textbox', { name: 'Title', exact: true });
+    this.flyoutCloseButton     = page.locator('#flyout-close');
+    this.taskEditFlyoutBackBtn = page.locator('#objects-add-edit-details-flyout').getByRole('button', { name: ' Back' });
   }
 
   // ===========================================
@@ -265,5 +272,66 @@ export class EmployeeProfileFlyout extends BasePage {
    */
   getEmploymentStatusField() {
     return this.employmentStatusDisplayField;
+  }
+
+  // ===========================================
+  // TASKS TAB METHODS
+  // ===========================================
+
+  /**
+   * Navigate to the Tasks tab in the employee profile
+   */
+  async goToTasksTab() {
+    await this.tasksTab.click();
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Search for a task by its title in the Tasks grid
+   * @param {string} title - Task title to search for
+   */
+  async searchTaskByTitle(title) {
+    await this.taskTitleSearchField.click();
+    await this.taskTitleSearchField.fill(title);
+    await this.taskTitleSearchField.press('Enter');
+    await this.page.waitForTimeout(1000);
+  }
+
+  /**
+   * Click the task link in the grid to open its detail flyout
+   * @param {string} title - Task title (used to locate the link)
+   */
+  async openTaskByTitle(title) {
+    await this.page.getByRole('link', { name: title }).click();
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Search for a task and assert it is visible in the grid
+   * @param {string} title - Task title to verify
+   */
+  async verifyTaskExists(title) {
+    if (!this.expect) {
+      throw new Error('expect object is required for assertions. Pass it in constructor.');
+    }
+    await this.searchTaskByTitle(title);
+    await this.expect(this.page.getByRole('link', { name: title })).toBeVisible({ timeout: 10000 });
+    console.log(`✓ Task "${title}" found in Tasks grid`);
+  }
+
+  /**
+   * Close the task detail flyout via the #flyout-close button
+   */
+  async closeTaskFlyout() {
+    await this.flyoutCloseButton.click();
+    await this.page.waitForTimeout(1000);
+  }
+
+  /**
+   * Click the Back button scoped inside the task edit flyout
+   */
+  async goBackFromTaskEdit() {
+    await this.taskEditFlyoutBackBtn.click();
+    await this.page.waitForTimeout(1500);
   }
 }
