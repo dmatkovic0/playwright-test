@@ -1,4 +1,4 @@
-import { BasePage } from './BasePage.js';
+import { BasePage } from '../BasePage.js';
 import { generateShortID } from '../../src/utils.js';
 
 export class AddEmployeeFlyout extends BasePage {

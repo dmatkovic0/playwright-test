@@ -6,6 +6,10 @@ export class BasePage {
     // Shared dropdown locators
     this.dropdownMenu = page.locator('ul.dropdown-menu[role="menu"]:visible');
     this.dropdownItems = page.locator('ul.dropdown-menu[role="menu"]:visible li[ng-repeat="item in data"]');
+
+    // Application-wide post-login prompt locators
+    this.acceptButton = page.locator("//button[normalize-space()='Accept']");
+    this.skipNavigationButton = page.locator("//button[normalize-space()='Skip Navigation']");
   }
 
   // ===========================================
@@ -133,5 +137,25 @@ export class BasePage {
     this.selectedEmployeeNames = selectedEmployeeNames;
 
     return selectedIndices;
+  }
+
+  /**
+   * Accept the application privacy policy prompt (shown on first login / after activation)
+   */
+  async acceptPrivacyPolicy() {
+    await this.acceptButton.waitFor({ state: 'visible', timeout: 10000 });
+    await this.acceptButton.click();
+    await this.page.waitForTimeout(2000);
+    console.log('Privacy policy accepted');
+  }
+
+  /**
+   * Dismiss the navigation tour/wizard prompt (shown on first login)
+   */
+  async skipNavigation() {
+    await this.skipNavigationButton.waitFor({ state: 'visible', timeout: 10000 });
+    await this.skipNavigationButton.click();
+    await this.page.waitForTimeout(2000);
+    console.log('Navigation tour skipped');
   }
 }

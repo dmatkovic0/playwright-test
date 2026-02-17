@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(npx playwright test:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,4 +1,4 @@
-import { BasePage } from './PeopleApp/BasePage.js';
+import { BasePage } from './BasePage.js';
 
 export class NavbarAndSidebar extends BasePage {
   constructor(page, expect = null) {
@@ -14,7 +14,7 @@ export class NavbarAndSidebar extends BasePage {
     this.sidebarPanel = page.locator('.utility-sidebar.pull-left');
 
     // ── Logo ──
-    this.logo = page.locator('logo-button .logo');
+    this.logo = page.locator("//logo-button[@class='utility-bar-logo ng-isolate-scope']//i[@class='icon icon-3x icon-logo ng-scope']");
 
     // ── Workmates ──
     this.workmatesLink = page.locator('.highlighted-link a[href="#/Workmates"]');
@@ -445,5 +445,13 @@ export class NavbarAndSidebar extends BasePage {
    */
   async getPageTitle() {
     return await this.pageTitle.textContent();
+  }
+
+  /**
+   * Assert that the application logo is visible (confirms the user is on the dashboard)
+   */
+  async verifyLogoVisible() {
+    await this.expect(this.logo).toBeVisible({ timeout: 10000 });
+    console.log('Logo visible — user is on the dashboard');
   }
 }

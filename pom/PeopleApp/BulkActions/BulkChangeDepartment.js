@@ -1,4 +1,4 @@
-import { BasePage } from '../BasePage.js';
+import { BasePage } from '../../BasePage.js';
 
 export class BulkChangeDepartment extends BasePage {
   constructor(page, expect = null) {

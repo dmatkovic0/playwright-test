@@ -1,4 +1,4 @@
-import { BasePage } from '../BasePage.js';
+import { BasePage } from '../../BasePage.js';
 
 export class ChangeEmploymentStatusFlyout extends BasePage {
   constructor(page, expect = null) {
@@ -52,15 +52,9 @@ export class ChangeEmploymentStatusFlyout extends BasePage {
     await this.employmentStatusButton.click();
     await this.page.waitForTimeout(500);
 
-    // For Prehire, use the specific locator
-    if (status === 'Prehire') {
-      await this.page.locator('#xEmploymentStatusHistory-xEmploymentStatusLookup').getByText('Prehire').click();
-      await this.page.waitForTimeout(500);
-    } else {
-      // For other statuses (Active, Leave of Absence), use getByText
-      await this.page.getByText(status, { exact: true }).click();
-      await this.page.waitForTimeout(500);
-    }
+    // Use the specific locator scoped to the dropdown to avoid strict mode violations
+    await this.page.locator('#xEmploymentStatusHistory-xEmploymentStatusLookup').getByText(status, { exact: true }).click();
+    await this.page.waitForTimeout(500);
   }
 
   // ===========================================
