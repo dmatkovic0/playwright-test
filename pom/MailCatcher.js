@@ -35,7 +35,7 @@ export class MailCatcher {
   async open() {
     this.mailcatcherPage = await this.context.newPage();
     await this.mailcatcherPage.goto(`${this.baseUrl}/#/`);
-    await this.mailcatcherPage.waitForTimeout(2000);
+    await this.mailcatcherPage.waitForTimeout(5000);
     console.log('MailCatcher opened');
   }
 
@@ -160,10 +160,78 @@ export class MailCatcher {
 
       if (i < maxAttempts - 1) {
         await this.mailcatcherPage.reload();
-        await this.mailcatcherPage.waitForTimeout(2000);
+        await this.mailcatcherPage.waitForTimeout(5000);
       }
     }
 
     throw new Error(`Activation email not found for ${emailAddress} after ${maxAttempts} attempts`);
+  }
+
+  /**
+   * Poll MailCatcher until a password-reset email arrives for the given address,
+   * click the "RESET PASSWORD" link inside the email iframe, and return the
+   * popup page that opens (to be used with ResetPasswordPage POM).
+   *
+   * @param {string} emailAddress - Recipient email to search for
+   * @param {number} maxAttempts  - Maximum polling attempts (default: 30 = ~60s)
+   * @returns {Page} The popup page opened by clicking RESET PASSWORD
+   * @throws {Error} If the email or the reset link is not found in time
+   */
+  async getPasswordResetPopup(emailAddress, maxAttempts = 30) {
+    console.log(`Searching for password reset email sent to: ${emailAddress}`);
+
+    for (let i = 0; i < maxAttempts; i++) {
+      console.log(`Attempt ${i + 1}/${maxAttempts}: Looking for password reset email...`);
+
+      try {
+        await this.searchForEmail(emailAddress);
+
+        // There may be multiple emails for the same address (e.g. activation + reset).
+        // Iterate through ALL matching rows and check each one for the RESET PASSWORD link.
+        const allMatchingEmails = this.mailcatcherPage.locator(`text=${emailAddress}`);
+        const count = await allMatchingEmails.count();
+
+        for (let j = 0; j < count; j++) {
+          const emailItem = allMatchingEmails.nth(j);
+          const isVisible = await emailItem.isVisible({ timeout: 1000 }).catch(() => false);
+          if (!isVisible) continue;
+
+          await emailItem.click();
+          await this.mailcatcherPage.waitForTimeout(1500);
+
+          const iframeVisible = await this.emailIframe.isVisible({ timeout: 2000 }).catch(() => false);
+          if (!iframeVisible) continue;
+
+          const emailContent = await this.emailIframe.contentFrame();
+          const resetLink    = emailContent.getByRole('link', { name: 'RESET PASSWORD' });
+          const linkVisible  = await resetLink.isVisible({ timeout: 2000 }).catch(() => false);
+
+          if (linkVisible) {
+            try {
+              const popupPromise = this.mailcatcherPage.waitForEvent('popup', { timeout: 10000 });
+              await resetLink.click();
+              const popup = await popupPromise;
+              await popup.waitForLoadState('domcontentloaded');
+              console.log(`Password reset popup opened (found in email ${j + 1} of ${count})`);
+              return popup;
+            } catch (popupError) {
+              console.log(`Popup did not open on attempt ${i + 1}, email ${j + 1}: ${popupError.message}. Will refresh and retry...`);
+            }
+          } else {
+            console.log(`Email ${j + 1}/${count} does not contain RESET PASSWORD link, trying next...`);
+          }
+        }
+      } catch (error) {
+        console.log(`Error on attempt ${i + 1}: ${error.message}`);
+      }
+
+      if (i < maxAttempts - 1) {
+        // Navigate back to mailcatcher explicitly in case the page navigated away
+        await this.mailcatcherPage.goto(`${this.baseUrl}/#/`).catch(() => {});
+        await this.mailcatcherPage.waitForTimeout(5000);
+      }
+    }
+
+    throw new Error(`Password reset email not found for ${emailAddress} after ${maxAttempts} attempts`);
   }
 }

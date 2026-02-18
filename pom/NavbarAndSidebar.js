@@ -99,6 +99,10 @@ export class NavbarAndSidebar extends BasePage {
     this.mySettingsLink = page.locator('a[href="#/AccountSettings"]');
     this.helpLink = page.locator('a[href="#/Help"]');
     this.signOutButton = page.locator('.utility-navigation-tour-usermenu li:last-child');
+
+    // ── User menu (chevron + My Settings) — used when logged in as a non-admin employee ──
+    this.userMenuChevron  = page.locator("//i[@class='icon icon-chevron-down']");
+    this.mySettingsOption = page.locator("//p[normalize-space()='My Settings']");
   }
 
   // ===========================================
@@ -422,11 +426,13 @@ export class NavbarAndSidebar extends BasePage {
   }
 
   /**
-   * Navigate to My Settings page
+   * Navigate to My Settings page.
+   * Clicks the chevron to open the user menu, then clicks the My Settings option.
    */
   async goToMySettings() {
-    await this.openUserProfile();
-    await this.mySettingsLink.click();
+    await this.userMenuChevron.click();
+    await this.page.waitForTimeout(500);
+    await this.mySettingsOption.click();
     await this.page.waitForTimeout(1500);
   }
 
