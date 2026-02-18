@@ -25,22 +25,6 @@ export class BulkChangeManager extends BasePage {
   }
 
   // ===========================================
-  // EMPLOYEE SELECTION METHODS
-  // ===========================================
-
-  /**
-   * Select employees by clicking their checkboxes
-   * @param {Array<string>} employeeIdentifiers - Array of partial row text to identify employees
-   */
-  async selectEmployees(employeeIdentifiers) {
-    for (const identifier of employeeIdentifiers) {
-      await this.page.getByRole('row', { name: identifier }).locator('label').click();
-      await this.page.waitForTimeout(300);
-    }
-    console.log(`Selected ${employeeIdentifiers.length} employees`);
-  }
-
-  // ===========================================
   // BULK ACTIONS MENU METHODS
   // ===========================================
 
@@ -223,43 +207,6 @@ export class BulkChangeManager extends BasePage {
   // ===========================================
   // COMPLETE WORKFLOW METHODS
   // ===========================================
-
-  /**
-   * Bulk change manager for selected employees
-   * @param {Array<string>} employeeIdentifiers - Array of employee row identifiers
-   * @param {string} effectiveDate - Date in MM/DD/YYYY format (optional, for PeopleFull)
-   * @returns {string} Selected manager name
-   */
-  async bulkChangeManager(employeeIdentifiers, effectiveDate = null) {
-    // Select employees
-    await this.selectEmployees(employeeIdentifiers);
-
-    // Open bulk actions and select change position
-    await this.openBulkActionsMenu();
-    await this.clickChangePosition();
-
-    // Set effective date (only if provided - for PeopleFull)
-    if (effectiveDate) {
-      await this.selectDateByTyping(effectiveDate);
-    }
-
-    // Select Manager field
-    await this.selectManagerField();
-
-    // Select random manager from grid (no exclusion for specific employee method)
-    // Note: For this method, we don't exclude since employeeIdentifiers are partial text matches
-    const selectedManager = await this.selectRandomManager();
-
-    // Click Update
-    await this.clickUpdate();
-
-    // Confirm update
-    await this.confirmBulkUpdate(employeeIdentifiers.length);
-
-    console.log(`✓ Bulk manager change completed for ${employeeIdentifiers.length} employees`);
-
-    return selectedManager;
-  }
 
   /**
    * Bulk change manager for first N employees (generic version)

@@ -6,8 +6,12 @@ export class EmployeeProfileFlyout extends BasePage {
 
     // Profile tabs
     this.personalTab = page.getByRole('tab', { name: 'Personal' });
+    this.accountTab  = page.getByRole('tab', { name: 'Account' });
     // Tasks tab inside the employee profile flyout
     this.tasksTab = page.locator('.aut-button-tasks');
+
+    // Account tab — container used to scope security role verification
+    this.securityRoleContainer = page.locator('#employeePageScrollElement');
 
     // Personal section edit locators
     this.personalSectionEditButton = page.locator('#details-xEmployee-xPersonalSection').getByRole('link', { name: ' Edit' });
@@ -27,8 +31,9 @@ export class EmployeeProfileFlyout extends BasePage {
 
     // ----- Tasks grid -----
     this.taskTitleSearchField  = page.getByRole('textbox', { name: 'Title', exact: true });
+    this.taskDueDateFilterField = page.locator("//input[@placeholder='Due Date']");
     this.flyoutCloseButton     = page.locator('#flyout-close');
-    this.taskEditFlyoutBackBtn = page.locator('#objects-add-edit-details-flyout').getByRole('button', { name: ' Back' });
+    this.taskEditFlyoutBackBtn = page.locator("//button[@class='btn btn-link btn-with-icon back-link ng-binding']");
   }
 
   // ===========================================
@@ -41,6 +46,31 @@ export class EmployeeProfileFlyout extends BasePage {
   async goToPersonalTab() {
     await this.personalTab.click();
     await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Navigate to Account tab
+   */
+  async goToAccountTab() {
+    await this.accountTab.click();
+    await this.page.waitForTimeout(1500);
+  }
+
+  // ===========================================
+  // ACCOUNT TAB METHODS
+  // ===========================================
+
+  /**
+   * Verify that the given security role name is visible on the Account tab
+   * @param {string} roleName - Expected security role name
+   */
+  async verifySecurityRole(roleName) {
+    if (!this.expect) {
+      throw new Error('expect object is required for assertions. Pass it in constructor.');
+    }
+    const roleField = this.securityRoleContainer.getByText(roleName, { exact: true });
+    await this.expect(roleField).toBeVisible({ timeout: 10000 });
+    console.log(`✓ Security role "${roleName}" verified on Account tab`);
   }
 
   // ===========================================
@@ -287,14 +317,25 @@ export class EmployeeProfileFlyout extends BasePage {
   }
 
   /**
-   * Search for a task by its title in the Tasks grid
+   * Search for a task by its title and optionally filter by due date in the Tasks grid.
+   * Filtering by due date prevents false matches when the same task name exists multiple times.
    * @param {string} title - Task title to search for
+   * @param {string|null} dueDate - Due date in MM/DD/YYYY format (optional)
    */
-  async searchTaskByTitle(title) {
+  async searchTaskByTitle(title, dueDate = null) {
     await this.taskTitleSearchField.click();
     await this.taskTitleSearchField.fill(title);
     await this.taskTitleSearchField.press('Enter');
-    await this.page.waitForTimeout(1000);
+    await this.page.waitForTimeout(500);
+
+    if (dueDate) {
+      await this.taskDueDateFilterField.click();
+      await this.taskDueDateFilterField.fill(dueDate);
+      await this.taskDueDateFilterField.press('Enter');
+      await this.page.waitForTimeout(500);
+    }
+
+    await this.page.waitForTimeout(500);
   }
 
   /**
@@ -307,15 +348,17 @@ export class EmployeeProfileFlyout extends BasePage {
   }
 
   /**
-   * Search for a task and assert it is visible in the grid
+   * Search for a task by title (and optionally due date) and assert it is visible in the grid.
+   * Passing dueDate prevents ambiguity when the same task name was created on multiple test runs.
    * @param {string} title - Task title to verify
+   * @param {string|null} dueDate - Due date in MM/DD/YYYY format (optional)
    */
-  async verifyTaskExists(title) {
+  async verifyTaskExists(title, dueDate = null) {
     if (!this.expect) {
       throw new Error('expect object is required for assertions. Pass it in constructor.');
     }
-    await this.searchTaskByTitle(title);
-    await this.expect(this.page.getByRole('link', { name: title })).toBeVisible({ timeout: 10000 });
+    await this.searchTaskByTitle(title, dueDate);
+    await this.expect(this.page.getByRole('link', { name: title, exact: true }).first()).toBeVisible({ timeout: 10000 });
     console.log(`✓ Task "${title}" found in Tasks grid`);
   }
 

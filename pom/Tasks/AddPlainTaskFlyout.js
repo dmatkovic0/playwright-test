@@ -238,7 +238,7 @@ export class AddPlainTaskFlyout extends BasePage {
   async selectDateByCalendar(dayNumber) {
     await this.fixedDueDateInput.click();
     await this.page.waitForTimeout(500);
-    await this.page.getByRole('link', { name: dayNumber.toString() }).click();
+    await this.page.locator('#ui-datepicker-div').getByRole('link', { name: dayNumber.toString(), exact: true }).click();
     await this.page.waitForTimeout(500);
   }
 

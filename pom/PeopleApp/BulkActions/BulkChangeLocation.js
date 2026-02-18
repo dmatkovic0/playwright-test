@@ -26,22 +26,6 @@ export class BulkChangeLocation extends BasePage {
   }
 
   // ===========================================
-  // EMPLOYEE SELECTION METHODS
-  // ===========================================
-
-  /**
-   * Select employees by clicking their checkboxes
-   * @param {Array<string>} employeeIdentifiers - Array of partial row text to identify employees
-   */
-  async selectEmployees(employeeIdentifiers) {
-    for (const identifier of employeeIdentifiers) {
-      await this.page.getByRole('row', { name: identifier }).locator('label').click();
-      await this.page.waitForTimeout(300);
-    }
-    console.log(`Selected ${employeeIdentifiers.length} employees`);
-  }
-
-  // ===========================================
   // BULK ACTIONS MENU METHODS
   // ===========================================
 
@@ -185,42 +169,6 @@ export class BulkChangeLocation extends BasePage {
   // ===========================================
   // COMPLETE WORKFLOW METHODS
   // ===========================================
-
-  /**
-   * Bulk change location for selected employees
-   * @param {Array<string>} employeeIdentifiers - Array of employee row identifiers
-   * @param {string} effectiveDate - Date in MM/DD/YYYY format (optional, for PeopleFull)
-   * @returns {string} Selected location name
-   */
-  async bulkChangeLocation(employeeIdentifiers, effectiveDate = null) {
-    // Select employees
-    await this.selectEmployees(employeeIdentifiers);
-
-    // Open bulk actions and select change position
-    await this.openBulkActionsMenu();
-    await this.clickChangePosition();
-
-    // Set effective date (only if provided - for PeopleFull)
-    if (effectiveDate) {
-      await this.selectDateByTyping(effectiveDate);
-    }
-
-    // Select Location field
-    await this.selectLocationField();
-
-    // Select random location from grid and get the name
-    const selectedLocation = await this.selectRandomLocation();
-
-    // Click Update
-    await this.clickUpdate();
-
-    // Confirm update
-    await this.confirmBulkUpdate(employeeIdentifiers.length);
-
-    console.log(`✓ Bulk location change completed for ${employeeIdentifiers.length} employees`);
-
-    return selectedLocation;
-  }
 
   /**
    * Bulk change location for first N employees (generic version)

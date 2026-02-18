@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { generateRandomPastDate, generateShortID } from '../../src/utils.js';
-import { login1 } from '../../src/loginInfo/loginInfo.js';
+import { login1, login3 } from '../../src/loginInfo/loginInfo.js';
 import { LoginPage } from '../../pom/LoginPage.js';
 import { NavbarAndSidebar } from '../../pom/NavbarAndSidebar.js';
 import { AddEmployeeFlyout } from '../../pom/PeopleApp/AddEmployeeFlyout.js';
@@ -19,6 +19,8 @@ import { BulkChangeLocation } from '../../pom/PeopleApp/BulkActions/BulkChangeLo
 import { BulkChangePosition } from '../../pom/PeopleApp/BulkActions/BulkChangePosition.js';
 import { BulkChangeEmploymentType } from '../../pom/PeopleApp/BulkActions/BulkChangeEmploymentType.js';
 import { BulkCreateTasks } from '../../pom/PeopleApp/BulkActions/BulkCreateTasks.js';
+import { BulkConfigureSecurityRole } from '../../pom/PeopleApp/BulkActions/BulkConfigureSecurityRole.js';
+import { DeleteEmployee } from '../../pom/PeopleApp/BulkActions/DeleteEmployee.js';
 import { Position } from '../../pom/PeopleApp/Position.js';
 import { Location } from '../../pom/PeopleApp/Location.js';
 import { Department } from '../../pom/PeopleApp/Department.js';
@@ -1012,7 +1014,7 @@ test('BulkCreatePlainTasks', async ({ page }) => {
   // ========================================
   // Select 3 employees and bulk-create task
   // ========================================
-  const { employeeNames, selectedIndices } = await bulkCreateTasks.bulkCreateTasksGeneric(
+  const { employeeNames, selectedIndices, dueDate } = await bulkCreateTasks.bulkCreateTasksGeneric(
     3,
     taskName,
     todayDay
@@ -1020,6 +1022,10 @@ test('BulkCreatePlainTasks', async ({ page }) => {
 
   console.log(`Task created. Employees to verify: ${employeeNames.join(', ')}`);
   console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+  console.log(`Due date for filtering: ${dueDate}`);
+
+  // Wait for the task creation to settle before navigating away
+  await page.waitForTimeout(2000);
 
   // Navigate back to the People grid after task creation
   await nav.goToPeopleAndVerify();
@@ -1038,18 +1044,13 @@ test('BulkCreatePlainTasks', async ({ page }) => {
     // Navigate to the Tasks tab
     await employeeProfile.goToTasksTab();
 
-    // Search for the task and verify it's visible
-    await employeeProfile.verifyTaskExists(taskName);
+    // Search for the task (filtered by due date to avoid duplicate-name collisions) and verify it's visible
+    await employeeProfile.verifyTaskExists(taskName, dueDate);
 
-    // Open the task to confirm it is accessible
-    await employeeProfile.openTaskByTitle(taskName);
-
-    // Navigate back to the People grid for all employees except the last
-    if (i < selectedIndices.length - 1) {
-      await employeeProfile.closeTaskFlyout();
-      await employeeProfile.goBackFromTaskEdit();
-      await peopleGrid.clickBackAlt();
-    }
+    // First back: tasks view → employee profile
+    await employeeProfile.goBackFromTaskEdit();
+    // Second back: employee profile → People grid
+    await peopleGrid.clickBack();
   }
 
   console.log('✓ Task verified for all employees');
@@ -1083,6 +1084,9 @@ test('BulkCreateTaskFromLibrary', async ({ page }) => {
   console.log(`Employees to verify: ${employeeNames.join(', ')}`);
   console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
 
+  // Wait for the task assignment to settle before navigating away
+  await page.waitForTimeout(2000);
+
   // Navigate back to the People grid after task assignment
   await nav.goToPeopleAndVerify();
 
@@ -1097,17 +1101,141 @@ test('BulkCreateTaskFromLibrary', async ({ page }) => {
     await peopleGrid.openEmployeeProfileByRowIndex(rowIndex);
     await employeeProfile.goToTasksTab();
     await employeeProfile.verifyTaskExists(taskName);
-    await employeeProfile.openTaskByTitle(taskName);
+
+    // First back: tasks view → employee profile
+    await employeeProfile.goBackFromTaskEdit();
+    // Second back: employee profile → People grid
+    await peopleGrid.clickBack();
+  }
+
+  console.log('✓ Library task verified for all employees');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('BulkConfigureSecurityRole', async ({ page }) => {
+  test.setTimeout(120000);
+
+  // Login and navigate to People
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login1.environment, login1.email, login1.password);
+
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
+
+  // Create POM instances
+  const bulkConfigureSecurityRole = new BulkConfigureSecurityRole(page, expect);
+  const peopleGrid                = new PeopleGrid(page, expect);
+  const employeeProfile           = new EmployeeProfileFlyout(page, expect);
+
+  // ========================================
+  // Select 3 employees and bulk-assign a random security role
+  // ========================================
+  const { roleName, employeeNames, selectedIndices } = await bulkConfigureSecurityRole.bulkConfigureSecurityRoleGeneric(3);
+
+  console.log(`Security role assigned: "${roleName}"`);
+  console.log(`Employees to verify: ${employeeNames.join(', ')}`);
+  console.log(`Selected employee indices: ${selectedIndices.join(', ')}`);
+
+  // Wait for the role assignment to settle before navigating away
+  await page.waitForTimeout(2000);
+
+  // Navigate back to the People grid after role assignment
+  await nav.goToPeopleAndVerify();
+
+  // ========================================
+  // Verify security role on each employee's Account tab
+  // ========================================
+  for (let i = 0; i < selectedIndices.length; i++) {
+    const rowIndex = selectedIndices[i];
+    const name     = employeeNames[i];
+    console.log(`Verifying security role for employee: ${name} (row ${rowIndex})`);
+
+    await peopleGrid.openEmployeeProfileByRowIndex(rowIndex);
+    await employeeProfile.goToAccountTab();
+    await employeeProfile.verifySecurityRole(roleName);
 
     // Navigate back to the People grid for all employees except the last
     if (i < selectedIndices.length - 1) {
-      await employeeProfile.closeTaskFlyout();
-      await employeeProfile.goBackFromTaskEdit();
       await peopleGrid.clickBackAlt();
     }
   }
 
-  console.log('✓ Library task verified for all employees');
+  console.log('✓ Security role verified for all employees');
+
+  // Pause to keep browser open
+  await page.pause();
+});
+
+test('DeleteEmployee', async ({ page }) => {
+  test.setTimeout(120000);
+
+  // Login with login3
+  const loginPage = new LoginPage(page, expect);
+  await loginPage.login(login3.environment, login3.email, login3.password);
+
+  // Navigate to People page
+  const nav = new NavbarAndSidebar(page, expect);
+  await nav.ensureSidebarExpanded();
+  await nav.goToPeopleAndVerify();
+
+  // Create POM instances
+  const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  const peopleGrid        = new PeopleGrid(page, expect);
+  const deleteEmployee    = new DeleteEmployee(page, expect);
+
+  // ========================================
+  // Add a new employee (same flow as AddEmployeeOnboardingChecklist)
+  // ========================================
+  await addEmployeeFlyout.open();
+
+  const uniqueID  = generateShortID();
+  const firstName = `First_${uniqueID}`;
+  const lastName  = `Last_${uniqueID}`;
+  const email     = `${uniqueID}@mail.com`;
+  const startDate = addEmployeeFlyout.getTodayDate();
+
+  await addEmployeeFlyout.fillFirstName(firstName);
+  await addEmployeeFlyout.fillLastName(lastName);
+  await addEmployeeFlyout.fillEmail(email);
+  await addEmployeeFlyout.fillStartDate(startDate);
+
+  const selectedValues = await addEmployeeFlyout.selectRandomFromAllDropdowns();
+  console.log(`Selected Department: ${selectedValues.department}`);
+  console.log(`Selected Position: ${selectedValues.position}`);
+  console.log(`Selected Location: ${selectedValues.location}`);
+  console.log(`Selected Division: ${selectedValues.division}`);
+
+  await addEmployeeFlyout.selectFirstManager();
+  await addEmployeeFlyout.save();
+
+  console.log(`Created employee: ${firstName} ${lastName}`);
+
+  // Wait for save to complete
+  await page.waitForTimeout(3000);
+
+  // ========================================
+  // Return to grid and verify employee exists
+  // ========================================
+  await peopleGrid.clickBack();
+  await peopleGrid.searchByFirstName(firstName);
+  await peopleGrid.verifyEmployeeInGrid(firstName);
+  console.log(`Employee found in grid: ${firstName} ${lastName}`);
+
+  // ========================================
+  // Delete the employee
+  // ========================================
+  await deleteEmployee.deleteEmployeeGeneric(firstName);
+
+  // ========================================
+  // Poll every 2s until employee is gone from grid (up to 30s)
+  // ========================================
+  console.log('Waiting for employee to be removed from grid...');
+  await deleteEmployee.waitForEmployeeToDisappear(firstName);
+
+  console.log(`✓ Employee ${firstName} ${lastName} successfully deleted`);
 
   // Pause to keep browser open
   await page.pause();

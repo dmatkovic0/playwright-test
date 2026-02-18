@@ -23,49 +23,6 @@ export class BulkCreateTasks extends BasePage {
   }
 
   // ===========================================
-  // EMPLOYEE NAME CAPTURE METHODS
-  // ===========================================
-
-  /**
-   * Read the first N employee name links from the grid before selection.
-   * Mirrors the row-filtering logic in selectFirstNEmployees (skip row 0 = select-all, row 1 = HR Admin).
-   * @param {number} count - Number of employee names to capture
-   * @returns {string[]} Array of employee name strings
-   */
-  async captureEmployeeNames(count) {
-    await this.page.waitForTimeout(1000);
-
-    const allRows = await this.page.getByRole('row').all();
-
-    // Keep only rows that contain a checkbox label (data rows)
-    const dataRows = [];
-    for (const row of allRows) {
-      const labels = await row.locator('label').count();
-      if (labels > 0) {
-        dataRows.push(row);
-      }
-    }
-
-    const names = [];
-    const startIndex = 2; // skip row 0 (select all) and row 1 (HR Admin)
-
-    for (let i = startIndex; i < Math.min(startIndex + count, dataRows.length); i++) {
-      // First name and last name are separate <a class="aut-button-xEmployeeDetail"> links.
-      // Collect all of them and join to form the full name (e.g. "HR" + "Admin" → "HR Admin").
-      const nameLinks = await dataRows[i].locator('.aut-button-xEmployeeDetail').all();
-      const nameParts = [];
-      for (const link of nameLinks) {
-        const text = (await link.textContent() ?? '').trim();
-        if (text.length > 0) nameParts.push(text);
-      }
-      names.push(nameParts.join(' '));
-    }
-
-    console.log(`Captured employee names: ${names.join(', ')}`);
-    return names;
-  }
-
-  // ===========================================
   // BULK ACTIONS MENU METHODS
   // ===========================================
 
@@ -150,7 +107,7 @@ export class BulkCreateTasks extends BasePage {
    * @param {number} employeeCount - Number of employees to select (uses first N, skipping rows 0–1)
    * @param {string} taskName - Task name to create
    * @param {string|number} todayDay - Day number of today (e.g. '17') for the calendar picker
-   * @returns {{ taskName: string, employeeNames: string[], selectedIndices: number[] }}
+   * @returns {{ taskName: string, dueDate: string, employeeNames: string[], selectedIndices: number[] }}
    */
   async bulkCreateTasksGeneric(employeeCount, taskName, todayDay) {
     // Capture employee names from the grid before selecting (used for verification later)
@@ -171,15 +128,18 @@ export class BulkCreateTasks extends BasePage {
     await this.plainTaskForm.selectDateByCalendar(todayDay);
     await this.plainTaskForm.save();
 
-    console.log(`✓ Bulk task "${taskName}" created for: ${employeeNames.join(', ')}`);
+    // Remember today's full date so verification can filter by it (avoids duplicate-name collisions)
+    const dueDate = this.getTodayDate();
 
-    return { taskName, employeeNames, selectedIndices };
+    console.log(`✓ Bulk task "${taskName}" created for: ${employeeNames.join(', ')} (due: ${dueDate})`);
+
+    return { taskName, dueDate, employeeNames, selectedIndices };
   }
 
   /**
    * Select employees, pick a random task from the library, bulk-assign it, and return data for verification.
    * @param {number} employeeCount - Number of employees to select (uses first N, skipping rows 0–1)
-   * @returns {{ taskName: string, employeeNames: string[], selectedIndices: number[] }}
+   * @returns {{ taskName: string, dueDate: string, employeeNames: string[], selectedIndices: number[] }}
    */
   async bulkCreateTaskFromLibraryGeneric(employeeCount) {
     // Capture employee names from the grid before selecting
@@ -201,8 +161,11 @@ export class BulkCreateTasks extends BasePage {
     // Confirm selection
     await this.clickAdd();
 
-    console.log(`✓ Library task "${taskName}" bulk-assigned to: ${employeeNames.join(', ')}`);
+    // Remember today's full date so verification can filter by it (avoids duplicate-name collisions)
+    const dueDate = this.getTodayDate();
 
-    return { taskName, employeeNames, selectedIndices };
+    console.log(`✓ Library task "${taskName}" bulk-assigned to: ${employeeNames.join(', ')} (due: ${dueDate})`);
+
+    return { taskName, dueDate, employeeNames, selectedIndices };
   }
 }

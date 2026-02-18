@@ -89,6 +89,45 @@ export class BasePage {
   }
 
   /**
+   * Read the first N employee name links from the People grid before selection.
+   * Skips row 0 (select-all checkbox) and row 1 (HR Admin) — same logic as selectFirstNEmployees.
+   * @param {number} count - Number of employee names to capture
+   * @returns {string[]} Array of full employee name strings
+   */
+  async captureEmployeeNames(count) {
+    await this.page.waitForTimeout(1000);
+
+    const allRows = await this.page.getByRole('row').all();
+
+    // Keep only rows that contain a checkbox label (data rows)
+    const dataRows = [];
+    for (const row of allRows) {
+      const labels = await row.locator('label').count();
+      if (labels > 0) {
+        dataRows.push(row);
+      }
+    }
+
+    const names = [];
+    const startIndex = 2; // skip row 0 (select all) and row 1 (HR Admin)
+
+    for (let i = startIndex; i < Math.min(startIndex + count, dataRows.length); i++) {
+      // First name and last name are separate <a class="aut-button-xEmployeeDetail"> links.
+      // Collect all of them and join to form the full name (e.g. "HR" + "Admin" → "HR Admin").
+      const nameLinks = await dataRows[i].locator('.aut-button-xEmployeeDetail').all();
+      const nameParts = [];
+      for (const link of nameLinks) {
+        const text = (await link.textContent() ?? '').trim();
+        if (text.length > 0) nameParts.push(text);
+      }
+      names.push(nameParts.join(' '));
+    }
+
+    console.log(`Captured employee names: ${names.join(', ')}`);
+    return names;
+  }
+
+  /**
    * Select first N employees by clicking their checkboxes
    * @param {number} count - Number of employees to select
    * @returns {Array<number>} Array of row indices that were selected (0-based)
