@@ -146,12 +146,32 @@ export class MailCatcher {
       try {
         await this.searchForEmail(emailAddress);
 
-        const emailClicked = await this.clickEmail(emailAddress);
+        // There may be multiple emails for the same address (e.g. activation + welcome).
+        // Iterate through ALL matching emails and check each one for the activation link.
+        const allMatchingEmails = this.mailcatcherPage.locator(`text=${emailAddress}`);
+        const count = await allMatchingEmails.count();
 
-        if (emailClicked) {
-          const activationLink = await this.extractActivationLink();
-          if (activationLink) {
-            return activationLink;
+        for (let j = 0; j < count; j++) {
+          const emailItem = allMatchingEmails.nth(j);
+          const isVisible = await emailItem.isVisible({ timeout: 1000 }).catch(() => false);
+          if (!isVisible) continue;
+
+          await emailItem.click();
+          await this.mailcatcherPage.waitForTimeout(1500);
+
+          const iframeVisible = await this.emailIframe.isVisible({ timeout: 2000 }).catch(() => false);
+          if (!iframeVisible) continue;
+
+          const emailContent = await this.emailIframe.contentFrame();
+          const activationButton = emailContent.locator("//a[@class='button-link button-lg button-primary']");
+          const buttonVisible = await activationButton.isVisible({ timeout: 2000 }).catch(() => false);
+
+          if (buttonVisible) {
+            const link = await activationButton.getAttribute('href');
+            console.log(`Extracted activation link from email ${j + 1} of ${count}: ${link}`);
+            return link;
+          } else {
+            console.log(`Email ${j + 1}/${count} does not contain activation link, trying next...`);
           }
         }
       } catch (error) {

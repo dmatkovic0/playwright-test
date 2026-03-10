@@ -23,6 +23,7 @@ const aioConfig = {
 module.exports = defineConfig({
   testDir: './tests',
   timeout: 30000,
+  workers: 2,
   use: {
     baseURL: 'https://corehr.staging.hrcloud.net/Start/#/Authentication/Login?returnUrl=',
     headless: false,
