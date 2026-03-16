@@ -247,6 +247,37 @@ export class AddEmployeeFlyout extends BasePage {
   }
 
   /**
+   * Select random manager from lookup grid and return selected manager name
+   * @returns {string} Selected manager name
+   */
+  async selectRandomManager() {
+    await this.openManagerLookup();
+    await this.page.waitForTimeout(1000);
+
+    // Get all manager rows from the grid
+    const managerRows = await this.page.locator("//ngv-grid//tbody//tr").all();
+
+    if (managerRows.length === 0) {
+      throw new Error('No managers found in lookup grid');
+    }
+
+    // Select random manager
+    const randomIndex = Math.floor(Math.random() * managerRows.length);
+    const selectedRow = managerRows[randomIndex];
+
+    // Click on the manager row to select (click on 3rd column)
+    const managerNameCell = selectedRow.locator('td').nth(2); // 3rd column (0-indexed)
+    await managerNameCell.click({ force: true });
+    await this.page.waitForTimeout(1000);
+
+    // Get the manager name from the input field AFTER selection
+    // This ensures we capture the actual name that was selected
+    const managerName = await this.getManagerValue();
+
+    return managerName.trim();
+  }
+
+  /**
    * Get manager value
    * @returns {string} Manager value
    */
@@ -475,13 +506,11 @@ export class AddEmployeeFlyout extends BasePage {
     await this.fillEmail(email);
     await this.fillStartDate(startDate);
 
-    // Select dropdowns (2nd option for department, position, location)
-    await this.selectDepartment(1);
-    await this.selectPosition(1);
-    await this.selectLocation(1);
+    // Select random values from all dropdowns
+    const dropdownValues = await this.selectRandomFromAllDropdowns();
 
-    // Select manager
-    await this.selectFirstManager();
+    // Select random manager
+    const manager = await this.selectRandomManager();
 
     // Onboarding is default, so just save
     await this.save();
@@ -493,7 +522,12 @@ export class AddEmployeeFlyout extends BasePage {
       lastName,
       email,
       startDate,
-      uniqueID
+      uniqueID,
+      department: dropdownValues.department,
+      position: dropdownValues.position,
+      location: dropdownValues.location,
+      division: dropdownValues.division,
+      manager
     };
   }
 
@@ -512,6 +546,12 @@ export class AddEmployeeFlyout extends BasePage {
     await this.fillLastName(lastName);
     await this.fillEmail(email);
 
+    // Select random values from all dropdowns
+    const dropdownValues = await this.selectRandomFromAllDropdowns();
+
+    // Select random manager
+    const manager = await this.selectRandomManager();
+
     // Select prehire checklist
     await this.selectPrehireChecklist();
 
@@ -524,7 +564,12 @@ export class AddEmployeeFlyout extends BasePage {
       firstName,
       lastName,
       email,
-      uniqueID
+      uniqueID,
+      department: dropdownValues.department,
+      position: dropdownValues.position,
+      location: dropdownValues.location,
+      division: dropdownValues.division,
+      manager
     };
   }
 
@@ -543,6 +588,12 @@ export class AddEmployeeFlyout extends BasePage {
     await this.fillLastName(lastName);
     await this.fillEmail(email);
 
+    // Select random values from all dropdowns
+    const dropdownValues = await this.selectRandomFromAllDropdowns();
+
+    // Select random manager
+    const manager = await this.selectRandomManager();
+
     // Select no auto assignment
     await this.selectNoAutoAssignment();
 
@@ -555,7 +606,12 @@ export class AddEmployeeFlyout extends BasePage {
       firstName,
       lastName,
       email,
-      uniqueID
+      uniqueID,
+      department: dropdownValues.department,
+      position: dropdownValues.position,
+      location: dropdownValues.location,
+      division: dropdownValues.division,
+      manager
     };
   }
 }

@@ -1,8 +1,10 @@
 import { environments } from '../src/loginInfo/loginInfo.js';
+import { BasePage } from './BasePage.js';
 
 export class LoginPage {
   constructor(page) {
     this.page = page;
+    this.basePage = new BasePage(page);
 
     // Environment URLs (imported from secure loginInfo file)
     this.environments = environments;
@@ -91,7 +93,7 @@ export class LoginPage {
       const frame = await this.chatWidgetFrame.contentFrame();
       await frame.locator('[data-test-id="ai-welcome-msg-close-button"]').click({ timeout: 1500 });
     } catch (error) {
-      console.log('Chat widget close failed or not present:', error.message);
+      // Chat widget not present, continue
     }
   }
 
@@ -138,6 +140,9 @@ export class LoginPage {
     // Close chat widget
     await this.closeChatWidget();
 
+    // Close welcome chat message if it appears
+    await this.basePage.closeWelcomeChatMessage();
+
     console.log(`✓ Successfully logged in as: ${email} in ${environment} environment`);
   }
 
@@ -166,6 +171,7 @@ export class LoginPage {
     await this.passwordField.fill(password);
     await this.signInButton.click();
     await this.closeChatWidget();
+    await this.basePage.closeWelcomeChatMessage();
   }
 
   // ===========================================

@@ -197,4 +197,38 @@ export class BasePage {
     await this.page.waitForTimeout(2000);
     console.log('Navigation tour skipped');
   }
+
+  /**
+   * Close the welcome chat message if it appears after login
+   */
+  async closeWelcomeChatMessage() {
+    try {
+      // Wait for the chat widget iframe to appear
+      const chatWidgetFrame = this.page.locator('[data-test-id="chat-widget-iframe"]');
+      await chatWidgetFrame.waitFor({ state: 'attached', timeout: 5000 });
+
+      // Wait for the iframe to be fully loaded
+      await this.page.waitForTimeout(2000);
+
+      const frame = await chatWidgetFrame.contentFrame();
+
+      if (!frame) {
+        return;
+      }
+
+      // Try to close the welcome message with extended timeout
+      const closeButton = frame.locator('[data-test-id="welcome-message-close-button"]');
+
+      // Wait for button to be visible with longer timeout
+      try {
+        await closeButton.waitFor({ state: 'visible', timeout: 3000 });
+        await closeButton.click();
+        await this.page.waitForTimeout(500);
+      } catch (buttonError) {
+        // Welcome message not displayed, continue
+      }
+    } catch (error) {
+      // Chat widget not present, continue
+    }
+  }
 }

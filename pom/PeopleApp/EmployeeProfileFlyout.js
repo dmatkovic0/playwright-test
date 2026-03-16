@@ -20,13 +20,15 @@ export class EmployeeProfileFlyout extends BasePage {
     this.saveEditButton = page.getByRole('button', { name: 'Save' });
 
     // Display fields for verification
-    this.departmentDisplayField = page.locator('#details-xEmployee-xDepartmentLookup');
-    this.positionDisplayField = page.locator('#details-xEmployee-xPositionLookup');
-    this.divisionDisplayField = page.locator('#details-xEmployee-xDivisionLookup');
-    this.locationDisplayField = page.locator('#details-xEmployee-xLocationLookup');
-    this.startDateDisplayField = page.locator('#details-xEmployee-xStartDate');
-    this.salaryDisplayField = page.locator('//span[@id=\'details-xEmployee-xSalary\']');
-    this.employmentStatusDisplayField = page.locator('employee-information-picture');
+    this.departmentDisplayField = page.locator("//span[@id='details-xEmployee-xDepartmentLookup']");
+    this.positionDisplayField = page.locator("//span[@id='details-xEmployee-xPositionLookup']");
+    this.divisionDisplayField = page.locator("//span[@id='details-xEmployee-xDivisionLookup']");
+    this.locationDisplayField = page.locator("//span[@id='details-xEmployee-xLocationLookup']");
+    this.managerDisplayField = page.locator("//span[@id='details-xEmployee-xManagerLookup']");
+    this.employmentStatusDisplayField = page.locator("//span[@id='details-xEmployee-xEmploymentStatusLookup']");
+    this.employmentTypeDisplayField = page.locator("//span[@id='details-xEmployee-xEmploymentTypeLookup']");
+    this.startDateDisplayField = page.locator("//span[@id='details-xEmployee-xStartDate']");
+    this.salaryDisplayField = page.locator("//span[@id='details-xEmployee-xSalary']");
     this.bonusDisplayField = page.locator('#details-xEmployee-xBonus');
 
     // ----- Tasks grid -----
@@ -193,7 +195,6 @@ export class EmployeeProfileFlyout extends BasePage {
     await this.startDateDisplayField.waitFor({ state: 'visible', timeout: 5000 });
     await this.page.waitForTimeout(500);
     const text = await this.startDateDisplayField.textContent();
-    console.log(`Start Date verified: ${text}`);
     return text.trim();
   }
 
@@ -210,6 +211,17 @@ export class EmployeeProfileFlyout extends BasePage {
   }
 
   /**
+   * Get manager value from profile display field
+   * @returns {string} The manager text
+   */
+  async getManagerValue() {
+    await this.managerDisplayField.waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.waitForTimeout(500);
+    const text = await this.managerDisplayField.textContent();
+    return text.trim();
+  }
+
+  /**
    * Get employment status value from profile display field
    * @returns {string} The employment status text
    */
@@ -217,7 +229,17 @@ export class EmployeeProfileFlyout extends BasePage {
     await this.employmentStatusDisplayField.waitFor({ state: 'visible', timeout: 5000 });
     await this.page.waitForTimeout(500);
     const text = await this.employmentStatusDisplayField.textContent();
-    console.log(`Employment Status verified: ${text}`);
+    return text.trim();
+  }
+
+  /**
+   * Get employment type value from profile display field
+   * @returns {string} The employment type text
+   */
+  async getEmploymentTypeValue() {
+    await this.employmentTypeDisplayField.waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.waitForTimeout(500);
+    const text = await this.employmentTypeDisplayField.textContent();
     return text.trim();
   }
 
@@ -297,11 +319,27 @@ export class EmployeeProfileFlyout extends BasePage {
   }
 
   /**
+   * Get manager field element for assertions
+   * @returns {Locator} Manager display field
+   */
+  getManagerField() {
+    return this.managerDisplayField;
+  }
+
+  /**
    * Get employment status field element for assertions
    * @returns {Locator} Employment status display field
    */
   getEmploymentStatusField() {
     return this.employmentStatusDisplayField;
+  }
+
+  /**
+   * Get employment type field element for assertions
+   * @returns {Locator} Employment type display field
+   */
+  getEmploymentTypeField() {
+    return this.employmentTypeDisplayField;
   }
 
   // ===========================================

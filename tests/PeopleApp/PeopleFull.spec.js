@@ -41,12 +41,18 @@ test('AddEmployeeOnboardingChecklist', async ({ page }) => {
   // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
   const peopleGrid = new PeopleGrid(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
 
   // Open flyout and add employee with onboarding checklist
   await addEmployeeFlyout.open();
   const employeeData = await addEmployeeFlyout.createEmployeeWithOnboardingChecklist();
 
   console.log(`Created employee: ${employeeData.firstName} ${employeeData.lastName}`);
+  console.log(`Selected Department: ${employeeData.department}`);
+  console.log(`Selected Position: ${employeeData.position}`);
+  console.log(`Selected Location: ${employeeData.location}`);
+  console.log(`Selected Division: ${employeeData.division}`);
+  console.log(`Selected Manager: ${employeeData.manager}`);
 
   // Wait for save to complete
   await page.waitForTimeout(3000);
@@ -62,8 +68,44 @@ test('AddEmployeeOnboardingChecklist', async ({ page }) => {
 
   console.log(`✓ Verified employee appears in grid: ${employeeData.firstName} ${employeeData.lastName}`);
 
-  // Pause to keep browser open
-  await page.pause();
+  // Open employee profile
+  await peopleGrid.openEmployeeProfile(employeeData.firstName);
+
+  // Verify all fields in the profile
+  const actualDepartment = await employeeProfile.getDepartmentValue();
+  const actualPosition = await employeeProfile.getPositionValue();
+  const actualLocation = await employeeProfile.getLocationValue();
+  const actualDivision = await employeeProfile.getDivisionValue();
+  const actualManager = await employeeProfile.getManagerValue();
+  const actualStartDate = await employeeProfile.getStartDateValue();
+  const actualEmploymentStatus = await employeeProfile.getEmploymentStatusValue();
+
+  expect(actualDepartment).toBe(employeeData.department);
+  expect(actualPosition).toBe(employeeData.position);
+  expect(actualLocation).toBe(employeeData.location);
+  expect(actualDivision).toBe(employeeData.division);
+  expect(actualManager).toContain(employeeData.manager);
+  expect(actualStartDate.trim()).toBe(employeeData.startDate);
+  expect(actualEmploymentStatus).toContain('Active');
+
+  console.log(`✓ Department verified: ${actualDepartment}`);
+  console.log(`✓ Position verified: ${actualPosition}`);
+  console.log(`✓ Location verified: ${actualLocation}`);
+  console.log(`✓ Division verified: ${actualDivision}`);
+  console.log(`✓ Manager verified: ${actualManager}`);
+  console.log(`✓ Start Date verified: ${actualStartDate.trim()}`);
+  console.log(`✓ Employment Status verified: ${actualEmploymentStatus}`);
+
+  // Verify employment status badge is visible (either Onboarding or Active)
+  const onboardingBadge = page.locator("//span[contains(text(),'Onboarding')]");
+  const activeBadge = page.locator("//span[contains(@class,'label-caps Active')]");
+
+  const onboardingVisible = await onboardingBadge.isVisible({ timeout: 5000 }).catch(() => false);
+  const activeVisible = await activeBadge.isVisible({ timeout: 5000 }).catch(() => false);
+
+  expect(onboardingVisible || activeVisible).toBeTruthy();
+  console.log(`✓ Employment Status badge verified (Onboarding or Active)`);
+
 });
 
 test('UpdateExistingEmployee', async ({ page }) => {
@@ -138,8 +180,6 @@ test('UpdateExistingEmployee', async ({ page }) => {
 
   console.log(`Verified edited employee appears in search results`);
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('AddEmployeePrehireChecklist', async ({ page }) => {
@@ -157,12 +197,18 @@ test('AddEmployeePrehireChecklist', async ({ page }) => {
   // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
   const peopleGrid = new PeopleGrid(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
 
   // Open flyout and add employee with prehire checklist
   await addEmployeeFlyout.open();
   const employeeData = await addEmployeeFlyout.createEmployeeWithPrehireChecklist();
 
   console.log(`Created employee: ${employeeData.firstName} ${employeeData.lastName}`);
+  console.log(`Selected Department: ${employeeData.department}`);
+  console.log(`Selected Position: ${employeeData.position}`);
+  console.log(`Selected Location: ${employeeData.location}`);
+  console.log(`Selected Division: ${employeeData.division}`);
+  console.log(`Selected Manager: ${employeeData.manager}`);
 
   // Wait for save to complete
   await page.waitForTimeout(3000);
@@ -178,8 +224,43 @@ test('AddEmployeePrehireChecklist', async ({ page }) => {
 
   console.log(`✓ Verified employee appears in grid: ${employeeData.firstName} ${employeeData.lastName}`);
 
-  // Pause to keep browser open
-  await page.pause();
+  // Open employee profile
+  await peopleGrid.openEmployeeProfile(employeeData.firstName);
+
+  // Verify all fields in the profile
+  const actualDepartment = await employeeProfile.getDepartmentValue();
+  const actualPosition = await employeeProfile.getPositionValue();
+  const actualLocation = await employeeProfile.getLocationValue();
+  const actualDivision = await employeeProfile.getDivisionValue();
+  const actualManager = await employeeProfile.getManagerValue();
+  const actualStartDate = await employeeProfile.getStartDateValue();
+  const actualEmploymentStatus = await employeeProfile.getEmploymentStatusValue();
+
+  // Get today's date for comparison (system auto-populates start date for prehire)
+  const today = new Date();
+  const expectedStartDate = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;
+
+  expect(actualDepartment).toBe(employeeData.department);
+  expect(actualPosition).toBe(employeeData.position);
+  expect(actualLocation).toBe(employeeData.location);
+  expect(actualDivision).toBe(employeeData.division);
+  expect(actualManager).toContain(employeeData.manager);
+  expect(actualStartDate.trim()).toBe(expectedStartDate);
+  expect(actualEmploymentStatus).toContain('Prehire');
+
+  console.log(`✓ Department verified: ${actualDepartment}`);
+  console.log(`✓ Position verified: ${actualPosition}`);
+  console.log(`✓ Location verified: ${actualLocation}`);
+  console.log(`✓ Division verified: ${actualDivision}`);
+  console.log(`✓ Manager verified: ${actualManager}`);
+  console.log(`✓ Start Date verified: ${actualStartDate.trim()}`);
+  console.log(`✓ Employment Status verified: ${actualEmploymentStatus}`);
+
+  // Verify employment status badge is visible (visual indicator)
+  const employmentStatusBadge = page.locator("//span[contains(@class,'label-caps PreHire')]");
+  await expect(employmentStatusBadge).toBeVisible();
+  console.log(`✓ Employment Status badge 'Prehire' is visible`);
+
 });
 
 test('AddEmployeeNoAutoAssignment', async ({ page }) => {
@@ -197,12 +278,18 @@ test('AddEmployeeNoAutoAssignment', async ({ page }) => {
   // Create POM instances
   const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
   const peopleGrid = new PeopleGrid(page, expect);
+  const employeeProfile = new EmployeeProfileFlyout(page, expect);
 
   // Open flyout and add employee with no auto assignment
   await addEmployeeFlyout.open();
   const employeeData = await addEmployeeFlyout.createEmployeeWithNoAutoAssignment();
 
   console.log(`Created employee: ${employeeData.firstName} ${employeeData.lastName}`);
+  console.log(`Selected Department: ${employeeData.department}`);
+  console.log(`Selected Position: ${employeeData.position}`);
+  console.log(`Selected Location: ${employeeData.location}`);
+  console.log(`Selected Division: ${employeeData.division}`);
+  console.log(`Selected Manager: ${employeeData.manager}`);
 
   // Wait for save to complete
   await page.waitForTimeout(3000);
@@ -218,8 +305,43 @@ test('AddEmployeeNoAutoAssignment', async ({ page }) => {
 
   console.log(`✓ Verified employee appears in grid: ${employeeData.firstName} ${employeeData.lastName}`);
 
-  // Pause to keep browser open
-  await page.pause();
+  // Open employee profile
+  await peopleGrid.openEmployeeProfile(employeeData.firstName);
+
+  // Verify all fields in the profile
+  const actualDepartment = await employeeProfile.getDepartmentValue();
+  const actualPosition = await employeeProfile.getPositionValue();
+  const actualLocation = await employeeProfile.getLocationValue();
+  const actualDivision = await employeeProfile.getDivisionValue();
+  const actualManager = await employeeProfile.getManagerValue();
+  const actualStartDate = await employeeProfile.getStartDateValue();
+  const actualEmploymentStatus = await employeeProfile.getEmploymentStatusValue();
+
+  // Get today's date for comparison (system auto-populates start date for no auto assignment)
+  const today = new Date();
+  const expectedStartDate = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;
+
+  expect(actualDepartment).toBe(employeeData.department);
+  expect(actualPosition).toBe(employeeData.position);
+  expect(actualLocation).toBe(employeeData.location);
+  expect(actualDivision).toBe(employeeData.division);
+  expect(actualManager).toContain(employeeData.manager);
+  expect(actualStartDate.trim()).toBe(expectedStartDate);
+  expect(actualEmploymentStatus).toContain('Active');
+
+  console.log(`✓ Department verified: ${actualDepartment}`);
+  console.log(`✓ Position verified: ${actualPosition}`);
+  console.log(`✓ Location verified: ${actualLocation}`);
+  console.log(`✓ Division verified: ${actualDivision}`);
+  console.log(`✓ Manager verified: ${actualManager}`);
+  console.log(`✓ Start Date verified: ${actualStartDate.trim()}`);
+  console.log(`✓ Employment Status verified: ${actualEmploymentStatus}`);
+
+  // Verify employment status badge is visible (visual indicator)
+  const employmentStatusBadge = page.locator("//span[contains(@class,'label-caps Active')]");
+  await expect(employmentStatusBadge).toBeVisible();
+  console.log(`✓ Employment Status badge 'Active' is visible`);
+
 });
 
 test('AddPosition', async ({ page }) => {
@@ -243,8 +365,6 @@ test('AddPosition', async ({ page }) => {
   // Add new position
   await position.createPosition();
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('AddLocation', async ({ page }) => {
@@ -268,8 +388,6 @@ test('AddLocation', async ({ page }) => {
   // Add new location
   await location.createLocation();
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('UpdatePosition', async ({ page }) => {
@@ -293,8 +411,6 @@ test('UpdatePosition', async ({ page }) => {
   // Update existing position
   await position.updatePositionCode();
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('UpdateLocation', async ({ page }) => {
@@ -318,8 +434,6 @@ test('UpdateLocation', async ({ page }) => {
   // Update existing location
   await location.updateLocationCode();
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('AddDepartment', async ({ page }) => {
@@ -343,8 +457,6 @@ test('AddDepartment', async ({ page }) => {
   // Add new department
   await department.createDepartment();
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('UpdateDepartment', async ({ page }) => {
@@ -368,8 +480,6 @@ test('UpdateDepartment', async ({ page }) => {
   // Update existing department
   await department.updateDepartmentCode();
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('UpdateStartDate', async ({ page }) => {
@@ -421,8 +531,6 @@ test('UpdateStartDate', async ({ page }) => {
   expect(actualStartDate.trim()).toBe(expectedDate);
   console.log(`✓ Start date verified: Expected ${expectedDate}, Got ${actualStartDate.trim()}`);
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 
@@ -491,8 +599,6 @@ test('ChangeSalary', async ({ page }) => {
   expect(actualSalary).toContain(formattedSalary);
   console.log(`✓ Salary verified: Expected ${expectedSalaryText}, Got ${actualSalary}`);
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('ChangePosition', async ({ page }) => {
@@ -573,8 +679,6 @@ test('ChangePosition', async ({ page }) => {
   expect(actualPosition).toBe(selectedPosition);
   console.log(`✓ Position verified: Expected ${selectedPosition}, Got ${actualPosition}`);
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 
@@ -634,8 +738,6 @@ test('ChangeEmploymentStatusLoA', async ({ page }) => {
   expect(actualEmploymentStatus).toContain('Leave of Absence');
   console.log(`✓ Employment Status verified: Expected "Leave of Absence", Got "${actualEmploymentStatus}"`);
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('ChangeEmploymentStatusPrehire', async ({ page }) => {
@@ -694,8 +796,6 @@ test('ChangeEmploymentStatusPrehire', async ({ page }) => {
   expect(actualEmploymentStatus).toContain('Prehire');
   console.log(`✓ Employment Status verified: Expected "Prehire", Got "${actualEmploymentStatus}"`);
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 
@@ -763,8 +863,6 @@ test('AddBonus', async ({ page }) => {
   expect(newBonusValue).toBe(expectedBonusValue);
   console.log(`✓ Bonus verified: Initial ${initialBonusValue}, Added ${bonusToAdd}, New ${newBonusValue} (Expected ${expectedBonusValue})`);
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('BulkChangeManager', async ({ page }) => {
@@ -800,8 +898,6 @@ test('BulkChangeManager', async ({ page }) => {
 
   console.log('✓ All employees have been updated with new manager');
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('BulkChangeDepartment', async ({ page }) => {
@@ -837,8 +933,6 @@ test('BulkChangeDepartment', async ({ page }) => {
 
   console.log('✓ All employees have been updated with new department');
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('BulkChangeDivision', async ({ page }) => {
@@ -874,8 +968,6 @@ test('BulkChangeDivision', async ({ page }) => {
 
   console.log('✓ All employees have been updated with new division');
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('BulkChangeLocation', async ({ page }) => {
@@ -911,8 +1003,6 @@ test('BulkChangeLocation', async ({ page }) => {
 
   console.log('✓ All employees have been updated with new location');
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('BulkChangePosition', async ({ page }) => {
@@ -948,8 +1038,6 @@ test('BulkChangePosition', async ({ page }) => {
 
   console.log('✓ All employees have been updated with new position');
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('BulkChangeEmploymentType', async ({ page }) => {
@@ -985,8 +1073,6 @@ test('BulkChangeEmploymentType', async ({ page }) => {
 
   console.log('✓ All employees have been updated with new employment type');
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('BulkCreatePlainTasks', async ({ page }) => {
@@ -1055,8 +1141,6 @@ test('BulkCreatePlainTasks', async ({ page }) => {
 
   console.log('✓ Task verified for all employees');
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('BulkCreateTaskFromLibrary', async ({ page }) => {
@@ -1110,8 +1194,6 @@ test('BulkCreateTaskFromLibrary', async ({ page }) => {
 
   console.log('✓ Library task verified for all employees');
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('BulkConfigureSecurityRole', async ({ page }) => {
@@ -1165,8 +1247,6 @@ test('BulkConfigureSecurityRole', async ({ page }) => {
 
   console.log('✓ Security role verified for all employees');
 
-  // Pause to keep browser open
-  await page.pause();
 });
 
 test('DeleteEmployee', async ({ page }) => {
@@ -1237,6 +1317,4 @@ test('DeleteEmployee', async ({ page }) => {
 
   console.log(`✓ Employee ${firstName} ${lastName} successfully deleted`);
 
-  // Pause to keep browser open
-  await page.pause();
 });
