@@ -5,6 +5,7 @@ import { NavbarAndSidebar } from '../../pom/NavbarAndSidebar.js';
 import { QuickAddEmployee } from '../../pom/PeopleApp/QuickAddEmployee.js';
 import { PeopleGrid } from '../../pom/PeopleApp/PeopleGrid.js';
 import { AddEmployeeFlyout } from '../../pom/PeopleApp/AddEmployeeFlyout.js';
+import { AddEmployeeWithDetailsFlyoutPeopleWM } from '../../pom/PeopleApp/AddEmployeeWithDetailsFlyoutPeopleWM.js';
 
 test('QuickAddEmployee', async ({ page }) => {
   test.setTimeout(60000); // 1 minute
@@ -31,8 +32,14 @@ test('QuickAddEmployee', async ({ page }) => {
   const nav = new NavbarAndSidebar(page, expect);
   await nav.goToPeopleAndVerify();
 
+  // Get today's date (Quick Add auto-populates start date as today)
+  const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
+  const todayDate = addEmployeeFlyout.getTodayDate();
+
   const peopleGrid = new PeopleGrid(page, expect);
   await peopleGrid.searchByFirstName(employeeData.firstName);
+  await peopleGrid.searchByLastName(employeeData.lastName);
+  await peopleGrid.searchByStartDate(todayDate);
 
   // ========================================
   // STEP 4: Verify employee appears in grid
@@ -41,6 +48,7 @@ test('QuickAddEmployee', async ({ page }) => {
   await expect(employeeProfileLink).toBeVisible();
 
   console.log(`✓ Employee verified in grid: ${employeeData.firstName} ${employeeData.lastName}`);
+  console.log(`✓ Start Date: ${todayDate}`);
   console.log(`✓ Test completed: QuickAddEmployee verified successfully`);
 });
 
@@ -60,40 +68,42 @@ test('AddEmployeeWithDetails', async ({ page }) => {
   await quickAddEmployee.openAddEmployeeWithDetails();
 
   // ========================================
-  // STEP 3: Fill employee details
+  // STEP 3: Fill employee details and save
   // ========================================
-  const addEmployeeFlyout = new AddEmployeeFlyout(page, expect);
-  const employeeData = await addEmployeeFlyout.fillAllRequiredFields();
-
-  // Select random values from dropdowns
-  const dropdownValues = await addEmployeeFlyout.selectRandomFromAllDropdowns();
+  const addEmployeeWithDetailsFlyout = new AddEmployeeWithDetailsFlyoutPeopleWM(page, expect);
+  const employeeData = await addEmployeeWithDetailsFlyout.createEmployeeWithDetails();
 
   console.log(`Created employee: ${employeeData.firstName} ${employeeData.lastName}`);
   console.log(`Employee email: ${employeeData.email}`);
   console.log(`Start date: ${employeeData.startDate}`);
-  console.log(`Selected dropdowns:`, dropdownValues);
+  console.log(`Selected Position: ${employeeData.position}`);
+  console.log(`Selected Department: ${employeeData.department}`);
+  console.log(`Selected Location: ${employeeData.location}`);
+  console.log(`Selected Manager: ${employeeData.manager}`);
 
-  // ========================================
-  // STEP 4: Save employee (No Auto Assignment is default)
-  // ========================================
-  await addEmployeeFlyout.save();
+  // Wait for save to complete
   await page.waitForTimeout(3000);
 
   // ========================================
-  // STEP 5: Navigate to People and search for employee
+  // STEP 4: Navigate to People and search for employee
   // ========================================
   const nav = new NavbarAndSidebar(page, expect);
   await nav.goToPeopleAndVerify();
 
   const peopleGrid = new PeopleGrid(page, expect);
   await peopleGrid.searchByFirstName(employeeData.firstName);
+  await peopleGrid.searchByLastName(employeeData.lastName);
+  await peopleGrid.searchByStartDate(employeeData.startDate);
+  await peopleGrid.searchByPosition(employeeData.position);
+  await peopleGrid.searchByDepartment(employeeData.department);
+  await peopleGrid.searchByLocation(employeeData.location);
 
   // ========================================
-  // STEP 6: Verify employee appears in grid
+  // STEP 5: Verify employee appears in grid
   // ========================================
   const employeeProfileLink = page.getByRole('link', { name: employeeData.firstName });
   await expect(employeeProfileLink).toBeVisible();
 
-  console.log(`✓ Employee verified in grid: ${employeeData.firstName} ${employeeData.lastName}`);
+  console.log(`✓ Employee verified in grid with all filters applied`);
   console.log(`✓ Test completed: AddEmployeeWithDetails verified successfully`);
 });

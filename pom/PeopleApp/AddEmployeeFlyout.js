@@ -43,6 +43,10 @@ export class AddEmployeeFlyout extends BasePage {
    * Open the Add Employee flyout
    */
   async open() {
+    // Move mouse to close sidebar if it's open
+    await this.page.mouse.move(600, 400);
+    await this.page.waitForTimeout(500);
+
     await this.addButton.click();
     await this.page.waitForTimeout(500);
   }
@@ -458,6 +462,49 @@ export class AddEmployeeFlyout extends BasePage {
     }
 
     return await field.inputValue();
+  }
+
+  /**
+   * Check if Save button is disabled
+   * @returns {boolean} True if disabled, false otherwise
+   */
+  async isSaveButtonDisabled() {
+    return await this.saveButton.isDisabled();
+  }
+
+  /**
+   * Fill only basic fields for prehire employee (firstName, lastName, email)
+   * @param {string} uniqueID - Optional unique ID (will generate if not provided)
+   * @returns {object} Employee data
+   */
+  async fillBasicFieldsForPrehire(uniqueID = null) {
+    if (!uniqueID) {
+      uniqueID = generateShortID();
+    }
+
+    const firstName = `First_${uniqueID}`;
+    const lastName = `Last_${uniqueID}`;
+    const email = `${uniqueID}@mail.com`;
+
+    await this.fillFirstName(firstName);
+    await this.fillLastName(lastName);
+    await this.fillEmail(email);
+
+    return { firstName, lastName, email, uniqueID };
+  }
+
+  /**
+   * Create employee with prehire checklist - basic fields only
+   * @returns {object} Employee data
+   */
+  async createPrehireEmployeeBasicOnly() {
+    const employeeData = await this.fillBasicFieldsForPrehire();
+    await this.selectPrehireChecklist();
+    await this.save();
+
+    console.log(`✓ Prehire employee created (basic fields only): ${employeeData.firstName} ${employeeData.lastName}`);
+
+    return employeeData;
   }
 
   // ===========================================

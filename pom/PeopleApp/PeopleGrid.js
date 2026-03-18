@@ -9,6 +9,10 @@ export class PeopleGrid extends BasePage {
     this.backButtonAlt = page.getByRole('button', { name: ' Back' });
     this.firstNameSearchField = page.getByRole('textbox', { name: 'First Name' });
     this.lastNameSearchField = page.getByRole('textbox', { name: 'Last Name' });
+    this.startDateSearchField = page.locator("//input[@placeholder='Start Date']");
+    this.positionSearchField = page.locator("//input[@placeholder='Position Title']");
+    this.departmentSearchField = page.locator("//input[@placeholder='Department Name']");
+    this.locationSearchField = page.locator("//input[@placeholder='Location Name']");
     this.searchClearIcon = page.locator('td:nth-child(3) > .search-field > .icon.icon-xs.icon-close');
   }
 
@@ -53,6 +57,46 @@ export class PeopleGrid extends BasePage {
   async searchByLastName(lastName) {
     await this.lastNameSearchField.fill(lastName);
     await this.lastNameSearchField.press('Enter');
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Search for employee by start date
+   * @param {string} startDate - Start date to search for (MM/DD/YYYY format)
+   */
+  async searchByStartDate(startDate) {
+    await this.startDateSearchField.fill(startDate);
+    await this.startDateSearchField.press('Enter');
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Search for employee by position
+   * @param {string} position - Position title to search for
+   */
+  async searchByPosition(position) {
+    await this.positionSearchField.fill(position);
+    await this.positionSearchField.press('Enter');
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Search for employee by department
+   * @param {string} department - Department name to search for
+   */
+  async searchByDepartment(department) {
+    await this.departmentSearchField.fill(department);
+    await this.departmentSearchField.press('Enter');
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Search for employee by location
+   * @param {string} location - Location name to search for
+   */
+  async searchByLocation(location) {
+    await this.locationSearchField.fill(location);
+    await this.locationSearchField.press('Enter');
     await this.page.waitForTimeout(1500);
   }
 

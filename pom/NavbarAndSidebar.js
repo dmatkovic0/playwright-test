@@ -30,7 +30,7 @@ export class NavbarAndSidebar extends BasePage {
     this.smartFlowsLink = page.locator('a[href="#/Checklists"]');
     this.reportsLink = page.locator('a[href="#/Reports/Overview"]');
     this.surveysLink = page.locator('a[href="#/SurveyApp"]');
-    this.settingsLink = page.locator('a[href="#/Settings"]');
+    this.settingsLink = page.locator('//a[@class="applications-link aut-button-settings"]');
 
     // ── Applications Section ──
     this.applicationsSubtitle = page.locator('.side-navigation-subtitle');
@@ -187,14 +187,11 @@ export class NavbarAndSidebar extends BasePage {
   async goToSettings() {
     await this.settingsLink.click();
     await this.page.waitForTimeout(1500);
-  }
 
-  /**
-   * Navigate to People app
-   */
-  async goToPeople() {
-    await this.peopleLink.click();
-    await this.page.waitForTimeout(1500);
+    // Verify System Settings opened successfully
+    const userManagementLink = this.page.locator('//span[@class="aut-button-userLink"]');
+    await userManagementLink.waitFor({ state: 'visible', timeout: 5000 });
+    console.log('System settings opened successfully');
   }
 
   /**
