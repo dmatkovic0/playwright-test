@@ -30,6 +30,7 @@ export class EmployeeProfileFlyout extends BasePage {
     this.startDateDisplayField = page.locator("//span[@id='details-xEmployee-xStartDate']");
     this.salaryDisplayField = page.locator("//span[@id='details-xEmployee-xSalary']");
     this.bonusDisplayField = page.locator('#details-xEmployee-xBonus');
+    this.accountPhoneDisplayField = page.locator("//span[@class='padding-left-20 aut-label-accountPhone ng-binding']");
 
     // ----- Tasks grid -----
     this.taskTitleSearchField  = page.getByRole('textbox', { name: 'Title', exact: true });
@@ -264,6 +265,17 @@ export class EmployeeProfileFlyout extends BasePage {
     // Remove commas, USD, and convert to number (e.g., "1,000.00 USD" -> 1000.00)
     const numericValue = parseFloat(bonusText.replace(/,/g, '').replace(' USD', ''));
     return numericValue;
+  }
+
+  /**
+   * Get account phone value from profile display field (Account tab)
+   * @returns {string} The account phone text
+   */
+  async getAccountPhoneValue() {
+    await this.accountPhoneDisplayField.waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.waitForTimeout(500);
+    const value = await this.accountPhoneDisplayField.textContent();
+    return value.trim();
   }
 
   // ===========================================

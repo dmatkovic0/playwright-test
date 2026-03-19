@@ -26,3 +26,18 @@ export function generateRandomPastDate(daysBack = 30) {
 
   return `${month}/${day}/${year}`;
 }
+
+// Generate a random 9-digit phone number
+// Returns phone number as a string (e.g., "123456789")
+// First digit is always 1-9 (never 0)
+export function generateRandomPhoneNumber() {
+  // First digit: 1-9
+  let phoneNumber = '' + (Math.floor(Math.random() * 9) + 1);
+
+  // Remaining 8 digits: 0-9
+  for (let i = 0; i < 8; i++) {
+    phoneNumber += Math.floor(Math.random() * 10);
+  }
+
+  return phoneNumber;
+}

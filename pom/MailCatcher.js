@@ -188,6 +188,66 @@ export class MailCatcher {
   }
 
   /**
+   * Verify that a password change notification email was received.
+   * The email contains the text "Recently your account password has changed".
+   *
+   * @param {string} emailAddress - Recipient email to search for
+   * @param {number} maxAttempts  - Maximum polling attempts (default: 30 = ~60s)
+   * @returns {boolean} True if the notification email was found with the expected text
+   * @throws {Error} If the email is not found within the allotted attempts
+   */
+  async verifyPasswordChangeNotification(emailAddress, maxAttempts = 30) {
+    console.log(`Searching for password change notification email sent to: ${emailAddress}`);
+
+    for (let i = 0; i < maxAttempts; i++) {
+      console.log(`Attempt ${i + 1}/${maxAttempts}: Looking for password change notification...`);
+
+      try {
+        await this.searchForEmail(emailAddress);
+
+        // There may be multiple emails for the same address.
+        // Iterate through ALL matching emails and check each one for the notification text.
+        const allMatchingEmails = this.mailcatcherPage.locator(`text=${emailAddress}`);
+        const count = await allMatchingEmails.count();
+
+        for (let j = 0; j < count; j++) {
+          const emailItem = allMatchingEmails.nth(j);
+          const isVisible = await emailItem.isVisible({ timeout: 1000 }).catch(() => false);
+          if (!isVisible) continue;
+
+          await emailItem.click();
+          await this.mailcatcherPage.waitForTimeout(1500);
+
+          const iframeVisible = await this.emailIframe.isVisible({ timeout: 2000 }).catch(() => false);
+          if (!iframeVisible) continue;
+
+          const emailContent = await this.emailIframe.contentFrame();
+
+          // Look for the specific text "Recently your account password has changed"
+          const notificationText = emailContent.locator("text=Recently your account password has changed");
+          const textVisible = await notificationText.isVisible({ timeout: 2000 }).catch(() => false);
+
+          if (textVisible) {
+            console.log(`✓ Password change notification found in email ${j + 1} of ${count}`);
+            return true;
+          } else {
+            console.log(`Email ${j + 1}/${count} does not contain password change notification, trying next...`);
+          }
+        }
+      } catch (error) {
+        console.log(`Error on attempt ${i + 1}: ${error.message}`);
+      }
+
+      if (i < maxAttempts - 1) {
+        await this.mailcatcherPage.reload();
+        await this.mailcatcherPage.waitForTimeout(5000);
+      }
+    }
+
+    throw new Error(`Password change notification email not found for ${emailAddress} after ${maxAttempts} attempts`);
+  }
+
+  /**
    * Poll MailCatcher until a password-reset email arrives for the given address,
    * click the "RESET PASSWORD" link inside the email iframe, and return the
    * popup page that opens (to be used with ResetPasswordPage POM).
@@ -246,8 +306,7 @@ export class MailCatcher {
       }
 
       if (i < maxAttempts - 1) {
-        // Navigate back to mailcatcher explicitly in case the page navigated away
-        await this.mailcatcherPage.goto(`${this.baseUrl}/#/`).catch(() => {});
+        await this.mailcatcherPage.reload();
         await this.mailcatcherPage.waitForTimeout(5000);
       }
     }

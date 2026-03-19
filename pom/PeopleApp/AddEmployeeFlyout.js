@@ -1,5 +1,5 @@
 import { BasePage } from '../BasePage.js';
-import { generateShortID } from '../../src/utils.js';
+import { generateShortID, generateRandomPhoneNumber } from '../../src/utils.js';
 
 export class AddEmployeeFlyout extends BasePage {
   constructor(page, expect = null) {
@@ -16,6 +16,7 @@ export class AddEmployeeFlyout extends BasePage {
     this.firstNameField = this.flyoutContainer.getByRole('textbox', { name: 'First Name*' });
     this.lastNameField = this.flyoutContainer.getByRole('textbox', { name: 'Last Name*' });
     this.emailField = this.flyoutContainer.getByRole('textbox', { name: 'Account Email*' });
+    this.accountPhoneField = page.locator("//input[@placeholder='Enter account phone...']");
     this.startDateField = this.flyoutContainer.getByRole('textbox', { name: 'Start Date*' });
 
     // Dropdown locators
@@ -122,6 +123,14 @@ export class AddEmployeeFlyout extends BasePage {
   async fillStartDate(date) {
     await this.startDateField.fill(date);
     await this.startDateField.press('Enter');
+  }
+
+  /**
+   * Fill account phone field
+   * @param {string} phoneNumber - Phone number value (9 digits)
+   */
+  async fillAccountPhone(phoneNumber) {
+    await this.accountPhoneField.fill(phoneNumber);
   }
 
   /**
@@ -653,6 +662,49 @@ export class AddEmployeeFlyout extends BasePage {
       firstName,
       lastName,
       email,
+      uniqueID,
+      department: dropdownValues.department,
+      position: dropdownValues.position,
+      location: dropdownValues.location,
+      division: dropdownValues.division,
+      manager
+    };
+  }
+
+  /**
+   * Create employee with phone number only (no email)
+   * @returns {object} Employee data
+   */
+  async createEmployeeWithPhoneOnly() {
+    const uniqueID = generateShortID();
+    const firstName = `First_${uniqueID}`;
+    const lastName = `Last_${uniqueID}`;
+    const phoneNumber = generateRandomPhoneNumber();
+    const startDate = this.getTodayDate();
+
+    // Fill basic fields (NO EMAIL)
+    await this.fillFirstName(firstName);
+    await this.fillLastName(lastName);
+    await this.fillAccountPhone(phoneNumber);
+    await this.fillStartDate(startDate);
+
+    // Select random values from all dropdowns
+    const dropdownValues = await this.selectRandomFromAllDropdowns();
+
+    // Select random manager
+    const manager = await this.selectRandomManager();
+
+    // Onboarding is default, so just save
+    await this.save();
+
+    console.log(`✓ Employee created with phone only: ${firstName} ${lastName}`);
+    console.log(`  Phone: ${phoneNumber}`);
+
+    return {
+      firstName,
+      lastName,
+      phoneNumber,
+      startDate,
       uniqueID,
       department: dropdownValues.department,
       position: dropdownValues.position,
